@@ -4,15 +4,16 @@ import { useState } from 'react';
 
 type SearchType = {
   name: string;
+  className?: string;
 };
 
-function Search({ name }: SearchType) {
+function Search({ name, className }: SearchType) {
   const [search, setSearch] = useState('');
 
   return (
     <>
       <input
-        className='w-260px text-xl py-[9px] pl-[16px] bg-[#F8CD86] outline-none rounded-[10px]'
+        className={className}
         type='text'
         placeholder={name}
         value={search}
