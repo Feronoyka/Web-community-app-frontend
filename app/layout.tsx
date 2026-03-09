@@ -1,9 +1,6 @@
 import { Albert_Sans } from 'next/font/google';
 import type { Metadata } from 'next';
 import './globals.css';
-import Header from '@/components/Header';
-import Article from '@/components/Article';
-import Main from '@/components/Main';
 
 const albertSans = Albert_Sans({
   variable: '--font-albert',
@@ -23,12 +20,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${albertSans.variable} antialiased bg-[#F7EDE2]`}>
-        <Header />
-        <div className='grid grid-cols-12 gap-8 mx-[64px]'>
-          <Article />
-          <Main />
-        </div>
-        <div className='grid grid-cols-12 gap-8 mx-[64px] mt-9'>{children}</div>
+        {children}
       </body>
     </html>
   );

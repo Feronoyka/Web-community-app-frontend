@@ -1,6 +1,13 @@
-const UserLogo = ({ className }: { className?: string }) => (
+const AccountIcon = ({
+  className,
+  onClick,
+}: {
+  className?: string;
+  onClick?: () => void;
+}) => (
   <svg
     className={className}
+    onClick={onClick}
     width='54'
     height='54'
     viewBox='0 0 54 54'
@@ -14,4 +21,4 @@ const UserLogo = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export default UserLogo;
+export default AccountIcon;
