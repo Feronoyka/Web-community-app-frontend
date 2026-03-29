@@ -4,7 +4,7 @@ import { OutlineIcon } from '@/assets/icons';
 
 function SignUp() {
   const inputStyle =
-    'block text-[18px] my-4 mx-auto border border-[#808080] focus:outline-none rounded-[10px] py-2 pr-30 pl-4';
+    'block text-[18px] my-4 mx-auto border border-[#808080] focus:outline-none rounded-[10px] py-2 pl-4 w-[325px]';
 
   return (
     <form action={signUpForm}>

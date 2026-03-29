@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useDebounce } from '@/hooks/useDebounce';
+import { useEffect, useState } from 'react';
 
 type SearchType = {
   name: string;
@@ -8,7 +9,14 @@ type SearchType = {
 };
 
 function Search({ name, className }: SearchType) {
-  const [search, setSearch] = useState('');
+  const [queryPeople, setQueryPeople] = useState('');
+  const debounceQuery = useDebounce(queryPeople, 600);
+
+  useEffect(() => {
+    if (!debounceQuery) return;
+
+    console.log('API calls:', debounceQuery);
+  }, [debounceQuery]);
 
   return (
     <>
@@ -16,8 +24,8 @@ function Search({ name, className }: SearchType) {
         className={className}
         type='text'
         placeholder={name}
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        value={queryPeople}
+        onChange={(e) => setQueryPeople(e.target.value)}
       />
     </>
   );

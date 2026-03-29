@@ -6,9 +6,9 @@ function Main() {
     <>
       <Search
         name='Search communities'
-        className='text-xl bg-[#F8CD86] outline-none col-span-4 rounded-[10px] py-4 pl-6'
+        className='text-xl bg-[#F6BD60] outline-none col-span-4 rounded-[10px] py-4 pl-6'
       />
-      <div className='flex text-xl bg-[#F8CD86] col-start-9 col-end-13 self-center justify-around p-4 rounded-[10px]'>
+      <div className='inline-flex text-xl bg-[#F6BD60] col-start-9 col-end-13 self-center justify-around p-4 rounded-[10px]'>
         <NavLink href='/'>Communities</NavLink>
         <NavLink href='/owned-communities'>Owned Communities</NavLink>
       </div>

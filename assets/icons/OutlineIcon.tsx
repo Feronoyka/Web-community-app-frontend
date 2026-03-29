@@ -10,9 +10,9 @@ const OutlineIcon = ({ className }: { className?: string }) => (
     <path
       d='M11.375 4.875L3.25 13M3.25 13L11.375 21.125M3.25 13H22.75'
       stroke='#0F172A'
-      stroke-width='1.5'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeWidth='1.5'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     />
   </svg>
 );
