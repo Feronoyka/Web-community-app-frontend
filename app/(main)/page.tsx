@@ -10,11 +10,13 @@ interface Community {
 }
 
 export default function Home() {
-  // This endpoint returns an array (safe to .map over)
-  const url = 'https://jsonplaceholder.typicode.com/photos?_limit=6';
+  const url = 'https://jsonplaceholder.typicode.com/photos?_limit=3';
 
   const getCommunities = async (url: string): Promise<Community[]> => {
     const response = await fetch(url);
+
+    if (!response) throw new Error('Failed to fetch');
+
     const data = await response.json();
     return Array.isArray(data) ? data : [data];
   };
@@ -22,10 +24,16 @@ export default function Home() {
   const communities = use(getCommunities(url));
 
   return (
-    <div>
-      {communities.map((community) => (
-        <Community key={community.id} {...community} />
-      ))}
-    </div>
+    <>
+      {communities ? (
+        <div className='grid grid-flow-col justify-items-center gap-8'>
+          {communities.map((community) => (
+            <Community key={community.id} {...community} />
+          ))}
+        </div>
+      ) : (
+        <p>Failed to load communities</p>
+      )}
+    </>
   );
 }
