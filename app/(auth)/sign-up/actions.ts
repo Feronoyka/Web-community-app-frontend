@@ -1,32 +1,41 @@
-import { validateFormSignUp } from '@/utils/validateFormSignUp';
+'use server';
+
+import { z } from 'zod';
+import axios from 'axios';
+import { signUpSchema } from '@/utils/signUpSchema';
 import { redirect } from 'next/navigation';
 
-export const signUpForm = async (formData: FormData) => {
-  'use server';
+export const signUpForm = async (prevState: unknown, formData: FormData) => {
+  const result = signUpSchema.safeParse({
+    domainName: formData.get('domainName'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+  });
 
-  const domainName = formData.get('domainName') as string;
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
+  if (!result.success) {
+    const errors = z.treeifyError(result.error);
+    return {
+      errors: {
+        domainName: errors.properties?.domainName?.errors,
+        email: errors.properties?.email?.errors,
+        password: errors.properties?.password?.errors,
+      },
+    };
+  }
 
-  const isValid = validateFormSignUp({ domainName, email, password });
+  const url = 'http://localhost:3000/auth/register';
 
-  if (isValid) {
-    const JsonData = JSON.stringify({ domainName, email, password });
-
-    const url = 'http://localhost:3000/auth/register';
-
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JsonData,
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      return data.message;
+  try {
+    await axios.post(url, result.data);
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return {
+        errors: { server: error.response?.data?.message ?? error.message },
+      };
     }
 
-    redirect('/sign-in');
+    return { erros: { server: 'Somthing went wrong' } };
   }
+
+  redirect('/sign-in');
 };

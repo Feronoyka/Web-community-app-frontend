@@ -1,39 +1,39 @@
 import Community from '@/components/Community';
+import {
+  normalizeCommunities,
+  CommunityFromApi,
+} from '@/utils/normalizeCommunities';
 import { use } from 'react';
 
-interface Community {
-  albumId?: number;
-  id: number;
-  title: string;
-  url: string;
-  thumbnailUrl?: string;
-}
-
 export default function Home() {
-  const url = 'https://jsonplaceholder.typicode.com/photos?_limit=3';
+  const url = 'http://localhost:3000/community';
 
-  const getCommunities = async (url: string): Promise<Community[]> => {
+  const getCommunities = async (): Promise<CommunityFromApi[]> => {
     const response = await fetch(url);
 
-    if (!response) throw new Error('Failed to fetch');
+    if (!response.ok) return [];
 
-    const data = await response.json();
-    return Array.isArray(data) ? data : [data];
+    const data: unknown = await response.json();
+    return normalizeCommunities(data);
   };
 
-  const communities = use(getCommunities(url));
+  const communities = use(getCommunities());
 
   return (
-    <>
-      {communities ? (
-        <div className='grid grid-flow-col justify-items-center gap-8'>
-          {communities.map((community) => (
-            <Community key={community.id} {...community} />
-          ))}
-        </div>
+    <div className='grid grid-flow-col justify-items-center gap-8'>
+      {communities.length !== 0 ? (
+        communities.map((community) => (
+          <Community
+            key={community.id}
+            name={community.name}
+            followerCount={community.followerCount}
+            backgroundUrl={community.backgroundUrl}
+            discription={community.description}
+          />
+        ))
       ) : (
-        <p>Failed to load communities</p>
+        <p className='col-start-20 w-45'>There is no communities</p>
       )}
-    </>
+    </div>
   );
 }

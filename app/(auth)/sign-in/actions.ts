@@ -1,39 +1,46 @@
-import validateFormSignIn from '@/utils/validateFormSignIn';
-import { cookies } from 'next/headers';
+'use server';
+
+import z from 'zod';
+import axios from 'axios';
+import { signInSchema } from '@/utils/signInSchema';
 import { redirect } from 'next/navigation';
+import { cookiesStore } from '@/utils/cookies';
 
-export const signInForm = async (formData: FormData) => {
-  'use server';
+type Data = {
+  accessToken: string;
+};
 
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
+export const signInForm = async (prevState: unknown, formData: FormData) => {
+  const result = signInSchema.safeParse({
+    email: formData.get('email'),
+    password: formData.get('password'),
+  });
 
-  const JsonData = JSON.stringify({ email, password });
-
-  const isValid = validateFormSignIn({ email, password });
+  if (!result.success) {
+    const errors = z.treeifyError(result.error);
+    return {
+      errors: {
+        email: errors.properties?.email?.errors,
+        password: errors.properties?.password?.errors,
+      },
+    };
+  }
 
   const url = 'http://localhost:3000/auth/login';
 
-  if (isValid) {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JsonData,
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      return data.message;
+  try {
+    const data: Data = await axios.post(url, result.data);
+    console.log(data);
+    cookiesStore(data);
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return {
+        errors: { server: error.response?.data?.message ?? error.message },
+      };
     }
 
-    const cookieStore = await cookies();
-    cookieStore.set('token', data.token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-    });
-
-    redirect('/');
+    return { errors: 'Something went wrong' };
   }
+
+  redirect('/');
 };

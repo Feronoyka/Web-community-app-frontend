@@ -1,13 +1,20 @@
+'use client';
+
 import Link from 'next/link';
+import { useActionState } from 'react';
 import { signUpForm } from './actions';
 import { OutlineIcon } from '@/assets/icons';
 
 function SignUp() {
+  const [state, action, isPending] = useActionState(signUpForm, null);
+
   const inputStyle =
     'block text-[18px] my-4 mx-auto border border-[#808080] focus:outline-none rounded-[10px] py-2 pl-4 w-[325px]';
 
+  const errorStyle = 'block text-sm mb-2 mx-auto';
+
   return (
-    <form action={signUpForm}>
+    <form action={action}>
       <Link href='/'>
         <OutlineIcon className='ml-5 mt-5' />
       </Link>
@@ -18,21 +25,31 @@ function SignUp() {
         placeholder='Domain name'
         className={inputStyle}
       />
+      {state?.errors?.domainName && (
+        <p className={errorStyle}>{state.errors.domainName[0]}</p>
+      )}
       <input
         name='email'
         type='email'
         placeholder='Email'
         className={inputStyle}
       />
+      {state?.errors?.email && (
+        <p className={errorStyle}>{state.errors.email[0]}</p>
+      )}
       <input
         name='password'
         type='password'
         placeholder='Password'
         className={inputStyle}
       />
+      {state?.errors?.password && (
+        <p className={errorStyle}>{state.errors.password[0]}</p>
+      )}
       <button
         type='submit'
-        className='block text-white font-bold mx-auto bg-[#6C938A] rounded-[10px] py-2 px-[95px] cursor-pointer'
+        disabled={isPending}
+        className='block text-white font-bold mx-auto bg-[#6C938A] rounded-[10px] py-2 px-23.75 cursor-pointer'
       >
         Create an account
       </button>
