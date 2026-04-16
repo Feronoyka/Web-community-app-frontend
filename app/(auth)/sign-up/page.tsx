@@ -11,7 +11,7 @@ function SignUp() {
   const inputStyle =
     'block text-[18px] my-4 mx-auto border border-[#808080] focus:outline-none rounded-[10px] py-2 pl-4 w-[325px]';
 
-  const errorStyle = 'block text-sm mb-2 mx-auto';
+  const errorStyle = 'block text-red-500 text-sm';
 
   return (
     <form action={action}>
@@ -20,13 +20,13 @@ function SignUp() {
       </Link>
       <h1 className=' text-[36px] font-bold text-center'>Sign up</h1>
       <input
-        name='domainName'
+        name='nickname'
         type='text'
         placeholder='Domain name'
         className={inputStyle}
       />
-      {state?.errors?.domainName && (
-        <p className={errorStyle}>{state.errors.domainName[0]}</p>
+      {state?.errors?.nickname && (
+        <p className={errorStyle}>{state.errors.nickname[0]}</p>
       )}
       <input
         name='email'

@@ -6,8 +6,11 @@ import { signInSchema } from '@/utils/signInSchema';
 import { redirect } from 'next/navigation';
 import { cookiesStore } from '@/utils/cookies';
 
-type Data = {
-  accessToken: string;
+type ResponseType = {
+  data: {
+    accessToken: string;
+    refreshToken: string;
+  };
 };
 
 export const signInForm = async (prevState: unknown, formData: FormData) => {
@@ -29,9 +32,8 @@ export const signInForm = async (prevState: unknown, formData: FormData) => {
   const url = 'http://localhost:3000/auth/login';
 
   try {
-    const data: Data = await axios.post(url, result.data);
-    console.log(data);
-    cookiesStore(data);
+    const response: ResponseType = await axios.post(url, result.data);
+    await cookiesStore(response);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       return {

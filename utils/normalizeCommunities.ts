@@ -11,17 +11,11 @@ interface PaginatedCommunities {
   meta?: { total: number; offset?: number; limit?: number };
 }
 
-export function normalizeCommunities(payload: unknown): CommunityFromApi[] {
+export function normalizeCommunities(
+  payload: PaginatedCommunities,
+): CommunityFromApi[] {
   if (Array.isArray(payload)) {
     return payload;
-  }
-  if (
-    payload &&
-    typeof payload === 'object' &&
-    'data' in payload &&
-    Array.isArray((payload as PaginatedCommunities).data)
-  ) {
-    return (payload as PaginatedCommunities).data;
   }
   return [];
 }

@@ -11,7 +11,7 @@ function SignIn() {
   const inputStyle =
     'block text-[18px] my-4 mx-auto border border-[#808080] focus:outline-none rounded-[10px] py-2 pl-4 w-[325px]';
 
-  const errorStyle = 'block text-[18px] my-4';
+  const errorStyle = 'text-red-500 text-sm';
 
   return (
     <form action={action}>

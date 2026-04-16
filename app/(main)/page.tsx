@@ -1,20 +1,21 @@
+import axios from 'axios';
 import Community from '@/components/Community';
 import {
   normalizeCommunities,
   CommunityFromApi,
 } from '@/utils/normalizeCommunities';
 import { use } from 'react';
+import { AddIcon } from '@/assets/icons';
 
 export default function Home() {
   const url = 'http://localhost:3000/community';
 
   const getCommunities = async (): Promise<CommunityFromApi[]> => {
-    const response = await fetch(url);
+    const response = await axios.get(url);
 
-    if (!response.ok) return [];
+    if (!response.data) return [];
 
-    const data: unknown = await response.json();
-    return normalizeCommunities(data);
+    return normalizeCommunities(response.data);
   };
 
   const communities = use(getCommunities());
@@ -32,7 +33,9 @@ export default function Home() {
           />
         ))
       ) : (
-        <p className='col-start-20 w-45'>There is no communities</p>
+        <div className='col-span-45 mt-20 cursor-pointer'>
+          <AddIcon />
+        </div>
       )}
     </div>
   );

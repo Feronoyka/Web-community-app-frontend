@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation';
 
 export const signUpForm = async (prevState: unknown, formData: FormData) => {
   const result = signUpSchema.safeParse({
-    domainName: formData.get('domainName'),
+    nickname: formData.get('nickname'),
     email: formData.get('email'),
     password: formData.get('password'),
   });
@@ -16,7 +16,7 @@ export const signUpForm = async (prevState: unknown, formData: FormData) => {
     const errors = z.treeifyError(result.error);
     return {
       errors: {
-        domainName: errors.properties?.domainName?.errors,
+        nickname: errors.properties?.nickname?.errors,
         email: errors.properties?.email?.errors,
         password: errors.properties?.password?.errors,
       },

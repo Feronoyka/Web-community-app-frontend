@@ -4,10 +4,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Logo, AccountIcon, SignUpIcon, UserIcon } from '@/assets/icons';
 import Search from './Search';
+import Image from 'next/image';
 
 interface User {
+  id?: string;
+  avatarUrl: string;
+  nickname: string;
   username: string;
-  domainName: string;
   email: string;
 }
 
@@ -17,9 +20,21 @@ function Header({ user }: { user?: User }) {
   return (
     <div className='bg-[#EE605D] w-screen h-[85px] drop-shadow-lg'>
       <ul className='flex items-center h-full justify-between mx-8'>
-        <li className='inline-block text-xl'>
-          <Logo />
-        </li>
+        {user ? (
+          <li className='inline-block text-xl'>
+            {user.avatarUrl ? (
+              <Image src={user.avatarUrl} alt='' />
+            ) : (
+              <li className='inline-block text-xl'>
+                <Logo />
+              </li>
+            )}
+          </li>
+        ) : (
+          <li className='inline-block text-xl'>
+            <Logo />
+          </li>
+        )}
         <ul className='flex items-center'>
           <li>
             <Search
@@ -33,11 +48,13 @@ function Header({ user }: { user?: User }) {
               className=' cursor-pointer'
             />
             {isOpen && (
-              <ul className='text-[18px] items-center text-center absolute bg-white py-4 px-5 top-[85px] left-[89%] rounded-[10px]'>
-                {user ? (
+              <ul className='text-[18px] items-center text-center absolute bg-white py-4 px-5 top-21.5 left-[89%] rounded-[10px]'>
+                {user !== null ? (
                   <>
                     <li className='flex my-3 cursor-pointer'>
-                      <UserIcon className='mr-2' /> Profile
+                      <Link href={`/profile/${user?.nickname}`}>
+                        <UserIcon className='mr-2' /> Profile
+                      </Link>
                     </li>
                   </>
                 ) : (
