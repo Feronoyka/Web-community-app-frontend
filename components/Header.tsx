@@ -22,13 +22,7 @@ function Header({ user }: { user?: User }) {
       <ul className='flex items-center h-full justify-between mx-8'>
         {user ? (
           <li className='inline-block text-xl'>
-            {user.avatarUrl ? (
-              <Image src={user.avatarUrl} alt='' />
-            ) : (
-              <li className='inline-block text-xl'>
-                <Logo />
-              </li>
-            )}
+            {user.avatarUrl ? <Image src={user.avatarUrl} alt='' /> : <Logo />}
           </li>
         ) : (
           <li className='inline-block text-xl'>

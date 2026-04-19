@@ -52,12 +52,24 @@ function SignIn() {
       >
         Sign in
       </button>
-      <p className='my-4 text-center mb-4'>
-        <span>Do not have an account?</span>{' '}
-        <span className='text-[#0379FF]'>
-          <Link href='/sign-up'>Sign up</Link>
-        </span>
-      </p>
+      <div className='my-4 text-center mb-4'>
+        <div>
+          <span>
+            Forgot password?{' '}
+            <Link className='text-blue-500' href=''>
+              Reset
+            </Link>
+          </span>
+        </div>
+        <div>
+          <span>
+            Do not have an account?{' '}
+            <Link className='text-blue-500' href='/sign-up'>
+              Sign up
+            </Link>
+          </span>
+        </div>
+      </div>
     </form>
   );
 }
