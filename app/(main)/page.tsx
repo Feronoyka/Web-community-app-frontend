@@ -8,11 +8,10 @@ import { use } from 'react';
 import { AddIcon } from '@/assets/icons';
 
 export default function Home() {
-  const url = 'http://localhost:3000/community';
+  const API = process.env.API_URL;
 
   const getCommunities = async (): Promise<CommunityFromApi[]> => {
-    const response = await axios.get(url);
-
+    const response = await axios.get(`${API}/communities`);
     if (!response.data) return [];
 
     return normalizeCommunities(response.data);

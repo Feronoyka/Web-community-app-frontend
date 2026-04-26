@@ -2,23 +2,21 @@
 
 import { cookies } from 'next/headers';
 
-type ResponseType = {
-  data: {
-    accessToken: string;
-    refreshToken: string;
-  };
+type TokenResponse = {
+  accessToken: string;
+  refreshToken: string;
 };
 
-export const cookiesStore = async (response: ResponseType) => {
+export const storeAuthTokens = async (data: TokenResponse) => {
   const cookieStore = await cookies();
 
-  cookieStore.set('accessToken', response.data.accessToken, {
+  cookieStore.set('accessToken', data.accessToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     path: '/',
   });
 
-  cookieStore.set('refreshToken', response.data.refreshToken, {
+  cookieStore.set('refreshToken', data.refreshToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     path: '/',
