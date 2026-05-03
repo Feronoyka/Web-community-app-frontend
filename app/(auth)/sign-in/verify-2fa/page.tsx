@@ -1,5 +1,3 @@
-'use client';
-
 import Verify2fa from '@/components/verify2fa/Verify2fa';
 
 function page() {

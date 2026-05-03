@@ -5,7 +5,9 @@ import axios from 'axios';
 import { signUpSchema } from '@/utils/signUpSchema';
 import { redirect } from 'next/navigation';
 
-export const signUpForm = async (prevState: unknown, formData: FormData) => {
+export const signUpAction = async (prevState: unknown, formData: FormData) => {
+  const API = process.env.API_URL;
+
   const result = signUpSchema.safeParse({
     nickname: formData.get('nickname'),
     email: formData.get('email'),
@@ -23,10 +25,8 @@ export const signUpForm = async (prevState: unknown, formData: FormData) => {
     };
   }
 
-  const url = 'http://localhost:3000/auth/register';
-
   try {
-    await axios.post(url, result.data);
+    await axios.post(`${API}/auth/register`, result.data);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       return {

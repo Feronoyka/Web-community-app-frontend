@@ -1,6 +1,4 @@
-'use client';
-
-import SignUp from '@/components/signUp/Sign-up';
+import SignUp from '@/components/signUp/SignUp';
 
 function page() {
   return <SignUp />;

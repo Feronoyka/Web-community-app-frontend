@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Logo, AccountIcon, SignUpIcon, UserIcon } from '@/assets/icons';
+import { SignUpIcon, UserIcon, DefaultUserIcon, Logo } from '@/assets/icons';
 import Search from './Search';
 import Image from 'next/image';
 
@@ -20,15 +20,7 @@ function Header({ user }: { user?: User }) {
   return (
     <div className='bg-[#EE605D] w-screen h-[85px] drop-shadow-lg'>
       <ul className='flex items-center h-full justify-between mx-8'>
-        {user ? (
-          <li className='inline-block text-xl'>
-            {user.avatarUrl ? <Image src={user.avatarUrl} alt='' /> : <Logo />}
-          </li>
-        ) : (
-          <li className='inline-block text-xl'>
-            <Logo />
-          </li>
-        )}
+        <Logo />
         <ul className='flex items-center'>
           <li>
             <Search
@@ -36,11 +28,20 @@ function Header({ user }: { user?: User }) {
               className='pr-[128px] mr-8 text-xl py-[11px] pl-4 bg-[#F6BD60] outline-none rounded-[10px]'
             />
           </li>
+          {user ? (
+            <li className='inline-block text-xl'>
+              {user.avatarUrl ? (
+                <Image src={user.avatarUrl} alt='' />
+              ) : (
+                <DefaultUserIcon onClick={() => setIsOpen(isOpen)} />
+              )}
+            </li>
+          ) : (
+            <li className='inline-block text-xl'>
+              <DefaultUserIcon onClick={() => setIsOpen(!isOpen)} />
+            </li>
+          )}
           <li className='group'>
-            <AccountIcon
-              onClick={() => setIsOpen(!isOpen)}
-              className=' cursor-pointer'
-            />
             {isOpen && (
               <ul className='text-[18px] items-center text-center absolute bg-white py-4 px-5 top-21.5 left-[89%] rounded-[10px]'>
                 {user !== null ? (

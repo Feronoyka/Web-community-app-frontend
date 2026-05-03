@@ -56,7 +56,7 @@ export const verify2faAction = async (
       });
     }
 
-    cookieStore.delete('temptoken');
+    cookieStore.delete('tempToken');
   } catch (error) {
     if (axios.isAxiosError(error)) {
       return {

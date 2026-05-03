@@ -2,19 +2,13 @@
 
 import { useActionState, useState } from 'react';
 import OTPInput from 'react-otp-input';
-import { verify2faAction } from '@/app/(auth)/sign-in/verify-2fa/action';
-import { CheckBoxIcon, UnCheckBoxIcon } from '@/assets/icons/';
 import './otp.module.css';
+import { verifyResetOtpAction } from '@/app/(auth)/reset-password/verify/actions';
 import { Button } from '../UI';
 
-function Verify2faForm() {
+function VerifyResetOtpForm() {
   const [otp, setOtp] = useState('');
-  const [check, setCheck] = useState('off');
-  const [state, action, isPending] = useActionState(verify2faAction, null);
-
-  const toggleCheck = () => {
-    setCheck((state) => (state === 'off' ? 'on' : 'off'));
-  };
+  const [state, action, isPending] = useActionState(verifyResetOtpAction, null);
 
   return (
     <div className='mt-8'>
@@ -46,30 +40,15 @@ function Verify2faForm() {
               borderRadius: '5px',
             }}
           />
-          {state?.errors.otp && (
+          {state?.errors?.otp && (
             <p className='text-red-500'>{state.errors.otp[0]}</p>
           )}
         </div>
         <input type='hidden' name='otp' value={otp} />
         <div className='mt-4 mb-4'>
-          <Button type='submit' disabled={isPending} className='px-27.25'>
-            Verify
+          <Button className='px-19' type='submit' disabled={isPending}>
+            Confirm code
           </Button>
-        </div>
-        <div className='flex justify-center items-center'>
-          {check === 'on' ? (
-            <CheckBoxIcon
-              className='cursor-pointer transition-all transition-discrete'
-              onClick={toggleCheck}
-            />
-          ) : (
-            <UnCheckBoxIcon
-              className='cursor-pointer transition-all transition-discrete'
-              onClick={toggleCheck}
-            />
-          )}
-          <input type='hidden' name='trustDevice' value={check} />
-          <p className='ml-1 font-semibold'>Trust this device for 30 days</p>
         </div>
       </form>
       <button className='text-blue-500 cursor-pointer'>Resend code</button>
@@ -77,4 +56,4 @@ function Verify2faForm() {
   );
 }
 
-export default Verify2faForm;
+export default VerifyResetOtpForm;

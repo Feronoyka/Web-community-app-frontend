@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation';
 import { storeAuthTokens } from '@/utils/cookies';
 import { cookies } from 'next/headers';
 
-export const signInForm = async (prevState: unknown, formData: FormData) => {
+export const signInAction = async (prevState: unknown, formData: FormData) => {
   const API = process.env.API_URL;
 
   const result = signInSchema.safeParse({
@@ -44,7 +44,7 @@ export const signInForm = async (prevState: unknown, formData: FormData) => {
         maxAge: 10 * 60,
       });
 
-      redirect('');
+      redirect('/verify-2fa');
     }
 
     await storeAuthTokens(data);

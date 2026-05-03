@@ -8,10 +8,9 @@ export const signInSchema = z.object({
   password: z
     .string()
     .trim()
-    .min(6, 'Password must be at least 6 characters long')
     .regex(
       /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&_])[A-Za-z\d@$!%*#?&_]+$/,
-      'Password must contain at least one uppercase letter and one number and one special character',
+      'Invalid email or address',
     )
     .transform((value) => value.trim()),
 });
