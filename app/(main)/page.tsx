@@ -1,11 +1,7 @@
 import axios from 'axios';
 import Community from '@/components/Community';
-import {
-  normalizeCommunities,
-  CommunityFromApi,
-} from '@/utils/normalizeCommunities';
+import { CommunityFromApi } from '@/utils/normalizeCommunities';
 import { use } from 'react';
-import { AddIcon } from '@/assets/icons';
 
 export default function Home() {
   const API = process.env.API_URL;
@@ -14,13 +10,13 @@ export default function Home() {
     const response = await axios.get(`${API}/communities`);
     if (!response.data) return [];
 
-    return normalizeCommunities(response.data);
+    return response.data.data;
   };
 
   const communities = use(getCommunities());
 
   return (
-    <div className='grid grid-flow-col justify-items-center gap-8'>
+    <div className='grid grid-cols-3 gap-8'>
       {communities.length !== 0 ? (
         communities.map((community) => (
           <Community
@@ -32,8 +28,8 @@ export default function Home() {
           />
         ))
       ) : (
-        <div className='col-span-45 mt-20 cursor-pointer'>
-          <AddIcon />
+        <div className='col-start-6'>
+          <p>There is no communities yet</p>
         </div>
       )}
     </div>

@@ -46,7 +46,13 @@ function VerifyResetOtpForm() {
         </div>
         <input type='hidden' name='otp' value={otp} />
         <div className='mt-4 mb-4'>
-          <Button className='px-19' type='submit' disabled={isPending}>
+          <Button
+            className='px-19 text-[18px]'
+            buttonType='primaryAction'
+            buttonColor='bg-(--steel-blue-50)'
+            type='submit'
+            disabled={isPending}
+          >
             Confirm code
           </Button>
         </div>

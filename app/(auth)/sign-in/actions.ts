@@ -35,21 +35,39 @@ export const signInAction = async (prevState: unknown, formData: FormData) => {
       deviceToken ? { headers: { Cookie: `deviceToken=${deviceToken}` } } : {},
     );
 
+    console.log(response.data);
+
     const data = response.data;
     if (data.requires2FA) {
-      cookieStore.set('tempToken', data.tempToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        path: '/',
-        maxAge: 10 * 60,
-      });
-
-      redirect('/verify-2fa');
+      // When login is called from a Next.js server action, the backend's Set-Cookie
+      // won't automatically reach the browser, so we persist tempToken ourselves.
+      if (data.tempToken) {
+        cookieStore.set('tempToken', data.tempToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          path: '/',
+          maxAge: 10 * 60, // 10 minutes
+        });
+      }
+      redirect('/sign-in/verify-2fa');
     }
 
     await storeAuthTokens(data);
   } catch (error) {
+    // `redirect()` in Next.js works by throwing a special error.
+    // If we catch it here, the redirect will never happen.
+    if (
+      typeof error === 'object' &&
+      error !== null &&
+      'digest' in error &&
+      typeof (error as { digest?: unknown }).digest === 'string' &&
+      (error as { digest: string }).digest.startsWith('NEXT_REDIRECT')
+    ) {
+      throw error;
+    }
+
     if (axios.isAxiosError(error)) {
+      console.log(error);
       return {
         errors: { server: error.response?.data?.message ?? error.message },
       };

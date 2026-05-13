@@ -20,7 +20,7 @@ export const signUpSchema = z.object({
     .min(6, 'Password must be at least 6 characters long')
     .regex(
       /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&_])[A-Za-z\d@$!%*#?&_]+$/,
-      'Password must contain at least one letter and one number',
+      'Password must contain at least one special character',
     )
     .transform((value) => value.trim()),
 });

@@ -11,3 +11,4 @@ export { default as UnCheckBoxIcon } from './UnCheckBoxIcon';
 export { default as SeeIcon } from './SeeIcon';
 export { default as UnSeeIcon } from './UnSeeIcon';
 export { default as KeyIcon } from './KeyIcon';
+export { default as membersIcon } from './membersIcon';

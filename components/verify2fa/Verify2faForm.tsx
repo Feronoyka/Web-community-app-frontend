@@ -9,11 +9,11 @@ import { Button } from '../UI';
 
 function Verify2faForm() {
   const [otp, setOtp] = useState('');
-  const [check, setCheck] = useState('off');
+  const [check, setCheck] = useState('');
   const [state, action, isPending] = useActionState(verify2faAction, null);
 
   const toggleCheck = () => {
-    setCheck((state) => (state === 'off' ? 'on' : 'off'));
+    setCheck((state) => (state === '' ? 'on' : ''));
   };
 
   return (
@@ -27,9 +27,11 @@ function Verify2faForm() {
             renderInput={(props) => (
               <input
                 {...props}
-                type='number'
+                // Don't use `type="number"`: it can strip leading zeros and break OTP verification.
+                type='text'
                 inputMode='numeric'
                 pattern='[0-9]*'
+                autoComplete='one-time-code'
               />
             )}
             containerStyle={{
@@ -49,10 +51,19 @@ function Verify2faForm() {
           {state?.errors.otp && (
             <p className='text-red-500'>{state.errors.otp[0]}</p>
           )}
+          {state?.errors?.server && (
+            <p className='text-red-500 mt-2'>{state.errors.server}</p>
+          )}
         </div>
         <input type='hidden' name='otp' value={otp} />
         <div className='mt-4 mb-4'>
-          <Button type='submit' disabled={isPending} className='px-27.25'>
+          <Button
+            type='submit'
+            buttonType='primaryAction'
+            buttonColor='bg-(--steel-blue-50)'
+            disabled={isPending}
+            className='px-27.25 text-[18px]'
+          >
             Verify
           </Button>
         </div>

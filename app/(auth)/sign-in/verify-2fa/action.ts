@@ -58,6 +58,18 @@ export const verify2faAction = async (
 
     cookieStore.delete('tempToken');
   } catch (error) {
+    // `redirect()` works by throwing a special Next.js error.
+    // If we catch it here, navigation will never happen.
+    if (
+      typeof error === 'object' &&
+      error !== null &&
+      'digest' in error &&
+      typeof (error as { digest?: unknown }).digest === 'string' &&
+      (error as { digest: string }).digest.startsWith('NEXT_REDIRECT')
+    ) {
+      throw error;
+    }
+
     if (axios.isAxiosError(error)) {
       return {
         errors: { server: error.response?.data?.message ?? error.message },

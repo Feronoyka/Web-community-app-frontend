@@ -15,7 +15,7 @@ export function normalizeCommunities(
   payload: PaginatedCommunities,
 ): CommunityFromApi[] {
   if (Array.isArray(payload)) {
-    return payload;
+    return payload.data;
   }
   return [];
 }

@@ -46,7 +46,13 @@ function SignUpForm() {
           )}
         </div>
         <div className='text-center mt-4'>
-          <Button type='submit' disabled={isPending} className='px-33'>
+          <Button
+            type='submit'
+            buttonType='primaryAction'
+            buttonColor='bg-(--steel-blue-50)'
+            disabled={isPending}
+            className='px-33 text-[18px]'
+          >
             Sign up
           </Button>
           <p className='mt-2 mb-4'>

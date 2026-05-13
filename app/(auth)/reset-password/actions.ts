@@ -47,5 +47,5 @@ export const ResetPasswordAction = async (
     return { errors: { server: 'Something went wrong' } };
   }
 
-  redirect('/verify-reset-otp');
+  redirect('/reset-password/verify');
 };

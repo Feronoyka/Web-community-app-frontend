@@ -13,11 +13,11 @@ export default async function RootLayout({
   return (
     <>
       <Header user={user} />
-      <div className='grid grid-cols-12 gap-8 mx-[64px]'>
+      <div className='grid grid-cols-12 gap-8 mx-16'>
         <Article />
         <Main />
       </div>
-      <div className='grid grid-cols-12 gap-8 mx-[64px] mt-9'>{children}</div>
+      <div className='grid grid-cols-12 gap-8 mx-16 mt-9'>{children}</div>
     </>
   );
 }

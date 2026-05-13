@@ -1,5 +1,29 @@
 @import 'tailwindcss';
 
+:root {
+  --vibrant-coral-50: #ff7f83;
+  --vibrant-coral-100: #ff595e;
+  --vibrant-coral-150: #ff3339;
+  --golden-pollen-50: #ffdd7f;
+  --golden-pollen-100: #ffca3a;
+  --golden-pollen-150: #ffba00;
+  --yellow-green-50: #a9df53;
+  --yellow-green-100: #8ac926;
+  --yellow-green-150: #76ac20;
+  --steel-blue-50: #33a0e5;
+  --steel-blue-100: #1982c4;
+  --steel-blue-150: #1778b5;
+  --dusty-grape-50: #8768b1;
+  --dusty-grape-100: #6a4c93;
+  --dusty-grape-150: #614586;
+
+  --cartoon-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+}
+
+* {
+  font-family: 'Albert Sans', sans-serif;
+}
+
 body,
 ul {
   list-style: none;

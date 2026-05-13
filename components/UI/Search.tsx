@@ -21,7 +21,7 @@ function Search({ name, className }: SearchType) {
   return (
     <>
       <input
-        className={className}
+        className={`border-2 shadow-(--cartoon-shadow) ${className}`}
         type='text'
         placeholder={name}
         value={queryPeople}

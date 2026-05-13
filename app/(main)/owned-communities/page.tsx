@@ -6,9 +6,13 @@ async function OwnedCommunities() {
   return (
     <>
       {user ? (
-        <div>Owned communities</div>
+        user.communities ? (
+          <div>{user.communities}</div>
+        ) : (
+          <p className='col-start-6 w-60'>You do not have any communities</p>
+        )
       ) : (
-        <h1>You do not have any communities</h1>
+        <p className='col-start-6 w-60'>Sign up to create community</p>
       )}
     </>
   );

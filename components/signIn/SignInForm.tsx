@@ -50,7 +50,13 @@ function SignInForm() {
             )}
         </div>
         <div className='mt-4 text-center mb-4'>
-          <Button type='submit' disabled={isPending} className='px-33.25'>
+          <Button
+            type='submit'
+            buttonType='primaryAction'
+            buttonColor='bg-(--steel-blue-50)'
+            disabled={isPending}
+            className='px-33.25 text-[18px]'
+          >
             Sign in
           </Button>
           <div className='mt-4'>

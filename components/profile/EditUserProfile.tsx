@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { OutlineIcon } from '@/assets/icons';
 import EditUserProfileForm from './EditUserProfileForm';
 
-type UserType = {
+type User = {
   user: {
     id?: string;
     avatarUrl?: string;
@@ -13,10 +13,10 @@ type UserType = {
   };
 };
 
-export default function EditUserProfile({ user }: UserType) {
+export default function EditUserProfile({ user }: User) {
   return (
-    <div className='bg-white col-start-3 col-end-11 rounded-[10px]'>
-      <div className='mx-9 my-9'>
+    <div className='bg-white col-start-3 col-end-11 rounded-[10px] shadow-(--cartoon-shadow) border-2'>
+      <div className='px-9 py-9'>
         <div className='flex justify-between mb-10'>
           <div>
             <h1 className='text-4xl font-bold mb-4'>Profile</h1>
@@ -28,7 +28,7 @@ export default function EditUserProfile({ user }: UserType) {
             <OutlineIcon />
           </Link>
         </div>
-        <div className='mx-7'>
+        <div className='px-7'>
           <EditUserProfileForm user={user} />
         </div>
       </div>

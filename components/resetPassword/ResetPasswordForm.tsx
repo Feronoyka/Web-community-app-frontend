@@ -21,7 +21,13 @@ function ResetPasswordForm() {
           <p className={errorStyle}>{state.errors.server[0]}</p>
         )}
         <div className='mt-4 mb-8'>
-          <Button type='submit' disabled={isPending} className='px-26'>
+          <Button
+            type='submit'
+            buttonType='primaryAction'
+            buttonColor='bg-(--steel-blue-50)'
+            disabled={isPending}
+            className='px-26 text-[18px]'
+          >
             Confirm email
           </Button>
         </div>

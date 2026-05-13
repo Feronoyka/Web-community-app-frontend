@@ -54,5 +54,5 @@ export const verifyResetOtpAction = async (
     return { errors: { server: 'Something went wrong' } };
   }
 
-  redirect('/reset-confirm');
+  redirect('/reset-password/reset');
 };

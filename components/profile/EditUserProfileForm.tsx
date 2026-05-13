@@ -4,8 +4,9 @@ import { useActionState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { updateUserProfileAction } from '@/app/profile/edit/[nickname]/action';
-import { PRONOUNS_OPTIONS } from '@/utils/enums';
-import defaultUser from '@/assets/pictures/default-user.jpg';
+import { PRONOUNS_OPTIONS, Pronouns } from '@/utils/enums';
+import { DefaultUserIcon } from '@/assets/icons';
+import { Button, Input, TextArea } from '../UI';
 
 type UserType = {
   user: {
@@ -26,8 +27,8 @@ function EditUserProfileForm({ user }: UserType) {
 
   const avatarStyle = 'mx-auto rounded-[100%] border-[#D9D9D9] border';
   const inputStyle =
-    'w-[359px] py-[7px] outline-1 outline-[#808080] rounded-[10px] pl-4';
-  const h3 = 'font-bold text-xl mb-1';
+    'w-[360px] py-2 outline-1 outline-[#808080] rounded-[10px] pl-2 mt-1 text-[18px]';
+  const h3 = 'font-bold text-xl';
   const errorStyle = 'text-red-500 text-sm';
 
   return (
@@ -35,14 +36,14 @@ function EditUserProfileForm({ user }: UserType) {
       <form action={action}>
         <div className='flex justify-between'>
           <div>
-            <div className='mb-2'>
+            <div>
               <h3 className={h3}>Name</h3>
-              <input
+              <Input
                 type='text'
                 name='username'
                 defaultValue={user.username}
-                className={inputStyle}
                 placeholder={user.username}
+                className='w-[360px]'
               />
               {state?.errors.username && (
                 <p className={errorStyle}>{state.errors.username}</p>
@@ -53,7 +54,7 @@ function EditUserProfileForm({ user }: UserType) {
               <select
                 className={inputStyle}
                 name='pronouns'
-                defaultValue={user.pronouns}
+                defaultValue={user.pronouns ?? Pronouns.NONE}
               >
                 {PRONOUNS_OPTIONS.map((pronoun) => (
                   <option key={pronoun} value={pronoun}>
@@ -67,20 +68,19 @@ function EditUserProfileForm({ user }: UserType) {
             </div>
             <div className='mt-2'>
               <h3 className={h3}>Description</h3>
-              <input
-                type='text'
-                defaultValue={user.description}
+              <TextArea
                 name='description'
-                className={`pb-[282px] ${inputStyle}`}
                 placeholder='I love cute stuff'
-              />
+                className='max-w-[360px]'
+                defaultValue={user.description}
+              ></TextArea>
               {state?.errors.description && (
                 <p className={errorStyle}>{state.errors.description}</p>
               )}
             </div>
           </div>
-          <div className='block text-center'>
-            <div className='mb-75'>
+          <div className='flex flex-col justify-between text-center'>
+            <div className='mb'>
               {user.avatarUrl ? (
                 <Image
                   src={user.avatarUrl}
@@ -90,30 +90,31 @@ function EditUserProfileForm({ user }: UserType) {
                   className={avatarStyle}
                 />
               ) : (
-                <Image
-                  src={defaultUser}
-                  alt=''
-                  width={150}
-                  height={150}
-                  className={avatarStyle}
-                />
+                <DefaultUserIcon width={163} height={163} />
               )}
-              <p className='text-[#808080] mt-2'>
+              <p className='text-[#808080] mt-2 opacity-50'>
                 {'@'}
                 {user.nickname}
               </p>
             </div>
             <div>
               <Link className='mr-2' href={`/profile/${user.nickname}`}>
-                Discard
+                <Button
+                  buttonType='primary'
+                  buttonColor='bg-(--vibrant-coral-100)'
+                >
+                  Discard
+                </Button>
               </Link>
-              <button
+              <Button
                 className='ml-2 cursor-pointer'
                 type='submit'
+                buttonType='primary'
+                buttonColor='bg-(--dusty-grape-50)'
                 disabled={isPending}
               >
                 Save
-              </button>
+              </Button>
             </div>
           </div>
         </div>

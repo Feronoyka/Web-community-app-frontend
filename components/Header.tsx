@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { SignUpIcon, UserIcon, DefaultUserIcon, Logo } from '@/assets/icons';
-import Search from './Search';
+import Search from './UI/Search';
 import Image from 'next/image';
 
 interface User {
@@ -18,22 +18,26 @@ function Header({ user }: { user?: User }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className='bg-[#EE605D] w-screen h-[85px] drop-shadow-lg'>
+    <div className='bg-(--vibrant-coral-150) w-screen h-21.25 drop-shadow-lg'>
       <ul className='flex items-center h-full justify-between mx-8'>
         <Logo />
         <ul className='flex items-center'>
           <li>
             <Search
               name='Search people'
-              className='pr-[128px] mr-8 text-xl py-[11px] pl-4 bg-[#F6BD60] outline-none rounded-[10px]'
+              className='pr-32 mr-8 text-xl py-2.75 pl-4 bg-(--golden-pollen-100) outline-none rounded-[10px]'
             />
           </li>
           {user ? (
             <li className='inline-block text-xl'>
               {user.avatarUrl ? (
-                <Image src={user.avatarUrl} alt='' />
+                <Image
+                  src={user.avatarUrl}
+                  alt=''
+                  onClick={() => setIsOpen(!isOpen)}
+                />
               ) : (
-                <DefaultUserIcon onClick={() => setIsOpen(isOpen)} />
+                <DefaultUserIcon onClick={() => setIsOpen(!isOpen)} />
               )}
             </li>
           ) : (
@@ -43,19 +47,27 @@ function Header({ user }: { user?: User }) {
           )}
           <li className='group'>
             {isOpen && (
-              <ul className='text-[18px] items-center text-center absolute bg-white py-4 px-5 top-21.5 left-[89%] rounded-[10px]'>
+              <ul className='text-[18px] items-center absolute bg-white py-4 px-5 top-21.5 left-[86%] rounded-[10px]'>
                 {user !== null ? (
-                  <>
-                    <li className='flex my-3 cursor-pointer'>
-                      <Link href={`/profile/${user?.nickname}`}>
-                        <UserIcon className='mr-2' /> Profile
-                      </Link>
-                    </li>
-                  </>
+                  <li className='my-3 items-center justify-center cursor-pointer'>
+                    <Link
+                      href={`/profile/${user?.nickname}`}
+                      className='flex flex-row'
+                    >
+                      <UserIcon className='mr-2' />
+                      <p>Profile</p>
+                    </Link>
+                    <Link href={'/community-create'}>
+                      <p>Create community</p>
+                    </Link>
+                  </li>
                 ) : (
                   <li className='cursor-pointer'>
-                    <Link href='/sign-up' className='inline-flex items-center'>
-                      <SignUpIcon className='mr-2' /> Sign up
+                    <Link
+                      href='/sign-up'
+                      className='flex flex-row items-center'
+                    >
+                      <SignUpIcon className='mr-2' /> <p>Sign up</p>
                     </Link>
                   </li>
                 )}

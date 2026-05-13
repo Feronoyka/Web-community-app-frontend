@@ -50,8 +50,10 @@ function ResetConfirmForm() {
         )}
         <Button
           type='submit'
+          buttonType='primaryAction'
+          buttonColor='bg-(--steel-blue-50)'
           disabled={isPending}
-          className='px-21.25 mt-4 mb-8'
+          className='px-21.25 mt-4 mb-8 text-[18px]'
         >
           Confirm password
         </Button>

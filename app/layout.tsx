@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 const albertSans = Albert_Sans({
-  variable: '--font-albert',
+  variable: '--font-albert-sans',
   subsets: ['latin'],
 });
 
