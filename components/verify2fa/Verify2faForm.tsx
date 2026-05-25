@@ -1,19 +1,32 @@
 'use client';
 
-import { useActionState, useState } from 'react';
+import { useActionState, useState, useTransition } from 'react';
 import OTPInput from 'react-otp-input';
-import { verify2faAction } from '@/app/(auth)/sign-in/verify-2fa/action';
+import { verify2faAction } from '@/app/(auth)/sign-in/verify-2fa/actions';
 import { CheckBoxIcon, UnCheckBoxIcon } from '@/assets/icons/';
 import './otp.module.css';
 import { Button } from '../UI';
+import { useResendCooldown } from '@/hooks/useResendCooldown';
+import { resend2faAction } from '@/app/(auth)/sign-in/verify-2fa/resend2faAction';
 
 function Verify2faForm() {
   const [otp, setOtp] = useState('');
   const [check, setCheck] = useState('');
   const [state, action, isPending] = useActionState(verify2faAction, null);
+  const [isPendingResend, startTransition] = useTransition();
+  const { isOnCooldown, formatted, startCooldown, isMaxReached } =
+    useResendCooldown();
 
   const toggleCheck = () => {
     setCheck((state) => (state === '' ? 'on' : ''));
+  };
+
+  const handleResend = () => {
+    startTransition(async () => {
+      await resend2faAction();
+      startCooldown();
+      setOtp('');
+    });
   };
 
   return (
@@ -83,7 +96,19 @@ function Verify2faForm() {
           <p className='ml-1 font-semibold'>Trust this device for 30 days</p>
         </div>
       </form>
-      <button className='text-blue-500 cursor-pointer'>Resend code</button>
+      <button
+        className='text-blue-500 cursor-pointer'
+        onClick={handleResend}
+        disabled={isOnCooldown || isPendingResend}
+      >
+        {isPendingResend
+          ? 'Sending...'
+          : isMaxReached
+            ? 'Too many resend attempts'
+            : isOnCooldown
+              ? `Resend code in ${formatted}`
+              : 'Resend code'}
+      </button>
     </div>
   );
 }

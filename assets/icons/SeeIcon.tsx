@@ -1,17 +1,13 @@
-const SeeIcon = ({
-  className,
-  onClick,
-}: {
-  className?: string;
-  onClick?: () => void;
-}) => {
+import { Icon } from '@/types';
+
+const SeeIcon = ({ className, onClick, height = 24, width = 24 }: Icon) => {
   return (
     <>
       <svg
         onClick={onClick}
         className={`${className} cursor-pointer`}
-        width='24'
-        height='24'
+        width={width}
+        height={height}
         viewBox='0 0 24 24'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'

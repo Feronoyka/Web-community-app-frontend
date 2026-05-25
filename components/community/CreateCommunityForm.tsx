@@ -35,8 +35,8 @@ function CreateCommunityForm() {
             ></TextArea>
             {state?.errors.description && <p>{state.errors.description}</p>}
           </div>
-          <div className='bg-[#F6BD60] w-89.75 h-120.75 rounded-[10px] shadow-(--cartoon-shadow) border-2'>
-            <div className='flex bg-[#F8CD86] w-89 h-39 rounded-t-[10px] justify-center'>
+          <div className='bg-(--golden-pollen-100) w-89.75 h-120.75 rounded-[10px] shadow-(--cartoon-shadow) border-2'>
+            <div className='flex bg-(--golden-pollen-50) w-89 h-39 rounded-t-[10px] justify-center'>
               <div className='bg-(--dusty-grape-100) w-25 h-25 my-25 rounded-[10px]'></div>
             </div>
             <div className='text-center my-15'>

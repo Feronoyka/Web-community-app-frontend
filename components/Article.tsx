@@ -5,7 +5,7 @@ function Article() {
   return (
     <>
       <div className={article}>
-        <h1 className='text-white font-bold text-[48px] mt-[81px] ml-[52px]'>
+        <h1 className='text-white font-bold text-[48px] mt-20.25 ml-13'>
           Welcome to lovely community
         </h1>
       </div>

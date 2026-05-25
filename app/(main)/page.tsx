@@ -1,37 +1,45 @@
-import axios from 'axios';
 import Community from '@/components/Community';
+import { getCommunities } from '@/lib/getCommunities';
 import { CommunityFromApi } from '@/utils/normalizeCommunities';
 import { use } from 'react';
 
-export default function Home() {
-  const API = process.env.API_URL;
+interface User {
+  id?: string;
+  avatarUrl: string;
+  nickname: string;
+  username: string;
+  email: string;
+  communities?: CommunityFromApi[];
+}
 
-  const getCommunities = async (): Promise<CommunityFromApi[]> => {
-    const response = await axios.get(`${API}/communities`);
-    if (!response.data) return [];
-
-    return response.data.data;
-  };
-
+export default function Home({ user }: { user?: User }) {
   const communities = use(getCommunities());
 
   return (
-    <div className='grid grid-cols-3 gap-8'>
+    <>
       {communities.length !== 0 ? (
-        communities.map((community) => (
-          <Community
-            key={community.id}
-            name={community.name}
-            followerCount={community.followerCount}
-            backgroundUrl={community.backgroundUrl}
-            discription={community.description}
-          />
-        ))
+        <div className='grid grid-cols-12 gap-8'>
+          <div className='grid grid-cols-3 gap-8'>
+            <div>
+              {communities.map((community) => (
+                <Community
+                  key={community.id}
+                  ownerId={community.ownerId}
+                  name={community.name}
+                  followerCount={community.followerCount}
+                  backgroundUrl={community.backgroundUrl}
+                  discription={community.description}
+                  user={user}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       ) : (
-        <div className='col-start-6'>
+        <div className='flex justify-center'>
           <p>There is no communities yet</p>
         </div>
       )}
-    </div>
+    </>
   );
 }

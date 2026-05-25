@@ -29,18 +29,33 @@ export const createAxiosInstance = async () => {
     async (error) => {
       const originalRequest = error.config;
 
+      console.log('Response error:', {
+        error: error.response?.status,
+        url: originalRequest.url,
+        data: error.response.data,
+      });
+
       if (error.response?.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
-        console.log(error.response.status);
 
         try {
           const refreshToken = cookieStore.get('refreshToken')?.value;
 
-          if (!refreshToken) redirect('/sign-in');
+          console.log(refreshToken);
 
-          const refreshResponse = await axios.post(`${API}/auth/refresh`, {
-            refreshToken,
-          });
+          if (!refreshToken) return null;
+
+          const refreshResponse = await axios.post(
+            `${API}/auth/refresh`,
+            {},
+            {
+              headers: {
+                Cookie: `refreshToken=${refreshToken}`,
+              },
+            },
+          );
+
+          console.log(refreshResponse);
 
           const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
             refreshResponse.data;
@@ -60,7 +75,9 @@ export const createAxiosInstance = async () => {
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
           return axiosInstance(originalRequest);
-        } catch {
+        } catch (refreshError) {
+          console.log(refreshError);
+
           cookieStore.delete('accessToken');
           cookieStore.delete('refreshToken');
           redirect('/sign-in');

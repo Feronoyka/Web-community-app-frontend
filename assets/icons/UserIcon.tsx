@@ -1,8 +1,11 @@
-const UserIcon = ({ className }: { className?: string }) => (
+import { Icon } from '@/types';
+
+const UserIcon = ({ className, onClick, height = 32, width = 32 }: Icon) => (
   <svg
-    className={className}
-    width='32'
-    height='32'
+    onClick={onClick}
+    className={` mr-2 ${className}`}
+    width={width}
+    height={height}
     viewBox='0 0 32 32'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'

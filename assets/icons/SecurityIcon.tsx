@@ -1,10 +1,18 @@
-const SecurityIcon = ({ className }: { className?: string }) => {
+import { Icon } from '@/types';
+
+const SecurityIcon = ({
+  className,
+  onClick,
+  height = 142,
+  width = 117,
+}: Icon) => {
   return (
     <>
       <svg
+        onClick={onClick}
         className={className}
-        width='117'
-        height='142'
+        width={width}
+        height={height}
         viewBox='0 0 117 142'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'

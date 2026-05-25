@@ -47,12 +47,13 @@ export const verify2faAction = async (
     const data = response.data;
     await storeAuthTokens(data);
 
+    const deviceTokenExpiryAt = 30 * 24 * 60 * 60; // 30 days
     if (data.deviceToken) {
       cookieStore.set('deviceToken', data.deviceToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         path: '/',
-        maxAge: 30 * 24 * 60 * 60, // 30 days
+        maxAge: deviceTokenExpiryAt,
       });
     }
 

@@ -17,7 +17,7 @@ export default async function RootLayout({
         <Article />
         <Main />
       </div>
-      <div className='grid grid-cols-12 gap-8 mx-16 mt-9'>{children}</div>
+      <div>{children}</div>
     </>
   );
 }

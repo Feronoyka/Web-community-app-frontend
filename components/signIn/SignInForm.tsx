@@ -32,12 +32,12 @@ function SignInForm() {
           <Input type={type} name='password' placeholder='Enter a password' />
           {type === 'password' ? (
             <UnSeeIcon
-              className='absolute top-[15px] left-72'
+              className='absolute top-3.75 left-72'
               onClick={toggleHideAndSHow}
             />
           ) : (
             <SeeIcon
-              className='absolute top-[15px] left-72'
+              className='absolute top-3.75 left-72'
               onClick={toggleHideAndSHow}
             />
           )}

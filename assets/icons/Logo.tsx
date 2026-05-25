@@ -1,8 +1,11 @@
-const Logo = ({ className }: { className?: string }) => (
+import { Icon } from '@/types';
+
+const Logo = ({ className, onClick, height = 51, width = 53 }: Icon) => (
   <svg
+    onClick={onClick}
     className={className}
-    width='53'
-    height='51'
+    width={width}
+    height={height}
     viewBox='0 0 53 51'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'

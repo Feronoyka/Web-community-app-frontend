@@ -1,17 +1,18 @@
+import { Icon } from '@/types';
+
 const CheckBoxIcon = ({
   className,
   onClick,
-}: {
-  className?: string;
-  onClick?: () => void;
-}) => {
+  height = 20,
+  width = 20,
+}: Icon) => {
   return (
     <>
       <svg
         className={className}
         onClick={onClick}
-        width='20'
-        height='20'
+        width={width}
+        height={height}
         viewBox='0 0 20 20'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'

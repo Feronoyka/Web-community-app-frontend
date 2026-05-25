@@ -1,8 +1,11 @@
-const OutlineIcon = ({ className }: { className?: string }) => (
+import { Icon } from '@/types';
+
+const OutlineIcon = ({ className, onClick, height = 26, width = 26 }: Icon) => (
   <svg
+    onClick={onClick}
     className={`${className}`}
-    width='26'
-    height='26'
+    width={width}
+    height={height}
     viewBox='0 0 26 26'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'

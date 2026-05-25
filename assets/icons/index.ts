@@ -1,5 +1,4 @@
 export { default as Logo } from './Logo';
-export { default as AccountIcon } from './AccountIcon';
 export { default as UserIcon } from './UserIcon';
 export { default as SignUpIcon } from './SignUpIcon';
 export { default as OutlineIcon } from './OutlineIcon';
@@ -11,4 +10,7 @@ export { default as UnCheckBoxIcon } from './UnCheckBoxIcon';
 export { default as SeeIcon } from './SeeIcon';
 export { default as UnSeeIcon } from './UnSeeIcon';
 export { default as KeyIcon } from './KeyIcon';
-export { default as membersIcon } from './membersIcon';
+export { default as MembersIcon } from './MembersIcon';
+export { default as SearchIcon } from './SearchIcon';
+export { default as AccountIcon } from './AccountIcon';
+export { default as Logout } from './Logout';

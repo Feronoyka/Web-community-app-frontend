@@ -43,7 +43,7 @@ function EditUserProfileForm({ user }: UserType) {
                 name='username'
                 defaultValue={user.username}
                 placeholder={user.username}
-                className='w-[360px]'
+                className='w-90'
               />
               {state?.errors.username && (
                 <p className={errorStyle}>{state.errors.username}</p>
@@ -71,7 +71,7 @@ function EditUserProfileForm({ user }: UserType) {
               <TextArea
                 name='description'
                 placeholder='I love cute stuff'
-                className='max-w-[360px]'
+                className='max-w-90'
                 defaultValue={user.description}
               ></TextArea>
               {state?.errors.description && (

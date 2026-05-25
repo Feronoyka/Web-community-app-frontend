@@ -1,9 +1,12 @@
-const KeyIcon = ({ className }: { className?: string }) => {
+import { Icon } from '@/types';
+
+const KeyIcon = ({ className, onClick, height = 157, width = 157 }: Icon) => {
   return (
     <svg
+      onClick={onClick}
       className={className}
-      width='157'
-      height='157'
+      width={width}
+      height={height}
       viewBox='0 0 157 157'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'

@@ -1,14 +1,27 @@
 'use client';
 
-import { useActionState, useState } from 'react';
+import { useActionState, useState, useTransition } from 'react';
 import OTPInput from 'react-otp-input';
 import './otp.module.css';
 import { verifyResetOtpAction } from '@/app/(auth)/reset-password/verify/actions';
 import { Button } from '../UI';
+import { useResendCooldown } from '@/hooks/useResendCooldown';
+import { resendResetOtpAction } from '@/app/(auth)/reset-password/verify/resendResetOtpAction';
 
 function VerifyResetOtpForm() {
   const [otp, setOtp] = useState('');
   const [state, action, isPending] = useActionState(verifyResetOtpAction, null);
+  const [isPendingResend, startTransition] = useTransition();
+  const { isOnCooldown, formatted, startCooldown, isMaxReached } =
+    useResendCooldown();
+
+  const handleResend = () => {
+    startTransition(async () => {
+      await resendResetOtpAction();
+      startCooldown();
+      setOtp('');
+    });
+  };
 
   return (
     <div className='mt-8'>
@@ -57,7 +70,19 @@ function VerifyResetOtpForm() {
           </Button>
         </div>
       </form>
-      <button className='text-blue-500 cursor-pointer'>Resend code</button>
+      <button
+        className='text-blue-500 cursor-pointer'
+        disabled={isOnCooldown || isPendingResend}
+        onClick={handleResend}
+      >
+        {isPendingResend
+          ? 'Sending...'
+          : isMaxReached
+            ? 'Too many resend attempts'
+            : isOnCooldown
+              ? `Resend code in ${formatted}`
+              : 'Resend code'}
+      </button>
     </div>
   );
 }

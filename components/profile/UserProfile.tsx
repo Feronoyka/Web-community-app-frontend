@@ -42,9 +42,7 @@ export default async function UserProfile({ user }: UserType) {
         )}
         <p className='text-5 text-[#808080] my-1 opacity-50'>
           {`@`}
-          {user.nickname}
-        </p>
-        <p className='absolute rotate-65 left-87 top-25 text-[#808080] opacity-50'>
+          {user.nickname} |
           {user.pronouns === Pronouns.NONE ? null : user.pronouns}
         </p>
         <p className='text-3xl font-bold mb-8'>{user.username}</p>

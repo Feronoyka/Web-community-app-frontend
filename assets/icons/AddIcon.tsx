@@ -1,16 +1,12 @@
-const AddIcon = ({
-  className,
-  onClick,
-}: {
-  className?: string;
-  onClick?: () => void;
-}) => {
+import { Icon } from '@/types';
+
+const AddIcon = ({ className, onClick, height = 48, width = 48 }: Icon) => {
   return (
     <svg
       className={className}
       onChange={onClick}
-      width='48'
-      height='48'
+      width={width}
+      height={height}
       viewBox='0 0 48 48'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'

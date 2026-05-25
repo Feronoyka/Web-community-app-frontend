@@ -26,7 +26,7 @@ export const ResetPasswordAction = async (
   }
 
   try {
-    await axios.post(`${API}/auth`, {
+    await axios.post(`${API}/auth/reset-password`, {
       email: result.data.email,
     });
 

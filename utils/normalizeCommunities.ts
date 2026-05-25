@@ -2,8 +2,11 @@ export interface CommunityFromApi {
   id: string;
   name: string;
   backgroundUrl?: string;
+  avatarUrl?: string;
   description?: string;
+  isFollowed: boolean;
   followerCount: number;
+  ownerId: string;
 }
 
 interface PaginatedCommunities {
@@ -14,7 +17,7 @@ interface PaginatedCommunities {
 export function normalizeCommunities(
   payload: PaginatedCommunities,
 ): CommunityFromApi[] {
-  if (Array.isArray(payload)) {
+  if (payload) {
     return payload.data;
   }
   return [];

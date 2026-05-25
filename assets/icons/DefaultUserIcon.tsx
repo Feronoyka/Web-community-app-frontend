@@ -1,14 +1,11 @@
+import { Icon } from '@/types';
+
 const DefaultUserIcon = ({
   className,
   onClick,
-  width = 50,
   height = 50,
-}: {
-  className?: string;
-  onClick?: () => void;
-  width?: number;
-  height?: number;
-}) => {
+  width = 50,
+}: Icon) => {
   return (
     <svg
       className={`cursor-pointer ${className}`}

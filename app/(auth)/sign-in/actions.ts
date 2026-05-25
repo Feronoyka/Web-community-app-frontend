@@ -41,14 +41,23 @@ export const signInAction = async (prevState: unknown, formData: FormData) => {
     if (data.requires2FA) {
       // When login is called from a Next.js server action, the backend's Set-Cookie
       // won't automatically reach the browser, so we persist tempToken ourselves.
+      const expiryAt = 10 * 60 * 1000; // 10 minutes
       if (data.tempToken) {
         cookieStore.set('tempToken', data.tempToken, {
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production',
           path: '/',
-          maxAge: 10 * 60, // 10 minutes
+          maxAge: expiryAt,
         });
       }
+
+      cookieStore.set('tempEmail', result.data.email, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        path: '/',
+        maxAge: expiryAt,
+      });
+
       redirect('/sign-in/verify-2fa');
     }
 
