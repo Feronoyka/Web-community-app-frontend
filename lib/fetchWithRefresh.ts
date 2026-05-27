@@ -11,5 +11,9 @@ export const fetchWithRefresh = async (url: string, options = {}) => {
     ...options,
   });
 
+  if (!response.data) {
+    return null;
+  }
+
   return response.data;
 };

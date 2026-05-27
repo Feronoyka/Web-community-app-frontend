@@ -1,0 +1,13 @@
+import { CommunityFromApi } from '@/utils/normalizeCommunities';
+
+export type User = {
+  id?: string;
+  avatarUrl?: string;
+  nickname: string;
+  username: string;
+  pornouns?: string;
+  description?: string;
+  email?: string;
+  communities?: CommunityFromApi[];
+  ownedCommunities?: CommunityFromApi[];
+};

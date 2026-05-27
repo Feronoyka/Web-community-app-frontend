@@ -14,16 +14,9 @@ import {
 import SearchUser from './UI/SearchUser';
 import Image from 'next/image';
 import { logout } from '@/lib/logout';
+import { User } from '@/types';
 
-interface User {
-  id?: string;
-  avatarUrl: string;
-  nickname: string;
-  username: string;
-  email: string;
-}
-
-function Header({ user }: { user?: User }) {
+function Header({ user }: { user?: User | null }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

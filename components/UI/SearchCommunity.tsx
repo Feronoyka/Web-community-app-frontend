@@ -1,7 +1,6 @@
 'use client';
 
 import { useDebounce } from '@/hooks/useDebounce';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 type SearchType = {
@@ -9,35 +8,17 @@ type SearchType = {
   className?: string;
 };
 
-const API = process.env.API_URL;
-
 function SearchCommunity({ name, className }: SearchType) {
   const [queryCommunity, setQueryCommunity] = useState('');
-  const [results, setResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const debounceQuery = useDebounce(queryCommunity, 600);
 
   useEffect(() => {
     const fetchCommunityQuery = async () => {
       if (!debounceQuery.trim()) return;
-
-      setIsLoading(true);
-
-      try {
-        const response = await axios.get(
-          `${API}/communities/?search=${queryCommunity}`,
-        );
-        setResults(response.data.data ?? []);
-      } catch (error) {
-        console.error(error);
-        setResults([]);
-      } finally {
-        setIsLoading(false);
-      }
+      console.log('API calls');
     };
-
     fetchCommunityQuery();
-  }, [debounceQuery, queryCommunity]);
+  }, [debounceQuery]);
 
   return (
     <>

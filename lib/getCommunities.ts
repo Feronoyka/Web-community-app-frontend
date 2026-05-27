@@ -1,15 +1,8 @@
+'use server';
+
 import { normalizeCommunities } from '@/utils/normalizeCommunities';
 
 const API = process.env.API_URL;
-
-// interface CommunityType {
-//   id: string;
-//   backgroundUrl?: string | null;
-//   name: string;
-//   discription?: string;
-//   followerCount: number;
-//   ownerId: string;
-// }
 
 interface CommunityFromApi {
   id: string;

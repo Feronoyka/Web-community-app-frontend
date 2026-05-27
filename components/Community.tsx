@@ -1,31 +1,24 @@
 import MembersIcon from '@/assets/icons/MembersIcon';
 import Image from 'next/image';
 import { Button } from './UI';
+import { User } from '@/types';
 
 interface CommunityType {
   ownerId: string;
   backgroundUrl?: string | null;
   name: string;
-  discription?: string;
+  description?: string;
   followerCount: number;
-}
-
-interface User {
-  id?: string;
-  avatarUrl: string;
-  nickname: string;
-  username: string;
-  email: string;
 }
 
 async function Community({
   ownerId,
   backgroundUrl,
   name,
-  discription,
+  description,
   followerCount,
   user,
-}: CommunityType & { user?: User }) {
+}: CommunityType & { user?: User | null | undefined }) {
   return (
     <div className='rounded-[10px] bg-(--golden-pollen-100) w-110.5 w-max-110.5 h-120.5 shadow-(--cartoon-shadow) border-2 border-black)'>
       {backgroundUrl ? (
@@ -41,7 +34,7 @@ async function Community({
       <div className='my-15 text-center'>
         <h3 className='text-2xl font-bold'>{name}</h3>
         <p className='w-82.75 mx-auto text-gray-700 mt-3 border-box px-10 break-normal'>
-          {discription}
+          {description}
         </p>
         <div className='flex mt-3 justify-center items-center'>
           <MembersIcon width={27} height={27} />
