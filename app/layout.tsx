@@ -1,6 +1,7 @@
 import { Albert_Sans } from 'next/font/google';
 import type { Metadata } from 'next';
 import './globals.css';
+import { CommunityProvider } from '@/provider/community-provider';
 
 const albertSans = Albert_Sans({
   variable: '--font-albert-sans',
@@ -22,7 +23,7 @@ export default function RootLayout({
       <body
         className={`${albertSans.variable} antialiased bg-[#F7EDE2] overflow-x-hidden`}
       >
-        {children}
+        <CommunityProvider>{children}</CommunityProvider>
       </body>
     </html>
   );
