@@ -1,19 +1,9 @@
 'use server';
 
 import { normalizeCommunities } from '@/utils/normalizeCommunities';
+import { CommunityFromApi } from '@/types';
 
 const API = process.env.API_URL;
-
-interface CommunityFromApi {
-  id: string;
-  name: string;
-  backgroundUrl?: string;
-  avatarUrl?: string;
-  description?: string;
-  isFollowed: boolean;
-  followerCount: number;
-  ownerId: string;
-}
 
 export const getCommunities = async (): Promise<CommunityFromApi[]> => {
   try {

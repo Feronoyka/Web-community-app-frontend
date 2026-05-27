@@ -1,10 +1,14 @@
 import Communities from '@/components/Communities';
-import { User } from '@/types';
+// import { useCommunityStore } from '@/provider/community-provider';
+// import { User } from '@/types';
 
-export default async function Home({ user }: { user?: User | null }) {
+export default function Home() {
+  // const queryCommunities = useCommunityStore((state) => state.communities);
+  // const isLoading = useCommunityStore((state) => state.isLoading);
+
   return (
     <>
-      <Communities user={user} />
+      <Communities />
     </>
   );
 }

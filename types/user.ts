@@ -1,4 +1,4 @@
-import { CommunityFromApi } from '@/utils/normalizeCommunities';
+import { CommunityFromApi } from './communityFromApi';
 
 export type User = {
   id?: string;

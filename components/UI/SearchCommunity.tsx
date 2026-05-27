@@ -1,7 +1,9 @@
 'use client';
 
-import { useDebounce } from '@/hooks/useDebounce';
 import { useEffect, useState } from 'react';
+import { useDebounce } from '@/hooks/useDebounce';
+import { useCommunityStore } from '@/provider/community-provider';
+import { queryCommunities } from '@/lib/queryCommunities';
 
 type SearchType = {
   name: string;
@@ -11,14 +13,20 @@ type SearchType = {
 function SearchCommunity({ name, className }: SearchType) {
   const [queryCommunity, setQueryCommunity] = useState('');
   const debounceQuery = useDebounce(queryCommunity, 600);
+  const setCommunities = useCommunityStore((state) => state.setCommunities);
+  const setIsLoading = useCommunityStore((state) => state.setIsLoading);
 
   useEffect(() => {
     const fetchCommunityQuery = async () => {
       if (!debounceQuery.trim()) return;
-      console.log('API calls');
+
+      setIsLoading(true);
+
+      await queryCommunities({ setCommunities, setIsLoading, queryCommunity });
     };
+
     fetchCommunityQuery();
-  }, [debounceQuery]);
+  }, [debounceQuery, setCommunities, queryCommunity, setIsLoading]);
 
   return (
     <>

@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useRef } from 'react';
-import { CommunityState, createCommunityStore } from '@/store/community';
+import { CommunityStore, createCommunityStore } from '@/store/community';
 import { useStore } from 'zustand';
 
 type Store = ReturnType<typeof createCommunityStore>;
@@ -21,7 +21,7 @@ export function CommunityProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function useCommunityStore<T>(selector: (s: CommunityState) => T) {
+export function useCommunityStore<T>(selector: (s: CommunityStore) => T) {
   const store = useContext(Context);
 
   if (!store) throw new Error('Missing CommunityProvider');

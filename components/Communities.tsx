@@ -1,14 +1,24 @@
 import Community from '@/components/Community';
+import { getMe } from '@/lib/auth';
 import { getCommunities } from '@/lib/getCommunities';
-import { User } from '@/types';
+import { CommunityFromApi, User } from '@/types';
 
-export default async function Communities({ user }: { user?: User | null }) {
+export default async function Communities({
+  // user,
+  queryCommunities,
+  isLoading,
+}: {
+  // user?: User | null;
+  queryCommunities?: CommunityFromApi[];
+  isLoading?: boolean;
+}) {
   const communities = await getCommunities();
+  const user: User | null = await getMe();
 
   return (
     <>
-      {communities.length !== 0 ? (
-        <div className='grid grid-cols-12 gap-8'>
+      {communities.length !== 0 || queryCommunities ? (
+        <div className='grid grid-cols-12 gap-8 mx-16 mt-8'>
           <div className='grid grid-cols-3 gap-8'>
             <div>
               {communities.map((community) => (

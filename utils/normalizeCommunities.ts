@@ -1,13 +1,4 @@
-export interface CommunityFromApi {
-  id: string;
-  name: string;
-  backgroundUrl?: string;
-  avatarUrl?: string;
-  description?: string;
-  isFollowed: boolean;
-  followerCount: number;
-  ownerId: string;
-}
+import { CommunityFromApi } from '@/types';
 
 interface PaginatedCommunities {
   data: CommunityFromApi[];
