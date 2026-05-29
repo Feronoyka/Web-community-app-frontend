@@ -19,7 +19,7 @@ type UserResult = {
   avatarUrl?: string;
 };
 
-const API = process.env.API_URL;
+const API = process.env.NEXT_PUBLIC_API_URL;
 
 function SearchUser({ name, className }: SearchType) {
   const [queryPeople, setQueryPeople] = useState('');

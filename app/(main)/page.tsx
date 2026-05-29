@@ -1,14 +1,12 @@
 import Communities from '@/components/Communities';
-// import { useCommunityStore } from '@/provider/community-provider';
-// import { User } from '@/types';
+import { getMe } from '@/lib/auth';
+import { getCommunities } from '@/lib/getCommunities';
+import { User } from '@/types';
 
-export default function Home() {
-  // const queryCommunities = useCommunityStore((state) => state.communities);
-  // const isLoading = useCommunityStore((state) => state.isLoading);
+// Server Component: fetch data here. Zustand hooks belong in client children (Communities).
+export default async function Home() {
+  const communities = await getCommunities();
+  const user: User | null = await getMe();
 
-  return (
-    <>
-      <Communities />
-    </>
-  );
+  return <Communities user={user} communities={communities} />;
 }

@@ -1,3 +1,5 @@
+'use server';
+
 import { fetchWithRefresh } from '@/lib/fetchWithRefresh';
 import type { User } from '@/types';
 

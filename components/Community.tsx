@@ -11,7 +11,7 @@ interface CommunityType {
   followerCount: number;
 }
 
-async function Community({
+function Community({
   ownerId,
   backgroundUrl,
   name,

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useCommunityStore } from '@/provider/community-provider';
 import { queryCommunities } from '@/lib/queryCommunities';
@@ -11,22 +11,27 @@ type SearchType = {
 };
 
 function SearchCommunity({ name, className }: SearchType) {
-  const [queryCommunity, setQueryCommunity] = useState('');
-  const debounceQuery = useDebounce(queryCommunity, 600);
+  const searchCommunity = useCommunityStore((state) => state.searchCommunity);
+  const debounceQuery = useDebounce(searchCommunity, 600);
   const setCommunities = useCommunityStore((state) => state.setCommunities);
   const setIsLoading = useCommunityStore((state) => state.setIsLoading);
+  const setSearchCommunity = useCommunityStore(
+    (state) => state.setSearchCommunity,
+  );
 
   useEffect(() => {
-    const fetchCommunityQuery = async () => {
-      if (!debounceQuery.trim()) return;
+    if (!debounceQuery.trim()) {
+      setCommunities([]);
+      setIsLoading(false);
+      return;
+    }
 
-      setIsLoading(true);
-
-      await queryCommunities({ setCommunities, setIsLoading, queryCommunity });
-    };
-
-    fetchCommunityQuery();
-  }, [debounceQuery, setCommunities, queryCommunity, setIsLoading]);
+    void queryCommunities({
+      setCommunities,
+      setIsLoading,
+      searchCommunity: debounceQuery,
+    });
+  }, [debounceQuery, setCommunities, setIsLoading]);
 
   return (
     <>
@@ -34,8 +39,8 @@ function SearchCommunity({ name, className }: SearchType) {
         className={`border-2 shadow-(--cartoon-shadow) ${className}`}
         type='text'
         placeholder={name}
-        value={queryCommunity}
-        onChange={(e) => setQueryCommunity(e.target.value)}
+        value={searchCommunity}
+        onChange={(e) => setSearchCommunity(e.target.value)}
       />
     </>
   );
