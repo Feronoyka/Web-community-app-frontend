@@ -18,7 +18,7 @@ function Community({
   description,
   followerCount,
   user,
-}: CommunityType & { user?: User | null | undefined }) {
+}: CommunityType & { user?: User | null }) {
   return (
     <div className='rounded-[10px] bg-(--golden-pollen-100) w-110.5 w-max-110.5 h-120.5 shadow-(--cartoon-shadow) border-2 border-black)'>
       {backgroundUrl ? (
@@ -46,15 +46,15 @@ function Community({
             buttonType='primary'
             buttonColor='bg-(--steel-blue-50)'
           >
-            Follow
+            Join
           </Button>
         ) : (
           <Button
             className='mt-22 px-8 py-1 text-xl'
             buttonType='primary'
-            buttonColor='bg-(--vibrant-coral-100)'
+            buttonColor='bg-(--steel-blue-50)'
           >
-            Edit
+            Chat
           </Button>
         )}
       </div>

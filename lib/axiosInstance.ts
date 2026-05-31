@@ -41,7 +41,7 @@ export const createAxiosInstance = async () => {
         try {
           const refreshToken = cookieStore.get('refreshToken')?.value;
 
-          console.log(refreshToken);
+          // console.log(refreshToken);
 
           if (!refreshToken) return null;
 
@@ -55,7 +55,7 @@ export const createAxiosInstance = async () => {
             },
           );
 
-          console.log(refreshResponse);
+          // console.log(refreshResponse);
 
           const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
             refreshResponse.data;

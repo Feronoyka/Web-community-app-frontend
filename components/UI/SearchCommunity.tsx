@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useCommunityStore } from '@/provider/community-provider';
-import { queryCommunities } from '@/lib/queryCommunities';
+import { fethcQueryCommunities } from '@/lib/queryCommunities';
 
 type SearchType = {
   name: string;
@@ -20,16 +20,15 @@ function SearchCommunity({ name, className }: SearchType) {
   );
 
   useEffect(() => {
-    if (!debounceQuery.trim()) {
-      setCommunities([]);
-      setIsLoading(false);
-      return;
-    }
+    if (!debounceQuery.trim()) return;
 
-    void queryCommunities({
+    const controller = new AbortController();
+
+    void fethcQueryCommunities({
       setCommunities,
       setIsLoading,
-      searchCommunity: debounceQuery,
+      debounceQuery,
+      signal: controller.signal,
     });
   }, [debounceQuery, setCommunities, setIsLoading]);
 

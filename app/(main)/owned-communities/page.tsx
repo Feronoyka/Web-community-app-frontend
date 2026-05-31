@@ -1,11 +1,11 @@
+import { getMe } from '@/lib/auth';
 import OwnedCommunities from '@/components/OwnedCommunities';
+import { User } from '@/types';
 
-function page() {
-  return (
-    <>
-      <OwnedCommunities />
-    </>
-  );
+async function page() {
+  const user: User | null = await getMe();
+
+  return <OwnedCommunities user={user} />;
 }
 
 export default page;

@@ -3,18 +3,19 @@ import Link from 'next/link';
 import { DefaultUserIcon, OutlineIcon } from '@/assets/icons';
 import { Pronouns } from '@/utils/enums';
 import { Button } from '../UI';
+import { User } from '@/types';
 
-type UserType = {
-  user: {
-    avatarUrl?: string;
-    nickname: string;
-    username: string;
-    pronouns: string;
-    description?: string;
-  };
-};
+// type UserType = {
+//   user: {
+//     avatarUrl?: string;
+//     nickname: string;
+//     username: string;
+//     pronouns: string;
+//     description?: string;
+//   };
+// };
 
-export default async function UserProfile({ user }: UserType) {
+export default async function UserProfile({ user }: { user: User }) {
   const avatarStyle = 'mx-auto rounded-[100%] border-[#D9D9D9] border';
 
   return (

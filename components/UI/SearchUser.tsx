@@ -2,7 +2,8 @@
 
 import { DefaultUserIcon } from '@/assets/icons';
 import { useDebounce } from '@/hooks/useDebounce';
-import axios from 'axios';
+import { fetchUsersQuery } from '@/lib/queryUsers';
+import { User } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -12,85 +13,74 @@ type SearchType = {
   className?: string;
 };
 
-type UserResult = {
-  id: string;
-  nickname: string;
-  username?: string;
-  avatarUrl?: string;
-};
-
-const API = process.env.NEXT_PUBLIC_API_URL;
-
 function SearchUser({ name, className }: SearchType) {
-  const [queryPeople, setQueryPeople] = useState('');
-  const [results, setResults] = useState<UserResult[]>([]);
+  const [queryUsers, setQueryUsers] = useState('');
+  const [results, setResults] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const debounceQuery = useDebounce(queryPeople, 600);
+  const debounceQuery = useDebounce(queryUsers, 600);
 
   useEffect(() => {
-    const fetchUserQuery = async () => {
-      if (!debounceQuery.trim()) return;
+    if (!debounceQuery.trim()) return;
 
-      setIsLoading(true);
+    const controller = new AbortController();
 
-      try {
-        const response = await axios.get(`${API}/users/?search=${queryPeople}`);
-        setResults(response.data.data ?? []);
-      } catch (error) {
-        console.error('Error fetching query:', error);
-        setResults([]);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchUserQuery();
-  }, [debounceQuery, queryPeople]);
+    console.log('fetching...');
 
+    void fetchUsersQuery({
+      setIsLoading,
+      setResults,
+      debounceQuery,
+      signal: controller.signal,
+    });
+  }, [debounceQuery]);
+
+  const showResults = debounceQuery.trim() ? results : [];
   return (
-    <>
+    <div className='relative'>
       <input
         className={`border-2 shadow-(--cartoon-shadow) ${className}`}
         type='text'
         placeholder={name}
-        value={queryPeople}
-        onChange={(e) => setQueryPeople(e.target.value)}
+        value={queryUsers}
+        onChange={(e) => setQueryUsers(e.target.value)}
       />
 
-      {results.length > 0 ||
-        (isLoading && (
-          <ul>
-            {isLoading ? (
-              <li>Searching...</li>
-            ) : results ? (
-              results.map((user) => (
-                <li key={user.id}>
-                  {user.avatarUrl ? (
-                    <Image
-                      src={user.avatarUrl}
-                      alt=''
-                      width={32}
-                      height={32}
-                      className='rounded-full'
-                    />
-                  ) : (
-                    <div>
-                      <DefaultUserIcon />
-                    </div>
-                  )}
-                  <Link href={''}>
-                    <div>
-                      <p>{user.username}</p>
-                      <p>{user.nickname}</p>
-                    </div>
-                  </Link>
-                </li>
-              ))
-            ) : (
-              <p>User not found</p>
-            )}
-          </ul>
-        ))}
-    </>
+      {showResults.length > 0 && (
+        <ul className='absolute top-full left-80% bg-white px-3 py-4 rounded-[10px] w-[90%]'>
+          {showResults.map((user) => (
+            <li
+              key={user.id}
+              className='hover:bg-gray-200 rounded-[10px] px-1 py-2'
+            >
+              <Link
+                href={`/profile/${user.nickname}`}
+                className='flex items-center'
+              >
+                {user.avatarUrl ? (
+                  <Image
+                    src={user.avatarUrl}
+                    alt=''
+                    width={32}
+                    height={32}
+                    className='rounded-full'
+                  />
+                ) : (
+                  <div>
+                    <DefaultUserIcon />
+                  </div>
+                )}
+                <div className='ml-2'>
+                  <p className='font-semibold text-lg'>{user.username}</p>
+                  <p className='text-gray-400 opacity-70 text-sm'>
+                    @{user.nickname}
+                  </p>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 

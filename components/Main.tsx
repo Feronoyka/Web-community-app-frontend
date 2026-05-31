@@ -1,7 +1,7 @@
 import NavLink from './NavLink';
 import SearchCommunity from './UI/SearchCommunity';
 
-function Main() {
+function Navbar() {
   return (
     <>
       <SearchCommunity
@@ -20,4 +20,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Navbar;

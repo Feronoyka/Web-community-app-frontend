@@ -4,7 +4,7 @@ import { getCommunities } from '@/lib/getCommunities';
 import { User } from '@/types';
 
 // Server Component: fetch data here. Zustand hooks belong in client children (Communities).
-export default async function Home() {
+export default async function Main() {
   const communities = await getCommunities();
   const user: User | null = await getMe();
 

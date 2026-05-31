@@ -1,19 +1,23 @@
-'use server';
+'use client';
 
 import Community from '@/components/Community';
-import { getMe } from '@/lib/auth';
+import { useCommunityStore } from '@/provider/community-provider';
 import { User } from '@/types';
 
-async function OwnedCommunities() {
-  const user: User | null = await getMe();
+function OwnedCommunities({ user }: { user: User | null }) {
+  const queryCommunities = useCommunityStore((state) => state.communities);
+  const searchCommunity = useCommunityStore((state) => state.searchCommunity);
+  const isLoading = useCommunityStore((state) => state.isLoading);
 
+  const showSearchResults = Boolean(searchCommunity.trim()) || isLoading;
+  const list = showSearchResults ? queryCommunities : user?.ownedCommunities;
   return (
     <>
       {user ? (
         user.ownedCommunities?.length !== 0 ? (
           <div className='grid grid-cols-12 gap-8 mx-16 mt-8'>
             <div className='grid grid-cols-3 gap-8'>
-              {user.ownedCommunities?.map((community) => (
+              {list?.map((community) => (
                 <Community
                   key={community.id}
                   ownerId={community.ownerId}

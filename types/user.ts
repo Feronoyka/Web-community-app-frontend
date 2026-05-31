@@ -5,7 +5,7 @@ export type User = {
   avatarUrl?: string;
   nickname: string;
   username: string;
-  pornouns?: string;
+  pronouns?: string;
   description?: string;
   email?: string;
   communities?: CommunityFromApi[];

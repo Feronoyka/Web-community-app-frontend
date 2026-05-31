@@ -7,26 +7,37 @@ const API = process.env.NEXT_PUBLIC_API_URL;
 type QueryCommunitiesParams = {
   setCommunities: (communities: CommunityFromApi[]) => void;
   setIsLoading: (loading: boolean) => void;
-  searchCommunity: string;
+  debounceQuery: string;
+  signal: AbortSignal;
 };
 
-export async function queryCommunities({
+export async function fethcQueryCommunities({
   setCommunities,
   setIsLoading,
-  searchCommunity,
+  debounceQuery,
+  signal,
 }: QueryCommunitiesParams) {
   setIsLoading(true);
 
   try {
     const response = await axios.get(`${API}/communities`, {
-      params: { search: searchCommunity },
+      params: { search: debounceQuery },
+      signal,
     });
 
-    setCommunities(normalizeCommunities(response.data));
+    const communities = normalizeCommunities(response.data);
+
+    setCommunities(communities);
   } catch (error) {
-    console.error(error);
+    if (axios.isCancel(error)) {
+      return;
+    }
+
+    console.error('Error fetching query communities:', error);
     setCommunities([]);
   } finally {
-    setIsLoading(false);
+    if (!signal.aborted) {
+      setIsLoading(false);
+    }
   }
 }
