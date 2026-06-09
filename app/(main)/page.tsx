@@ -1,4 +1,4 @@
-import Communities from '@/components/Communities';
+import Communities from '@/components/community/Communities';
 import { getMe } from '@/lib/auth';
 import { getCommunities } from '@/lib/getCommunities';
 import { User } from '@/types';

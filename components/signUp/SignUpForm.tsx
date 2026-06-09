@@ -51,9 +51,9 @@ function SignUpForm() {
             buttonType='primaryAction'
             buttonColor='bg-(--steel-blue-50)'
             disabled={isPending}
-            className='px-33 text-[18px]'
+            className='w-81 text-[18px]'
           >
-            Sign up
+            {isPending ? <p>Signing up...</p> : <p>Sign up</p>}
           </Button>
           <p className='mt-2 mb-4'>
             <span>Already have an account?</span>{' '}

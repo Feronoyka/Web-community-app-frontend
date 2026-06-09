@@ -53,9 +53,9 @@ function ResetConfirmForm() {
           buttonType='primaryAction'
           buttonColor='bg-(--steel-blue-50)'
           disabled={isPending}
-          className='px-21.25 mt-4 mb-8 text-[18px]'
+          className='w-80 mt-4 mb-8 text-[18px]'
         >
-          Confirm password
+          {isPending ? <p>Confirming...</p> : <p>Confirm password</p>}
         </Button>
       </form>
     </>

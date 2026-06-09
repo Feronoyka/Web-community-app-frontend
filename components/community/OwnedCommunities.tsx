@@ -1,6 +1,6 @@
 'use client';
 
-import Community from '@/components/Community';
+import Community from '@/components/community/Community';
 import { useCommunityStore } from '@/provider/community-provider';
 import { User } from '@/types';
 
@@ -16,19 +16,21 @@ function OwnedCommunities({ user }: { user: User | null }) {
       {user ? (
         user.ownedCommunities?.length !== 0 ? (
           <div className='grid grid-cols-12 gap-8 mx-16 mt-8'>
-            <div className='grid grid-cols-3 gap-8'>
-              {list?.map((community) => (
+            {list?.map((community) => (
+              <div key={community.id} className='grid col-span-4'>
                 <Community
+                  id={community.id}
                   key={community.id}
                   ownerId={community.ownerId}
                   name={community.name}
                   followerCount={community.followerCount}
                   backgroundUrl={community.backgroundUrl}
                   description={community.description}
+                  isFollowing={community.isFollowing}
                   user={user}
                 />
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         ) : (
           <div className='flex justify-center'>

@@ -26,9 +26,9 @@ function ResetPasswordForm() {
             buttonType='primaryAction'
             buttonColor='bg-(--steel-blue-50)'
             disabled={isPending}
-            className='px-26 text-[18px]'
+            className='w-81 text-[18px]'
           >
-            Confirm email
+            {isPending ? <p>Confirming...</p> : <p>Confirm</p>}
           </Button>
         </div>
       </form>

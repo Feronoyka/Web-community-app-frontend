@@ -14,3 +14,6 @@ export { default as MembersIcon } from './MembersIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as AccountIcon } from './AccountIcon';
 export { default as Logout } from './Logout';
+export { default as MembersIconFilled } from './MembersIconFilled';
+export { default as SendIcon } from './SendIcon';
+export { default as DefaultMembers } from './DefaultMembers';

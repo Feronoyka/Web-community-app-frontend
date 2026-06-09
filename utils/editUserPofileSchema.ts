@@ -16,6 +16,8 @@ export const editUserProfileSchema = z.object({
     .string()
     .max(650, 'Description should not be exceed 650 characters')
     .optional(),
+
+  avatarUrl: z.string().optional(),
 });
 
 export type EditUserProfileSchema = z.infer<typeof editUserProfileSchema>;

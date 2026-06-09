@@ -1,5 +1,5 @@
 import { getMe } from '@/lib/auth';
-import OwnedCommunities from '@/components/OwnedCommunities';
+import OwnedCommunities from '@/components/community/OwnedCommunities';
 import { User } from '@/types';
 
 async function page() {

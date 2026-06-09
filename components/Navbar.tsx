@@ -19,6 +19,8 @@ import { User } from '@/types';
 function Navbar({ user }: { user: User | null }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const hoverList = 'hover:bg-gray-200 rounded-xl';
+
   return (
     <div className='bg-(--vibrant-coral-150) w-screen h-21.25 drop-shadow-lg'>
       <ul className='flex items-center h-full justify-between mx-8'>
@@ -50,31 +52,36 @@ function Navbar({ user }: { user: User | null }) {
           <li className='group'>
             {isOpen &&
               (user !== null ? (
-                <ul className='items-center absolute bg-white py-2 px-4 top-21.5 left-[83%] rounded-[10px] border-2 shadow-(--cartoon-shadow)'>
-                  <li className='my-3 items-center justify-center cursor-pointer'>
+                <ul className='items-center absolute bg-white py-2 px-4 top-21 left-[82%] rounded-[10px] border-2 shadow-(--cartoon-shadow)'>
+                  <li className='my-3 items-center justify-center'>
+                    <div>
+                      <p className='font-semibold'>{user.nickname}</p>
+                      <p className='text-gray-500'>{user.email}</p>
+                    </div>
+                    <hr className='text-gray-300 my-4' />
                     <Link
-                      href={`/profile/${user?.nickname}`}
-                      className='flex flex-row items-center py-1 px-2 hover:bg-gray-200 rounded-xl'
+                      href={`/you/${user?.id}`}
+                      className={`flex flex-row items-center py-1 px-2 ${hoverList}`}
                     >
                       <UserIcon />
                       <p className='text-[18px]'>Profile</p>
                     </Link>
                     <Link
-                      href={`/account/${user?.nickname}`}
-                      className='flex flex-row items-center py-1 px-2 hover:bg-gray-200 rounded-xl'
+                      href={`/account/${user?.id}`}
+                      className={`flex flex-row items-center py-1 px-2 ${hoverList}`}
                     >
                       <AccountIcon />
                       <p className='text-[18px]'>Account</p>
                     </Link>
                     <Link
                       href={'/community-create'}
-                      className='flex flex-row items-center py-1 px-2 hover:bg-gray-200 rounded-xl'
+                      className={`flex flex-row items-center py-1 px-2 ${hoverList}`}
                     >
                       <MembersIcon stroke='#000000' strokeWidth={1.5} />
                       <p className='text-[18px]'>Create community</p>
                     </Link>
                     <button
-                      className='flex flex-row items-center py-1 px-2 text-[18px] hover:bg-gray-200 rounded-xl cursor-pointer w-full'
+                      className={`flex flex-row items-center py-1 px-2 text-[18px] w-full cursor-pointer ${hoverList}`}
                       onClick={logout}
                     >
                       <Logout />

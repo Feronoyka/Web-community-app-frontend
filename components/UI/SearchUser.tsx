@@ -52,10 +52,7 @@ function SearchUser({ name, className }: SearchType) {
               key={user.id}
               className='hover:bg-gray-200 rounded-[10px] px-1 py-2'
             >
-              <Link
-                href={`/profile/${user.nickname}`}
-                className='flex items-center'
-              >
+              <Link href={`/profile/${user.id}`} className='flex items-center'>
                 {user.avatarUrl ? (
                   <Image
                     src={user.avatarUrl}

@@ -1,4 +1,4 @@
-import CreateCommunity from '@/components/community/CreateCommunity';
+import CreateCommunity from '@/components/createCommunity/CreateCommunity';
 import { getMe } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 

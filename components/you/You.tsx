@@ -2,9 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { DefaultUserIcon, OutlineIcon } from '@/assets/icons';
 import { Pronouns } from '@/utils/enums';
+import { Button } from '../UI';
 import { User } from '@/types';
 
-export default function UserProfile({ user }: { user: User }) {
+export default async function You({ user }: { user: User }) {
   const avatarStyle = 'mx-auto rounded-[100%] border-[#D9D9D9] border';
 
   return (
@@ -41,6 +42,15 @@ export default function UserProfile({ user }: { user: User }) {
         ) : (
           <p>{user.description}</p>
         )}
+        <Link href={`/you/edit/${user.nickname}`}>
+          <Button
+            buttonType='primary'
+            buttonColor='bg-linear-50 from-(--vibrant-coral-100) to-(--steel-blue-100)'
+            className='mt-8 w-20 hover:shadow-(--cartoon-shadow-50)'
+          >
+            Edit
+          </Button>
+        </Link>
       </div>
     </div>
   );

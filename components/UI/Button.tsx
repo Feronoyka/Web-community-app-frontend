@@ -4,7 +4,7 @@ type Button = {
   type?: 'submit' | 'reset' | 'button';
   onClick?: () => void;
   className?: string;
-  children: string;
+  children: React.ReactNode;
   disabled?: boolean;
   buttonType: 'primary' | 'primaryAction' | 'secondary';
   buttonColor:
@@ -30,7 +30,7 @@ function Button({
           <button
             type={type}
             onClick={onClick}
-            className={`text-white text-[18px] ${buttonColor} font-bold rounded-[10px] border-black border py-2.25 cursor-pointer shadow-(--cartoon-shadow) ${className}`}
+            className={`text-white text-[18px] ${buttonColor} font-bold rounded-[10px] border-black border-2 py-2.25 cursor-pointer shadow-(--cartoon-shadow) ${className}`}
             disabled={disabled}
           >
             {children}
@@ -42,7 +42,7 @@ function Button({
           <button
             type={type}
             onClick={onClick}
-            className={`text-white ${buttonColor} font-bold rounded-[15px] border-black border py-0.5 px-3 cursor-pointer shadow-(--cartoon-shadow) ${className}`}
+            className={`text-white ${buttonColor} font-bold rounded-[15px] border-black border py-0.5 text-center cursor-pointer shadow-(--cartoon-shadow) ${className}`}
             disabled={disabled}
           >
             {children}
@@ -54,7 +54,7 @@ function Button({
           <button
             type={type}
             onClick={onClick}
-            className={`text-white font-bold ${buttonColor} rounded-[15px] border-black border py-0.5 px-3 cursor-pointer shadow-(--cartoon-shadow) ${className}`}
+            className={`text-white font-bold ${buttonColor} rounded-[15px] border-black border py-0.5 w-25 cursor-pointer shadow-(--cartoon-shadow) ${className}`}
             disabled={disabled}
           >
             <Link href='/'>{children}</Link>

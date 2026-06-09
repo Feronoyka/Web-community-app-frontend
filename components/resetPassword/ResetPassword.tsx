@@ -6,7 +6,7 @@ function ResetPassword() {
   return (
     <div className='py-8 px-8'>
       <div className=''>
-        <Link href='/sign-in' className='flex justify-end'>
+        <Link href='/' className='flex justify-end'>
           <OutlineIcon />
         </Link>
         <div className='text-center mt-4'>

@@ -1,5 +1,5 @@
 import { getMe } from '@/lib/auth';
-import EditUserProfile from '@/components/profile/EditUserProfile';
+import EditProfile from '@/components/you/EditProfile';
 import { redirect } from 'next/navigation';
 
 async function page() {
@@ -8,7 +8,7 @@ async function page() {
 
   return (
     <>
-      <EditUserProfile user={user} />
+      <EditProfile user={user} />
     </>
   );
 }

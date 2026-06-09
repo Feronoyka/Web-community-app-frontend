@@ -1,19 +1,20 @@
 import Link from 'next/link';
 import { OutlineIcon } from '@/assets/icons';
-import EditUserProfileForm from './EditUserProfileForm';
+import EditProfileForm from './EditProfileForm';
+import { User } from '@/types';
 
-type User = {
-  user: {
-    id?: string;
-    avatarUrl?: string;
-    nickname: string;
-    username: string;
-    pronouns?: string;
-    description?: string;
-  };
-};
+// type User = {
+//   user: {
+//     id?: string;
+//     avatarUrl?: string;
+//     nickname: string;
+//     username: string;
+//     pronouns?: string;
+//     description?: string;
+//   };
+// };
 
-export default function EditUserProfile({ user }: User) {
+export default function EditProfile({ user }: { user: User }) {
   return (
     <div className='bg-white col-start-3 col-end-11 rounded-[10px] shadow-(--cartoon-shadow) border-2'>
       <div className='px-9 py-9'>
@@ -24,12 +25,12 @@ export default function EditUserProfile({ user }: User) {
               Update your profile
             </h3>
           </div>
-          <Link href={`/profile/${user.nickname}`}>
+          <Link href={`/you/${user.nickname}`}>
             <OutlineIcon />
           </Link>
         </div>
         <div className='px-7'>
-          <EditUserProfileForm user={user} />
+          <EditProfileForm user={user} />
         </div>
       </div>
     </div>

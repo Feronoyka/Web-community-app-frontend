@@ -3,7 +3,7 @@ import { Icon } from '@/types';
 const OutlineIcon = ({ className, onClick, height = 26, width = 26 }: Icon) => (
   <svg
     onClick={onClick}
-    className={`${className}`}
+    className={`cursor-pointer ${className} hover:bg-gray-300 rounded-[10px]`}
     width={width}
     height={height}
     viewBox='0 0 26 26'

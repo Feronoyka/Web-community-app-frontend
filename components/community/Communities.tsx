@@ -1,6 +1,6 @@
 'use client';
 
-import Community from '@/components/Community';
+import Community from '@/components/community/Community';
 import { useCommunityStore } from '@/provider/community-provider';
 import { CommunityFromApi, User } from '@/types';
 
@@ -21,21 +21,20 @@ export default function Communities({ communities, user }: CommunitiesProps) {
     <>
       {list.length !== 0 ? (
         <div className='grid grid-cols-12 gap-8 mx-16 mt-8'>
-          <div className='grid grid-cols-3 gap-8'>
-            <div>
-              {list.map((community) => (
-                <Community
-                  key={community.id}
-                  ownerId={community.ownerId}
-                  name={community.name}
-                  followerCount={community.followerCount}
-                  backgroundUrl={community.backgroundUrl}
-                  description={community.description}
-                  user={user}
-                />
-              ))}
+          {list.map((community) => (
+            <div key={community.id} className='col-span-4'>
+              <Community
+                id={community.id}
+                ownerId={community.ownerId}
+                name={community.name}
+                followerCount={community.followerCount}
+                backgroundUrl={community.backgroundUrl}
+                description={community.description}
+                isFollowing={community.isFollowing}
+                user={user}
+              />
             </div>
-          </div>
+          ))}
         </div>
       ) : (
         <div className='flex justify-center'>

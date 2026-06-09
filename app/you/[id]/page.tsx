@@ -1,5 +1,5 @@
 import { getMe } from '@/lib/auth';
-import UserProfile from '@/components/profile/UserProfile';
+import You from '@/components/you/You';
 import { redirect } from 'next/navigation';
 
 export default async function page() {
@@ -8,9 +8,5 @@ export default async function page() {
     redirect('/sign-in');
   }
 
-  return (
-    <>
-      <UserProfile user={user} />
-    </>
-  );
+  return <You user={user} />;
 }

@@ -66,7 +66,7 @@ function VerifyResetOtpForm() {
             type='submit'
             disabled={isPending}
           >
-            Confirm code
+            {isPending ? <p>Confirming...</p> : <p>Confirm code</p>}
           </Button>
         </div>
       </form>

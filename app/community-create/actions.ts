@@ -10,9 +10,15 @@ export const createCommunityAction = async (
   prevState: unknown,
   formData: FormData,
 ) => {
+  const avatarFile = formData.get('avatarUrl');
+
   const result = createCommunitySchema.safeParse({
     name: formData.get('communityName'),
     description: formData.get('communityDescription'),
+    avatarUrl:
+      avatarFile instanceof File && avatarFile.size > 0
+        ? avatarFile
+        : undefined,
   });
 
   if (!result.success) {
@@ -21,16 +27,30 @@ export const createCommunityAction = async (
       errors: {
         name: errors.properties?.name?.errors,
         description: errors.properties?.description?.errors,
+        avatarUrl: errors.properties?.avatarUrl?.errors,
       },
     };
   }
 
   try {
     const axiosInstance = await createAxiosInstance();
-    const response = await axiosInstance.post(`/communities/create`, {
-      name: result.data.name,
-      description: result.data.description,
-    });
+
+    const uploadData = new FormData();
+    uploadData.append('name', result.data.name);
+    if (result.data.description) {
+      uploadData.append('description', result.data.description);
+    }
+    if (result.data.avatarUrl) {
+      uploadData.append('avatarUrl', result.data.avatarUrl);
+    }
+
+    const response = await axiosInstance.post(
+      `/communities/create`,
+      uploadData,
+      {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      },
+    );
 
     console.log(response.data);
   } catch (error) {

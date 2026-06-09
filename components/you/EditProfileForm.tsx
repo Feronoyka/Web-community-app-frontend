@@ -3,23 +3,24 @@
 import { useActionState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { updateUserProfileAction } from '@/app/profile/edit/[nickname]/action';
+import { updateUserProfileAction } from '@/app/you/edit/[nickname]/action';
 import { PRONOUNS_OPTIONS, Pronouns } from '@/utils/enums';
 import { DefaultUserIcon } from '@/assets/icons';
 import { Button, Input, TextArea } from '../UI';
+import { User } from '@/types';
 
-type UserType = {
-  user: {
-    id?: string;
-    avatarUrl?: string;
-    nickname: string;
-    username: string;
-    pronouns?: string;
-    description?: string;
-  };
-};
+// type UserType = {
+//   user: {
+//     id?: string;
+//     avatarUrl?: string;
+//     nickname: string;
+//     username: string;
+//     pronouns?: string;
+//     description?: string;
+//   };
+// };
 
-function EditUserProfileForm({ user }: UserType) {
+function EditProfileForm({ user }: { user: User }) {
   const [state, action, isPending] = useActionState(
     updateUserProfileAction,
     null,
@@ -27,7 +28,7 @@ function EditUserProfileForm({ user }: UserType) {
 
   const avatarStyle = 'mx-auto rounded-[100%] border-[#D9D9D9] border';
   const inputStyle =
-    'w-[360px] py-2 outline-1 outline-[#808080] rounded-[10px] pl-2 mt-1 text-[18px]';
+    'w-81 py-2 outline-1 outline-[#808080] rounded-[10px] pl-2 mt-1 text-[18px]';
   const h3 = 'font-bold text-xl';
   const errorStyle = 'text-red-500 text-sm';
 
@@ -79,41 +80,50 @@ function EditUserProfileForm({ user }: UserType) {
               )}
             </div>
           </div>
-          <div className='flex flex-col justify-between text-center'>
+          <div className='flex flex-col justify-between text-center items-center'>
             <div className='mb'>
-              {user.avatarUrl ? (
-                <Image
-                  src={user.avatarUrl}
-                  alt=''
-                  width={163}
-                  height={163}
-                  className={avatarStyle}
+              <label>
+                <input
+                  type='file'
+                  accept='image/*'
+                  className='hidden'
+                  name='avatarUrl'
                 />
-              ) : (
-                <DefaultUserIcon width={163} height={163} />
-              )}
+                {user.avatarUrl ? (
+                  <Image
+                    src={user.avatarUrl}
+                    alt=''
+                    width={163}
+                    height={163}
+                    className={avatarStyle}
+                  />
+                ) : (
+                  <DefaultUserIcon width={163} height={163} />
+                )}
+              </label>
               <p className='text-[#808080] mt-2 opacity-50'>
                 {'@'}
                 {user.nickname}
               </p>
             </div>
             <div>
-              <Link className='mr-2' href={`/profile/${user.nickname}`}>
+              <Link className='mr-2' href={`/you/${user.nickname}`}>
                 <Button
                   buttonType='primary'
                   buttonColor='bg-(--vibrant-coral-100)'
+                  className='w-20 hover:shadow-(--cartoon-shadow-50)'
                 >
                   Discard
                 </Button>
               </Link>
               <Button
-                className='ml-2 cursor-pointer'
+                className='ml-2 cursor-pointer w-20 hover:shadow-(--cartoon-shadow-50)'
                 type='submit'
                 buttonType='primary'
                 buttonColor='bg-(--dusty-grape-50)'
                 disabled={isPending}
               >
-                Save
+                {isPending ? <p>Saving...</p> : <p>Save</p>}
               </Button>
             </div>
           </div>
@@ -123,4 +133,4 @@ function EditUserProfileForm({ user }: UserType) {
   );
 }
 
-export default EditUserProfileForm;
+export default EditProfileForm;

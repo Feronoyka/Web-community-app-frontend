@@ -12,10 +12,15 @@ export const updateUserProfileAction = async (
 ) => {
   const user = await getMe();
 
+  if (!user) {
+    redirect('/sign-in');
+  }
+
   const result = editUserProfileSchema.safeParse({
     username: formData.get('username'),
     pronouns: formData.get('pronouns'),
     description: formData.get('description'),
+    avatarUrl: formData.get('avatarUrl'),
   });
 
   if (!result.success) {
@@ -25,6 +30,7 @@ export const updateUserProfileAction = async (
         username: errors?.properties?.username?.errors,
         pronouns: errors?.properties?.pronouns?.errors,
         description: errors?.properties?.description?.errors,
+        avatarUrl: errors.properties?.avatarUrl?.errors,
       },
     };
   }
@@ -38,5 +44,5 @@ export const updateUserProfileAction = async (
     return { errors: { server: 'Something went wrong' } };
   }
 
-  redirect(`/profile/${user.nickname}`);
+  redirect(`/you/${user.nickname}`);
 };

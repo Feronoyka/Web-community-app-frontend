@@ -20,13 +20,6 @@ function SignInForm() {
       <form action={action}>
         <p className='font-bold mt-2'>Email</p>
         <Input type='text' placeholder='Enter an email' name='email' />
-        {state &&
-          typeof state === 'object' &&
-          'errors' in state &&
-          typeof state.errors !== 'string' &&
-          state.errors.email && (
-            <p className={errorStyle}>{state.errors.email[0]}</p>
-          )}
         <p className='font-bold mt-2'>Password</p>
         <div className='relative'>
           <Input type={type} name='password' placeholder='Enter a password' />
@@ -55,9 +48,9 @@ function SignInForm() {
             buttonType='primaryAction'
             buttonColor='bg-(--steel-blue-50)'
             disabled={isPending}
-            className='px-33.25 text-[18px]'
+            className='w-81 text-[18px]'
           >
-            Sign in
+            {isPending ? <p>Signing in...</p> : <p>Sign in</p>}
           </Button>
           <div className='mt-4'>
             <div>
