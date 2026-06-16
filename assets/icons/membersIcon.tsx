@@ -11,7 +11,7 @@ function MembersIcon({
   return (
     <svg
       onClick={onClick}
-      className={`mr-2 ${className}`}
+      className={`${className}`}
       width={width}
       height={height}
       viewBox='0 0 27 27'

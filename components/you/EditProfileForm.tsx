@@ -108,19 +108,12 @@ function EditProfileForm({ user }: { user: User }) {
             </div>
             <div>
               <Link className='mr-2' href={`/you/${user.nickname}`}>
-                <Button
-                  buttonType='primary'
-                  buttonColor='bg-(--vibrant-coral-100)'
-                  className='w-20 hover:shadow-(--cartoon-shadow-50)'
-                >
-                  Discard
-                </Button>
+                <Button buttonType='tertiary'>Discard</Button>
               </Link>
               <Button
                 className='ml-2 cursor-pointer w-20 hover:shadow-(--cartoon-shadow-50)'
                 type='submit'
-                buttonType='primary'
-                buttonColor='bg-(--dusty-grape-50)'
+                buttonType='secondaryTwo'
                 disabled={isPending}
               >
                 {isPending ? <p>Saving...</p> : <p>Save</p>}

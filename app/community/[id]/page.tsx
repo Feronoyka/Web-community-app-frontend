@@ -1,8 +1,8 @@
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import CommunityChat from '@/components/community/CommunityChat';
 import { getMe } from '@/lib/auth';
 import { getCommunity } from '@/lib/getCommunity';
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 
 async function page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -11,7 +11,6 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
   if (!user) redirect('/sign-in');
 
   const community = await getCommunity(id);
-  // const community = await getCommunities()
 
   const cookieStore = await cookies();
   const accessToken = cookieStore.get('accessToken')?.value ?? '';
@@ -19,9 +18,10 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
   return (
     <div className='grid grid-cols-12 gap-8 mx-16'>
       <CommunityChat
+        user={user}
         community={community}
         communityId={id}
-        currentUser={user}
+        owner={community?.owner}
         accessToken={accessToken}
       />
     </div>

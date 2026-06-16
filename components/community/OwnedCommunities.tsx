@@ -11,6 +11,7 @@ function OwnedCommunities({ user }: { user: User | null }) {
 
   const showSearchResults = Boolean(searchCommunity.trim()) || isLoading;
   const list = showSearchResults ? queryCommunities : user?.ownedCommunities;
+
   return (
     <>
       {user ? (
@@ -23,10 +24,9 @@ function OwnedCommunities({ user }: { user: User | null }) {
                   key={community.id}
                   ownerId={community.ownerId}
                   name={community.name}
-                  followerCount={community.followerCount}
+                  membersCount={community.membersCount}
                   backgroundUrl={community.backgroundUrl}
                   description={community.description}
-                  isFollowing={community.isFollowing}
                   user={user}
                 />
               </div>

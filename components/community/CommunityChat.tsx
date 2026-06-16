@@ -3,8 +3,11 @@
 // import Image from 'next/image';
 
 import {
+  DefaultMembers,
   DefaultUserIcon,
+  Logout,
   MembersIconFilled,
+  MembersSetting,
   OutlineIcon,
   SendIcon,
 } from '@/assets/icons';
@@ -14,25 +17,41 @@ import { CommunityFromApi, User } from '@/types';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { unfollowCommunity } from '@/lib/communityActions';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   communityId: string;
-  currentUser?: User;
   accessToken: string;
   community: CommunityFromApi | null;
+  owner?: User;
+  user: User;
 };
 
 export default function CommunityChat({
   communityId,
   accessToken,
   community,
+  owner,
+  user,
 }: Props) {
   const [input, setInput] = useState('');
+  const [isOpenEllipsis, setIsOpenEllipsis] = useState(false);
+  const [isOpenMembers, setIsOpenMembers] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+  const [count, setCount] = useState(community!.membersCount);
   const bottomRef = useRef<HTMLDivElement>(null);
   const { messages, isConnected, sendMessage } = useCommunityChat(
     communityId,
     accessToken,
   );
+
+  const router = useRouter();
+
+  const isOwner = owner?.id === community?.ownerId;
+  const isMember = community?.members?.some((member) => member.id === user.id);
+
+  console.log('is member:', isMember);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -51,35 +70,131 @@ export default function CommunityChat({
     }
   };
 
+  const handleIsOpenEllipsis = () => {
+    setIsOpenEllipsis(!isOpenEllipsis);
+    if (isOpenMembers) {
+      setIsOpenMembers(!isOpenMembers);
+    }
+  };
+
+  const handleIsOpenMembers = () => {
+    setIsOpenMembers(!isOpenMembers);
+    if (isOpenEllipsis) {
+      setIsOpenEllipsis(!isOpenEllipsis);
+    }
+  };
+
+  const handleUnfollow = async () => {
+    setIsPending(true);
+    try {
+      await unfollowCommunity(communityId);
+      setCount(count - 1);
+      router.push('/');
+    } catch (error) {
+      console.error('Error to unfollow community', error);
+    } finally {
+      setIsPending(false);
+    }
+  };
+
   return (
-    <div className='bg-white col-start-2 col-end-12 h-screen'>
-      <div className='bg-(--golden-pollen-100) py-4'>
+    <div
+      className={`bg-white col-start-2 col-end-12 ${messages.length > 8 ? 'h-full' : 'h-screen'}`}
+    >
+      <div
+        className={`fixed top-0 ${messages.length > 8 ? 'w-289' : 'w-292'} bg-(--golden-pollen-100) py-4 shadow-md`}
+      >
         <div className='flex justify-between items-center mx-8'>
-          <Link href={'/'}>
-            <OutlineIcon />
-          </Link>
-          {community?.avatarUrl ? (
-            <Image src={community.avatarUrl} alt='' />
-          ) : (
-            <div>Image</div>
-          )}
-          <h2>{community?.name}</h2>
+          <div className='flex items-center'>
+            <Link href={'/'}>
+              <OutlineIcon />
+            </Link>
+            {community?.avatarUrl ? (
+              <div className='relative w-20 h-20'>
+                <Image
+                  src={community.avatarUrl}
+                  alt=''
+                  className='ml-11 object-cover z-0 rounded-[5px]'
+                  fill
+                />
+              </div>
+            ) : (
+              <>
+                <DefaultMembers width={80} height={80} className='ml-11' />
+              </>
+            )}
+            <h2 className='text-2xl font-bold ml-17'>{community?.name}</h2>
+          </div>
           <div className='flex justify-between'>
-            <MembersIconFilled />
-            <EllipsisVertical />
+            <MembersIconFilled onClick={handleIsOpenMembers} />
+            {isOpenMembers && !isOpenEllipsis && (
+              <div className='absolute top-20 left-237 overflow-y-auto max-h-60 bg-white px-2 py-2 rounded-[10px] border-2 shadow-(--cartoon-shadow)'>
+                <ul>
+                  <li>
+                    <div className='flex items-center cursor-pointer hover:bg-gray-200 rounded-[10px] px-2 py-2'>
+                      {owner?.avatarUrl ? (
+                        <Image src={owner.avatarUrl} alt='' />
+                      ) : (
+                        <DefaultUserIcon width={40} height={40} />
+                      )}
+                      <div className='ml-2'>
+                        <p>{owner?.username}</p>
+                        <p className='text-sm text-gray-400'>Owner</p>
+                      </div>
+                    </div>
+                  </li>
+                  {community?.members?.length !== 0 &&
+                    community?.members?.map((member) => (
+                      <li key={member.id}>
+                        <div className='flex items-center cursor-pointer hover:bg-gray-200 rounded-[10px] px-2 py-2'>
+                          {member.avatarUrl ? (
+                            <Image src={member.avatarUrl} alt='' />
+                          ) : (
+                            <DefaultUserIcon width={40} height={40} />
+                          )}
+                          <p className='ml-2'>{member.username}</p>
+                        </div>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            )}
+            <EllipsisVertical onClick={handleIsOpenEllipsis} />
+            {isOpenEllipsis && !isOpenMembers && (
+              <div className='absolute bg-white px-3 py-2 rounded-[10px] top-22 left-227 border-2 shadow-(--cartoon-shadow)'>
+                <ul>
+                  {isOwner && (
+                    <Link href={`/community/${community?.id}/edit`}>
+                      <li className='cursor-pointer flex items-center hover:bg-gray-200 px-2 py-1 rounded-[10px]'>
+                        <p className='mr-2 w-30'>Edit community</p>
+                        <MembersSetting />
+                      </li>
+                    </Link>
+                  )}
+                  <li className='cursor-pointer hover:bg-gray-200 px-2 py-1 rounded-[10px]'>
+                    <button
+                      onClick={handleUnfollow}
+                      disabled={isPending || isOwner}
+                      className='flex items-center cursor-pointer'
+                    >
+                      Leave
+                      <Logout width={25} height={25} className='ml-1' />
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>
-      <div>
+      <div className='pt-30 pb-20 pl-10'>
         {messages.length === 0 && (
           <p className='text-center'>No messages yet, Say hello :3</p>
         )}
 
         {messages.map((message) => {
-          // const isOwn = message.senderId === currentUser?.id;
-
           return (
-            <div key={message.id} className='flex items-end ml-9 mt-4'>
+            <div key={message.id} className='flex items-end mt-4'>
               {message.sender?.avatarUrl ? (
                 <Image
                   src={message.sender.avatarUrl}
@@ -91,11 +206,16 @@ export default function CommunityChat({
               ) : (
                 <DefaultUserIcon width={55} height={55} />
               )}
-              <div className='bg-(--golden-pollen-50) rounded-[10px] px-3 py-2 ml-3 max-w-100 shadow-(--cartoon-shadow) border'>
+              <div className='bg-(--golden-pollen-50) rounded-[10px] px-3 py-2 ml-3 break-all max-w-100 shadow-(--cartoon-shadow) border'>
                 <div className='flex items-center'>
                   <p className='text-(--steel-blue-100)'>
                     {message.sender?.username}
                   </p>
+                  {message.senderId === user.id && (
+                    <p className='ml-1 text-(--steel-blue-150) text-sm'>
+                      (You)
+                    </p>
+                  )}
                   <p className='text-sm text-gray-500 ml-2'>
                     {new Date(message.createdAt).toLocaleTimeString([], {
                       hour: '2-digit',
@@ -110,7 +230,7 @@ export default function CommunityChat({
         })}
         <div ref={bottomRef} />
       </div>
-      <div className='fixed flex items-center top-172 left-56'>
+      <div className='fixed flex items-center top-172 left-54 bg-white pb-5'>
         <input
           type='text'
           value={input}

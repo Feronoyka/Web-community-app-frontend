@@ -2,19 +2,23 @@
 
 import { useState, useActionState, ChangeEvent } from 'react';
 import { Button, Input, TextArea } from '../UI';
-import { createCommunityAction } from '@/app/community-create/actions';
 import Image from 'next/image';
 import Link from 'next/link';
 import { DefaultMembers } from '@/assets/icons';
+import { editCommunityAction } from '@/app/community/[id]/edit/actions';
+import { CommunityFromApi } from '@/types';
 
-function CreateCommunityForm() {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [previewUrl, setPreviewUrl] = useState('');
-  const [state, action, isPending] = useActionState(
-    createCommunityAction,
-    null,
-  );
+function EditCommunityForm({
+  id,
+  community,
+}: {
+  id: string;
+  community: CommunityFromApi;
+}) {
+  const [name, setName] = useState(community.name);
+  const [description, setDescription] = useState(community.description);
+  const [previewUrl, setPreviewUrl] = useState(community.avatarUrl);
+  const [state, action, isPending] = useActionState(editCommunityAction, null);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -34,7 +38,8 @@ function CreateCommunityForm() {
             <p className='text-[20px] font-bold'>Name</p>
             <Input
               name='communityName'
-              placeholder='Community name'
+              placeholder={community.name}
+              defaultValue={community.name}
               onChange={(event) => setName(event.target?.value)}
               minLength={3}
               maxLength={30}
@@ -44,6 +49,7 @@ function CreateCommunityForm() {
             <TextArea
               name='communityDescription'
               placeholder='Community description'
+              defaultValue={community.description}
               onChange={(event) => setDescription(event.target.value)}
               maxLenght={650}
             ></TextArea>
@@ -52,6 +58,7 @@ function CreateCommunityForm() {
           <div className='bg-(--golden-pollen-100) w-89.75 h-120.75 rounded-[10px] shadow-(--cartoon-shadow) border-2'>
             <div className='flex bg-(--golden-pollen-50) w-89 h-39 rounded-t-[10px] justify-center'>
               <label className='relative my-25 block cursor-pointer group w-25 h-25 border border-gray-600 rounded-[10px] overflow-hidden'>
+                <input type='hidden' name='communityId' value={id} />
                 <input
                   type='file'
                   accept='image/*'
@@ -93,11 +100,11 @@ function CreateCommunityForm() {
           </div>
         </div>
         <div className='flex justify-between my-8'>
-          <Link href='/'>
+          <Link href={`/community/${id}`}>
             <Button buttonType='tertiary'>Discard</Button>
           </Link>
           <Button type='submit' buttonType='secondaryTwo' disabled={isPending}>
-            {isPending ? <p>Creating...</p> : <p>Create</p>}
+            {isPending ? <p>Saving...</p> : <p>Save</p>}
           </Button>
         </div>
       </form>
@@ -105,4 +112,4 @@ function CreateCommunityForm() {
   );
 }
 
-export default CreateCommunityForm;
+export default EditCommunityForm;

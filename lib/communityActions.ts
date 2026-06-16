@@ -3,13 +3,13 @@
 import { fetchWithRefresh } from './fetchWithRefresh';
 
 export const followCommunity = async (communityId: string) => {
-  return fetchWithRefresh(`/communities/${communityId}/follow`, {
+  return fetchWithRefresh(`/communities/${communityId}/join`, {
     method: 'post',
   });
 };
 
 export const unfollowCommunity = async (communityId: string) => {
-  return fetchWithRefresh(`/communities/${communityId}/unfollow`, {
+  return fetchWithRefresh(`/communities/${communityId}/leave`, {
     method: 'delete',
   });
 };

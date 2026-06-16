@@ -61,8 +61,7 @@ function VerifyResetOtpForm() {
         <div className='mt-4 mb-4'>
           <Button
             className='px-19 text-[18px]'
-            buttonType='primaryAction'
-            buttonColor='bg-(--steel-blue-50)'
+            buttonType='primary'
             type='submit'
             disabled={isPending}
           >

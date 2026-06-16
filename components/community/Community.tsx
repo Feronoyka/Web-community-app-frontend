@@ -2,22 +2,12 @@
 
 import MembersIcon from '@/assets/icons/MembersIcon';
 import { Button } from '../UI';
-import { User } from '@/types';
+import { CommunityFromApi, User } from '@/types';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { followCommunity } from '@/lib/communityActions';
 import { DefaultMembers } from '@/assets/icons';
 import Image from 'next/image';
-
-interface CommunityType {
-  id: string;
-  ownerId: string;
-  avatarUrl: string;
-  name: string;
-  description?: string;
-  followerCount: number;
-  isFollowing: boolean;
-}
 
 function Community({
   id,
@@ -25,30 +15,27 @@ function Community({
   avatarUrl,
   name,
   description,
-  followerCount = 1,
+  membersCount,
+  members,
   user,
-  isFollowing: initialIsFollowing = false,
-}: CommunityType & { user?: User | null }) {
+}: CommunityFromApi & { user?: User | null }) {
   const router = useRouter();
-  const [isFollowing, setIsFollowing] = useState(initialIsFollowing);
-  const [count, setCount] = useState(followerCount);
   const [isPending, setIsPending] = useState(false);
 
   const isOwner = user?.id === ownerId;
-  const isMember = isFollowing;
+  const isMember = members?.some((member) => member.id === user?.id);
 
   const handleFollow = async () => {
     if (!user) {
       router.push('/sign-in');
       return;
     }
+
+    router.push(`/community/${id}`);
+
     setIsPending(true);
     try {
       await followCommunity(id);
-
-      setIsFollowing(true);
-
-      setCount((prev) => prev + 1);
     } catch (error) {
       console.error('Error to follow community', error);
     } finally {
@@ -56,28 +43,26 @@ function Community({
     }
   };
 
-  // const handleUnfollow = async () => {
-  //   setIsPending(true);
-  //   try {
-  //     await unfollowCommunity(id);
-  //     setCount((prev) => prev - 1);
-  //   } catch (error) {
-  //     console.error('Error to unfollow community', error);
-  //   } finally {
-  //     setIsPending(false);
-  //   }
-  // };
-
   const handleChat = () => {
     router.push(`/community/${id}`);
   };
 
+  console.log('isOwner:', isOwner);
+  console.log('isMember:', isMember);
+
   return (
-    <div className='rounded-[10px] bg-(--golden-pollen-100) w-full w-max-110.5 h-120.5 shadow-(--cartoon-shadow) border-2 border-black)'>
+    <div className='rounded-[10px] bg-(--golden-pollen-100) w-full h-125 shadow-(--cartoon-shadow) border-2 border-black)'>
       <div className='flex bg-[#F8CD86] w-109.75 h-39 rounded-t-[10px] justify-center'>
         {avatarUrl ? (
           <div className='flex bg-[#F8CD86] w-89 h-39 rounded-t-[10px] justify-center'>
-            <Image src={avatarUrl} alt='' />
+            <div className='relative w-25 h-25 mt-25'>
+              <Image
+                src={avatarUrl}
+                alt=''
+                fill
+                className='absolute top-30 object-cover z-0 rounded-[5px]'
+              />
+            </div>
           </div>
         ) : (
           <DefaultMembers className='my-25' />
@@ -85,28 +70,29 @@ function Community({
       </div>
       <div className='my-15 text-center'>
         <h3 className='text-2xl font-bold'>{name}</h3>
-        <p className='w-82.75 mx-auto text-gray-700 mt-3 border-box px-10 break-normal'>
+        <p className='w-82.75 mx-auto h-30 text-gray-700 mt-3 border-box px-10 break-normal'>
           {description}
         </p>
-        <div className='flex mt-3 justify-center items-center'>
+        <div className='flex mb-4 justify-center items-center'>
           <MembersIcon width={27} height={27} />
-          <p className='text-gray-700 ml-1'>{count} Members</p>
+          {membersCount > 0 ? (
+            <p className='text-gray-700 ml-1'>{membersCount + 1} members</p>
+          ) : (
+            <p className='text-gray-700 ml-1'>1 member</p>
+          )}
         </div>
-        {isOwner && (
+        {isOwner || isMember ? (
           <Button
-            className='mt-22 px-8 py-1 text-xl hover:shadow-(--cartoon-shadow-50)'
-            buttonType='primary'
-            buttonColor='bg-(--steel-blue-50)'
+            className='px-8 py-1 text-xl hover:shadow-(--cartoon-shadow-50)'
+            buttonType='secondaryOne'
             onClick={handleChat}
           >
             Chat
           </Button>
-        )}
-        {!isOwner && !isMember && (
+        ) : (
           <Button
-            className='mt-22 px-8 py-1 text-xl hover:shadow-(--cartoon-shadow-50)'
-            buttonType='primary'
-            buttonColor='bg-(--steel-blue-50)'
+            className='mt-15.25 px-8 py-1 text-xl hover:shadow-(--cartoon-shadow-50)'
+            buttonType='secondaryOne'
             onClick={handleFollow}
             disabled={isPending}
           >

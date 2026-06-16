@@ -6,8 +6,9 @@ export type CommunityFromApi = {
   backgroundUrl?: string;
   avatarUrl?: string;
   description?: string;
-  isFollowing: boolean;
+  isMember?: boolean;
   members?: User[];
-  followerCount: number;
+  membersCount: number;
+  owner?: User;
   ownerId: string;
 };

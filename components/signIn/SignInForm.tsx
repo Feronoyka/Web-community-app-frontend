@@ -41,12 +41,18 @@ function SignInForm() {
             state?.errors?.password && (
               <p className={errorStyle}>{state.errors.password[0]}</p>
             )}
+          {state &&
+            typeof state === 'object' &&
+            'errors' in state &&
+            typeof state.errors !== 'string' &&
+            state?.errors?.server && (
+              <p className={errorStyle}>{state.errors.server}</p>
+            )}
         </div>
         <div className='mt-4 text-center mb-4'>
           <Button
             type='submit'
-            buttonType='primaryAction'
-            buttonColor='bg-(--steel-blue-50)'
+            buttonType='primary'
             disabled={isPending}
             className='w-81 text-[18px]'
           >

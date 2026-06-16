@@ -8,6 +8,6 @@ export type User = {
   pronouns?: string;
   description?: string;
   email?: string;
-  followedCommunities?: CommunityFromApi[];
+  joinedCommunities?: CommunityFromApi[];
   ownedCommunities?: CommunityFromApi[];
 };

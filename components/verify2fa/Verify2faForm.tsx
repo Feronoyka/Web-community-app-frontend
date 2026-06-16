@@ -72,8 +72,7 @@ function Verify2faForm() {
         <div className='mt-4 mb-4'>
           <Button
             type='submit'
-            buttonType='primaryAction'
-            buttonColor='bg-(--steel-blue-50)'
+            buttonType='primary'
             disabled={isPending}
             className='px-27.25 text-[18px]'
           >

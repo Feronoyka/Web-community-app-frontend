@@ -42,15 +42,9 @@ export default async function You({ user }: { user: User }) {
         ) : (
           <p>{user.description}</p>
         )}
-        <Link href={`/you/edit/${user.nickname}`}>
-          <Button
-            buttonType='primary'
-            buttonColor='bg-linear-50 from-(--vibrant-coral-100) to-(--steel-blue-100)'
-            className='mt-8 w-20 hover:shadow-(--cartoon-shadow-50)'
-          >
-            Edit
-          </Button>
-        </Link>
+        <Button buttonType='secondaryTwo' className='mt-8 w-20'>
+          <Link href={`/you/edit/${user.nickname}`}>Edit</Link>
+        </Button>
       </div>
     </div>
   );

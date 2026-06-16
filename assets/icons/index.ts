@@ -17,3 +17,4 @@ export { default as Logout } from './Logout';
 export { default as MembersIconFilled } from './MembersIconFilled';
 export { default as SendIcon } from './SendIcon';
 export { default as DefaultMembers } from './DefaultMembers';
+export { default as MembersSetting } from './MembersSetting';

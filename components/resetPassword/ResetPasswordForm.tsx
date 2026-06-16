@@ -23,8 +23,7 @@ function ResetPasswordForm() {
         <div className='mt-4 mb-8'>
           <Button
             type='submit'
-            buttonType='primaryAction'
-            buttonColor='bg-(--steel-blue-50)'
+            buttonType='primary'
             disabled={isPending}
             className='w-81 text-[18px]'
           >

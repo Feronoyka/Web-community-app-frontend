@@ -44,12 +44,14 @@ function SignUpForm() {
           {state?.errors?.password && (
             <p className={errorStyle}>{state.errors.password[0]}</p>
           )}
+          {state?.errors.server && (
+            <p className={errorStyle}>{state.errors.server}</p>
+          )}
         </div>
         <div className='text-center mt-4'>
           <Button
             type='submit'
-            buttonType='primaryAction'
-            buttonColor='bg-(--steel-blue-50)'
+            buttonType='primary'
             disabled={isPending}
             className='w-81 text-[18px]'
           >

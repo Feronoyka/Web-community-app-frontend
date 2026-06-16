@@ -96,7 +96,7 @@ function Navbar({ user }: { user: User | null }) {
                       href='/sign-up'
                       className='flex flex-row items-center'
                     >
-                      <SignUpIcon className='mr-2' /> <p>Sign up</p>
+                      <SignUpIcon /> <p>Sign up</p>
                     </Link>
                   </li>
                 </ul>
