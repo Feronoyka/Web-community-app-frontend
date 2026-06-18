@@ -98,9 +98,7 @@ export default function CommunityChat({
   };
 
   return (
-    <div
-      className={`bg-white col-start-2 col-end-12 ${messages.length > 8 ? 'h-full' : 'h-screen'}`}
-    >
+    <div className={`${messages.length > 8 ? 'h-full' : 'h-screen'}`}>
       <div
         className={`fixed top-0 ${messages.length > 8 ? 'w-289' : 'w-292'} bg-(--golden-pollen-100) py-4 shadow-md`}
       >

@@ -44,19 +44,25 @@ export const useCommunityChat = (communityId: string, accessToken: string) => {
       socket.on('connect', () => {
         setIsConnected(true);
         socket.emit('joinCommunity', communityId);
-        socket.emit('getMessages', communityId);
+        socket.emit('getMessagesFromCommunity', communityId);
       });
 
       socket.on('disconnect', () => {
         setIsConnected(false);
       });
 
-      socket.on('loadMessages', (existingMessages: Message[]) => {
+      socket.on('loadMessagesFromCommunity', (existingMessages: Message[]) => {
         setMessages(existingMessages);
       });
 
       socket.on('newMessage', (message: Message) => {
         setMessages((prev) => [...prev, message]);
+      });
+
+      socket.on('messageDeleted', ({ messageId }: { messageId: string }) => {
+        setMessages((prev) =>
+          prev.filter((message) => message.id !== messageId),
+        );
       });
     };
 
@@ -76,5 +82,13 @@ export const useCommunityChat = (communityId: string, accessToken: string) => {
     });
   };
 
-  return { messages, isConnected, sendMessage };
+  const deleteMessage = (messageId: string) => {
+    if (!socketRef.current?.connected) return;
+    socketRef.current.emit('deleteCommunityMessage', {
+      messageId,
+      communityId,
+    });
+  };
+
+  return { messages, isConnected, sendMessage, deleteMessage };
 };

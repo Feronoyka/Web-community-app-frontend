@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { DefaultUserIcon, OutlineIcon } from '@/assets/icons';
 import { Pronouns } from '@/utils/enums';
 import { User } from '@/types';
+import { Button } from '../UI';
 
 export default function UserProfile({ user }: { user: User }) {
   const avatarStyle = 'mx-auto rounded-[100%] border-[#D9D9D9] border';
@@ -41,6 +42,9 @@ export default function UserProfile({ user }: { user: User }) {
         ) : (
           <p>{user.description}</p>
         )}
+        <Button buttonType='secondaryOne' className='mt-6'>
+          <Link href={`/chat/private/${user.id}`}>Chat</Link>
+        </Button>
       </div>
     </div>
   );

@@ -44,7 +44,7 @@ function Community({
   };
 
   const handleChat = () => {
-    router.push(`/community/${id}`);
+    router.push(`/chat/community/${id}`);
   };
 
   console.log('isOwner:', isOwner);
@@ -91,7 +91,7 @@ function Community({
           </Button>
         ) : (
           <Button
-            className='mt-15.25 px-8 py-1 text-xl hover:shadow-(--cartoon-shadow-50)'
+            className='px-8 py-1 text-xl hover:shadow-(--cartoon-shadow-50)'
             buttonType='secondaryOne'
             onClick={handleFollow}
             disabled={isPending}
