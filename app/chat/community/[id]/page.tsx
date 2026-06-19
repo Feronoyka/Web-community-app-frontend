@@ -17,7 +17,7 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
 
   return (
     <CommunityChat
-      user={user}
+      currentUser={user}
       community={community}
       communityId={id}
       owner={community?.owner}

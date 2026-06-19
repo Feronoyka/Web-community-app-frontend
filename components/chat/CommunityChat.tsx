@@ -25,7 +25,7 @@ type Props = {
   accessToken: string;
   community: CommunityFromApi | null;
   owner?: User;
-  user: User;
+  currentUser: User;
 };
 
 export default function CommunityChat({
@@ -33,7 +33,7 @@ export default function CommunityChat({
   accessToken,
   community,
   owner,
-  user,
+  currentUser,
 }: Props) {
   const [input, setInput] = useState('');
   const [isOpenEllipsis, setIsOpenEllipsis] = useState(false);
@@ -41,15 +41,15 @@ export default function CommunityChat({
   const [isPending, setIsPending] = useState(false);
   const [count, setCount] = useState(community!.membersCount);
   const bottomRef = useRef<HTMLDivElement>(null);
-  const { messages, isConnected, sendMessage } = useCommunityChat(
-    communityId,
-    accessToken,
-  );
+  const { messages, isConnected, sendMessage, deleteMessage } =
+    useCommunityChat(communityId, accessToken);
 
   const router = useRouter();
 
-  const isOwner = owner?.id === community?.ownerId;
-  const isMember = community?.members?.some((member) => member.id === user.id);
+  const isOwner = currentUser.id === community?.ownerId;
+  const isMember = community?.members?.some(
+    (member) => member.id === currentUser.id,
+  );
 
   console.log('is member:', isMember);
 
@@ -126,7 +126,9 @@ export default function CommunityChat({
           <div className='flex justify-between'>
             <MembersIconFilled onClick={handleIsOpenMembers} />
             {isOpenMembers && !isOpenEllipsis && (
-              <div className='absolute top-20 left-237 overflow-y-auto max-h-60 bg-white px-2 py-2 rounded-[10px] border-2 shadow-(--cartoon-shadow)'>
+              <div
+                className={`absolute ${community?.members?.length !== 0 ? 'top-20 left-237' : 'top-20 left-241'} overflow-y-auto max-h-60 bg-white px-2 py-2 rounded-[10px] border-2 shadow-(--cartoon-shadow)`}
+              >
                 <ul>
                   <li>
                     <div className='flex items-center cursor-pointer hover:bg-gray-200 rounded-[10px] px-2 py-2'>
@@ -144,14 +146,16 @@ export default function CommunityChat({
                   {community?.members?.length !== 0 &&
                     community?.members?.map((member) => (
                       <li key={member.id}>
-                        <div className='flex items-center cursor-pointer hover:bg-gray-200 rounded-[10px] px-2 py-2'>
-                          {member.avatarUrl ? (
-                            <Image src={member.avatarUrl} alt='' />
-                          ) : (
-                            <DefaultUserIcon width={40} height={40} />
-                          )}
-                          <p className='ml-2'>{member.username}</p>
-                        </div>
+                        <Link href={`/profile/${member.id}`}>
+                          <div className='flex items-center cursor-pointer hover:bg-gray-200 rounded-[10px] px-2 py-2'>
+                            {member.avatarUrl ? (
+                              <Image src={member.avatarUrl} alt='' />
+                            ) : (
+                              <DefaultUserIcon width={40} height={40} />
+                            )}
+                            <p className='ml-2'>{member.username}</p>
+                          </div>
+                        </Link>
                       </li>
                     ))}
                 </ul>
@@ -159,7 +163,9 @@ export default function CommunityChat({
             )}
             <EllipsisVertical onClick={handleIsOpenEllipsis} />
             {isOpenEllipsis && !isOpenMembers && (
-              <div className='absolute bg-white px-3 py-2 rounded-[10px] top-22 left-227 border-2 shadow-(--cartoon-shadow)'>
+              <div
+                className={`absolute bg-white px-3 py-2 rounded-[10px] ${isOwner ? 'top-20 left-227' : 'top-20 left-246'} border-2 shadow-(--cartoon-shadow)`}
+              >
                 <ul>
                   {isOwner && (
                     <Link href={`/community/${community?.id}/edit`}>
@@ -185,11 +191,12 @@ export default function CommunityChat({
           </div>
         </div>
       </div>
+
+      {/*Chat */}
       <div className='pt-30 pb-20 pl-10'>
         {messages.length === 0 && (
           <p className='text-center'>No messages yet, Say hello :3</p>
         )}
-
         {messages.map((message) => {
           return (
             <div key={message.id} className='flex items-end mt-4'>
@@ -209,7 +216,7 @@ export default function CommunityChat({
                   <p className='text-(--steel-blue-100)'>
                     {message.sender?.username}
                   </p>
-                  {message.senderId === user.id && (
+                  {message.senderId === currentUser.id && (
                     <p className='ml-1 text-(--steel-blue-150) text-sm'>
                       (You)
                     </p>
@@ -220,6 +227,7 @@ export default function CommunityChat({
                       minute: '2-digit',
                     })}
                   </p>
+                  {/*hover Icon to delete message */}
                 </div>
                 <p className='text-[#333333]'>{message.content}</p>
               </div>
@@ -228,19 +236,21 @@ export default function CommunityChat({
         })}
         <div ref={bottomRef} />
       </div>
+
+      {/*Input */}
       <div className='fixed flex items-center top-172 left-54 bg-white pb-5'>
         <input
           type='text'
           value={input}
-          placeholder='Type a message'
+          placeholder='Type a message...'
           onKeyDown={handleKeyDown}
           onChange={(e) => setInput(e.target.value)}
           className='w-270 py-2 px-4 rounded-[10px] border-2 border-gray-400'
         />
         <button
-          className='absolute top-1.5 left-[96%]'
           onClick={handleSend}
           disabled={!input.trim() || !isConnected}
+          className='absolute top-1.5 left-[96%] disabled:opacity-50'
         >
           <SendIcon />
         </button>

@@ -9,17 +9,6 @@ import { DefaultUserIcon } from '@/assets/icons';
 import { Button, Input, TextArea } from '../UI';
 import { User } from '@/types';
 
-// type UserType = {
-//   user: {
-//     id?: string;
-//     avatarUrl?: string;
-//     nickname: string;
-//     username: string;
-//     pronouns?: string;
-//     description?: string;
-//   };
-// };
-
 function EditProfileForm({ user }: { user: User }) {
   const [state, action, isPending] = useActionState(
     updateUserProfileAction,
