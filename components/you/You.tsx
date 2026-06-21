@@ -1,12 +1,13 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
-import { DefaultUserIcon, OutlineIcon } from '@/assets/icons';
+import { ArrowLeft } from '@/assets/icons';
 import { Pronouns } from '@/utils/enums';
 import { Button } from '../UI';
 import { User } from '@/types';
+import UserAvatar from '../UI/UserAvatar';
 
 export default async function You({ user }: { user: User }) {
-  const avatarStyle = 'mx-auto rounded-[100%] border-[#D9D9D9] border';
+  // const avatarStyle = 'mx-auto rounded-[100%] border-[#D9D9D9] border';
 
   return (
     <div className='col-start-3 col-end-11 bg-white rounded-[10px] shadow-(--cartoon-shadow) border-2 pb-4'>
@@ -16,21 +17,24 @@ export default async function You({ user }: { user: User }) {
           {`'s`} Profile
         </h1>
         <Link href='/'>
-          <OutlineIcon />
+          <ArrowLeft />
         </Link>
       </div>
       <div className='relative text-center'>
-        {user.avatarUrl ? (
-          <Image
-            src={user.avatarUrl}
-            alt=''
-            className={avatarStyle}
-            width={163}
-            height={163}
-          />
-        ) : (
-          <DefaultUserIcon width={163} height={163} className='mx-auto' />
-        )}
+        {/* <label>
+          {user.avatarUrl ? (
+            <Image
+              src={user.avatarUrl}
+              alt=''
+              className={avatarStyle}
+              width={163}
+              height={163}
+            />
+          ) : (
+            <DefaultUser width={163} height={163} className='mx-auto' />
+          )}
+        </label> */}
+        <UserAvatar avatarUrl={user.avatarUrl} className='mx-auto' />
         <p className='text-5 text-[#808080] my-1 opacity-50'>
           {`@`}
           {user.nickname} |

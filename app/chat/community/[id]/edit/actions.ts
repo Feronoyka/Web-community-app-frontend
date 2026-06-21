@@ -1,7 +1,7 @@
 'use server';
 
 import { z } from 'zod';
-import { createCommunitySchema } from '@/utils/createCommunitySchema';
+import { createAndEditCommunitySchema } from '@/utils/createAndEditCommunitySchema';
 import { createAxiosInstance } from '@/lib/axiosInstance';
 import axios from 'axios';
 import { redirect } from 'next/navigation';
@@ -14,7 +14,7 @@ export const editCommunityAction = async (
 
   const id = formData.get('communityId');
 
-  const result = createCommunitySchema.safeParse({
+  const result = createAndEditCommunitySchema.safeParse({
     name: formData.get('communityName'),
     description: formData.get('communityDescription'),
     avatarUrl:

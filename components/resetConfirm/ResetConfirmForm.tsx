@@ -1,7 +1,7 @@
 'use client';
 
 import { resetConfirmAction } from '@/app/(auth)/reset-password/confirm/actions';
-import { SeeIcon, UnSeeIcon } from '@/assets/icons';
+import { Eye, EyeSlash } from '@/assets/icons';
 import { useActionState, useState } from 'react';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
@@ -23,12 +23,12 @@ function ResetConfirmForm() {
         <div className='relative'>
           <Input type={type} name='password' placeholder='Password' />
           {type === 'password' ? (
-            <UnSeeIcon
+            <EyeSlash
               onClick={toggleHideAndSHow}
               className='absolute top-[15px] left-72'
             />
           ) : (
-            <SeeIcon
+            <Eye
               onClick={toggleHideAndSHow}
               className='absolute top-[15px] left-72'
             />

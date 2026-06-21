@@ -1,11 +1,6 @@
 import { Icon } from '@/types';
 
-function MembersIconFilled({
-  className,
-  height = 40,
-  width = 40,
-  onClick,
-}: Icon) {
+function MembersFilled({ className, height = 40, width = 40, onClick }: Icon) {
   return (
     <>
       <svg
@@ -54,4 +49,4 @@ function MembersIconFilled({
   );
 }
 
-export default MembersIconFilled;
+export default MembersFilled;

@@ -4,11 +4,11 @@
 
 import {
   DefaultMembers,
-  DefaultUserIcon,
+  DefaultUser,
   Logout,
-  MembersIconFilled,
+  MembersFilled,
   MembersSetting,
-  OutlineIcon,
+  ArrowLeft,
   SendIcon,
 } from '@/assets/icons';
 import EllipsisVertical from '@/assets/icons/EllipsisVertical';
@@ -105,7 +105,7 @@ export default function CommunityChat({
         <div className='flex justify-between items-center mx-8'>
           <div className='flex items-center'>
             <Link href={'/'}>
-              <OutlineIcon />
+              <ArrowLeft />
             </Link>
             {community?.avatarUrl ? (
               <div className='relative w-20 h-20'>
@@ -124,7 +124,7 @@ export default function CommunityChat({
             <h2 className='text-2xl font-bold ml-17'>{community?.name}</h2>
           </div>
           <div className='flex justify-between'>
-            <MembersIconFilled onClick={handleIsOpenMembers} />
+            <MembersFilled onClick={handleIsOpenMembers} />
             {isOpenMembers && !isOpenEllipsis && (
               <div
                 className={`absolute ${community?.members?.length !== 0 ? 'top-20 left-237' : 'top-20 left-241'} overflow-y-auto max-h-60 bg-white px-2 py-2 rounded-[10px] border-2 shadow-(--cartoon-shadow)`}
@@ -135,7 +135,7 @@ export default function CommunityChat({
                       {owner?.avatarUrl ? (
                         <Image src={owner.avatarUrl} alt='' />
                       ) : (
-                        <DefaultUserIcon width={40} height={40} />
+                        <DefaultUser width={40} height={40} />
                       )}
                       <div className='ml-2'>
                         <p>{owner?.username}</p>
@@ -151,7 +151,7 @@ export default function CommunityChat({
                             {member.avatarUrl ? (
                               <Image src={member.avatarUrl} alt='' />
                             ) : (
-                              <DefaultUserIcon width={40} height={40} />
+                              <DefaultUser width={40} height={40} />
                             )}
                             <p className='ml-2'>{member.username}</p>
                           </div>
@@ -209,7 +209,7 @@ export default function CommunityChat({
                   className='rounded-full'
                 />
               ) : (
-                <DefaultUserIcon width={55} height={55} />
+                <DefaultUser width={55} height={55} />
               )}
               <div className='bg-(--golden-pollen-50) rounded-[10px] px-3 py-2 ml-3 break-all max-w-100 shadow-(--cartoon-shadow) border'>
                 <div className='flex items-center'>

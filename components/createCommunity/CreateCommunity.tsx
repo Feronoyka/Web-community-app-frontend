@@ -1,4 +1,4 @@
-import { OutlineIcon } from '@/assets/icons';
+import { ArrowLeft } from '@/assets/icons';
 import CreateCommunityForm from './CreateCommunityForm';
 import Link from 'next/link';
 
@@ -14,7 +14,7 @@ function CreateCommunity() {
         </div>
         <div>
           <Link href='/'>
-            <OutlineIcon />
+            <ArrowLeft />
           </Link>
         </div>
       </div>

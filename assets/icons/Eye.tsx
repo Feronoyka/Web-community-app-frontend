@@ -1,6 +1,6 @@
 import { Icon } from '@/types';
 
-const SeeIcon = ({ className, onClick, height = 24, width = 24 }: Icon) => {
+const Eye = ({ className, onClick, height = 24, width = 24 }: Icon) => {
   return (
     <>
       <svg
@@ -27,4 +27,4 @@ const SeeIcon = ({ className, onClick, height = 24, width = 24 }: Icon) => {
   );
 };
 
-export default SeeIcon;
+export default Eye;

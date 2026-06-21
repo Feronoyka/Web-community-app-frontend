@@ -3,12 +3,12 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import {
-  SignUpIcon,
+  SignUp,
   UserIcon,
-  DefaultUserIcon,
+  DefaultUser,
   Logo,
-  MembersIcon,
-  AccountIcon,
+  Members,
+  Account,
   Logout,
 } from '@/assets/icons';
 import SearchUser from './UI/SearchUser';
@@ -41,12 +41,12 @@ function Navbar({ user }: { user: User | null }) {
                   onClick={() => setIsOpen(!isOpen)}
                 />
               ) : (
-                <DefaultUserIcon onClick={() => setIsOpen(!isOpen)} />
+                <DefaultUser onClick={() => setIsOpen(!isOpen)} />
               )}
             </li>
           ) : (
             <li className='inline-block text-xl'>
-              <DefaultUserIcon onClick={() => setIsOpen(!isOpen)} />
+              <DefaultUser onClick={() => setIsOpen(!isOpen)} />
             </li>
           )}
           <li className='group'>
@@ -70,14 +70,14 @@ function Navbar({ user }: { user: User | null }) {
                       href={`/account/${user?.id}`}
                       className={`flex flex-row items-center py-1 px-2 ${hoverList}`}
                     >
-                      <AccountIcon />
+                      <Account />
                       <p className='text-[18px]'>Account</p>
                     </Link>
                     <Link
                       href={'/community-create'}
                       className={`flex flex-row items-center py-1 px-2 ${hoverList}`}
                     >
-                      <MembersIcon stroke='#000000' strokeWidth={1.5} />
+                      <Members stroke='#000000' strokeWidth={1.5} />
                       <p className='text-[18px]'>Create community</p>
                     </Link>
                     <button
@@ -94,9 +94,9 @@ function Navbar({ user }: { user: User | null }) {
                   <li className='cursor-pointer'>
                     <Link
                       href='/sign-up'
-                      className='flex flex-row items-center'
+                      className={`flex flex-row items-center py-1 px-2 ${hoverList}`}
                     >
-                      <SignUpIcon /> <p>Sign up</p>
+                      <SignUp /> <p>Sign up</p>
                     </Link>
                   </li>
                 </ul>

@@ -1,21 +1,27 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useState, ChangeEvent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { updateUserProfileAction } from '@/app/you/edit/[nickname]/action';
 import { PRONOUNS_OPTIONS, Pronouns } from '@/utils/enums';
-import { DefaultUserIcon } from '@/assets/icons';
+import { DefaultUser } from '@/assets/icons';
 import { Button, Input, TextArea } from '../UI';
 import { User } from '@/types';
+import Camera from '@/assets/icons/Camera';
 
 function EditProfileForm({ user }: { user: User }) {
   const [state, action, isPending] = useActionState(
     updateUserProfileAction,
     null,
   );
+  const [previewUrl, setPreviewUrl] = useState(user.avatarUrl ?? '');
 
-  const avatarStyle = 'mx-auto rounded-[100%] border-[#D9D9D9] border';
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) setPreviewUrl(URL.createObjectURL(file));
+  };
+
   const inputStyle =
     'w-81 py-2 outline-1 outline-[#808080] rounded-[10px] pl-2 mt-1 text-[18px]';
   const h3 = 'font-bold text-xl';
@@ -71,24 +77,32 @@ function EditProfileForm({ user }: { user: User }) {
           </div>
           <div className='flex flex-col justify-between text-center items-center'>
             <div className='mb'>
-              <label>
+              <label className='relative group rounded-full block cursor-pointer w-40.75 h-40.75 overflow-hidden'>
                 <input
                   type='file'
                   accept='image/*'
                   className='hidden'
                   name='avatarUrl'
+                  onChange={handleFileChange}
                 />
-                {user.avatarUrl ? (
+                {previewUrl ? (
                   <Image
-                    src={user.avatarUrl}
+                    src={previewUrl}
                     alt=''
-                    width={163}
-                    height={163}
-                    className={avatarStyle}
+                    fill
+                    className='rounded-full object-cover z-0 border-[#D9D9D9] border'
                   />
                 ) : (
-                  <DefaultUserIcon width={163} height={163} />
+                  <DefaultUser
+                    width={163}
+                    height={163}
+                    className='group relative'
+                  />
                 )}
+                <div className='absolute text-white inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity'>
+                  <Camera />
+                  <p className='center font-bold text-xl'>Upload</p>
+                </div>
               </label>
               <p className='text-[#808080] mt-2 opacity-50'>
                 {'@'}

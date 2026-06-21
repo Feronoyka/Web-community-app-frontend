@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { OutlineIcon } from '@/assets/icons';
+import { ArrowLeft } from '@/assets/icons';
 import EditProfileForm from './EditProfileForm';
 import { User } from '@/types';
 
@@ -26,7 +26,7 @@ export default function EditProfile({ user }: { user: User }) {
             </h3>
           </div>
           <Link href={`/you/${user.nickname}`}>
-            <OutlineIcon />
+            <ArrowLeft />
           </Link>
         </div>
         <div className='px-7'>

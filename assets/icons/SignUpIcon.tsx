@@ -1,6 +1,6 @@
 import { Icon } from '@/types';
 
-const SignUpIcon = ({ className, onClick, height = 32, width = 32 }: Icon) => (
+const SignUp = ({ className, onClick, height = 32, width = 32 }: Icon) => (
   <svg
     onClick={onClick}
     className={className}
@@ -19,4 +19,4 @@ const SignUpIcon = ({ className, onClick, height = 32, width = 32 }: Icon) => (
   </svg>
 );
 
-export default SignUpIcon;
+export default SignUp;

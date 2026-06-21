@@ -1,6 +1,6 @@
 import { Icon } from '@/types';
 
-const OutlineIcon = ({ className, onClick, height = 26, width = 26 }: Icon) => (
+const ArrowLeft = ({ className, onClick, height = 26, width = 26 }: Icon) => (
   <svg
     onClick={onClick}
     className={`cursor-pointer ${className} hover:bg-gray-300 rounded-[10px]`}
@@ -20,4 +20,4 @@ const OutlineIcon = ({ className, onClick, height = 26, width = 26 }: Icon) => (
   </svg>
 );
 
-export default OutlineIcon;
+export default ArrowLeft;

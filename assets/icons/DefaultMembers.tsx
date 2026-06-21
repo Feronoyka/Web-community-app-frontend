@@ -9,15 +9,15 @@ function DefaultMembers({
   return (
     <>
       <svg
-        onClick={onClick}
         className={`${className}`}
+        onClick={onClick}
         width={width}
         height={height}
         viewBox='0 0 100 100'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <rect width='100' height='100' rx='5' fill='#8768B1' />
+        <rect width='100' height='100' rx='10' fill='#8768B1' />
         <path
           fillRule='evenodd'
           clipRule='evenodd'

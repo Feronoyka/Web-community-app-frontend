@@ -1,4 +1,4 @@
-import { OutlineIcon } from '@/assets/icons';
+import { ArrowLeft } from '@/assets/icons';
 import Link from 'next/link';
 import EditCommunityForm from './EditCommunityForm';
 import { CommunityFromApi } from '@/types';
@@ -21,7 +21,7 @@ function EditCommunity({
         </div>
         <div>
           <Link href='/'>
-            <OutlineIcon />
+            <ArrowLeft />
           </Link>
         </div>
       </div>

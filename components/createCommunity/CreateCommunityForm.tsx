@@ -64,8 +64,6 @@ function CreateCommunityForm() {
                     <Image
                       src={previewUrl}
                       alt=''
-                      // width={100}
-                      // height={100}
                       fill
                       className='rounded-[10px] object-cover z-0'
                     />

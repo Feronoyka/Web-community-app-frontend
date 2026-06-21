@@ -1,4 +1,4 @@
-import { CommunityFromApi } from './communityFromApi';
+import { Community } from './community';
 
 export type User = {
   id?: string;
@@ -8,6 +8,6 @@ export type User = {
   pronouns?: string;
   description?: string;
   email?: string;
-  joinedCommunities?: CommunityFromApi[];
-  ownedCommunities?: CommunityFromApi[];
+  joinedCommunities?: Community[];
+  ownedCommunities?: Community[];
 };

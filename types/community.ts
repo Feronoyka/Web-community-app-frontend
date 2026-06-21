@@ -1,6 +1,6 @@
 import { User } from '.';
 
-export type CommunityFromApi = {
+export type Community = {
   id: string;
   name: string;
   backgroundUrl?: string;

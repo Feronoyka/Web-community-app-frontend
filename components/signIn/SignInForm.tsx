@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useActionState, useState } from 'react';
 import { signInAction } from '@/app/(auth)/sign-in/actions';
-import { SeeIcon, UnSeeIcon } from '@/assets/icons';
+import { Eye, EyeSlash } from '@/assets/icons';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 
@@ -24,12 +24,12 @@ function SignInForm() {
         <div className='relative'>
           <Input type={type} name='password' placeholder='Enter a password' />
           {type === 'password' ? (
-            <UnSeeIcon
+            <EyeSlash
               className='absolute top-3.75 left-72'
               onClick={toggleHideAndSHow}
             />
           ) : (
-            <SeeIcon
+            <Eye
               className='absolute top-3.75 left-72'
               onClick={toggleHideAndSHow}
             />

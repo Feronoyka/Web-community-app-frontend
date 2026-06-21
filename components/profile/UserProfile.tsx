@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { DefaultUserIcon, OutlineIcon } from '@/assets/icons';
+import { DefaultUser, ArrowLeft } from '@/assets/icons';
 import { Pronouns } from '@/utils/enums';
 import { User } from '@/types';
 import { Button } from '../UI';
@@ -16,7 +16,7 @@ export default function UserProfile({ user }: { user: User }) {
           {`'s`} Profile
         </h1>
         <Link href='/'>
-          <OutlineIcon />
+          <ArrowLeft />
         </Link>
       </div>
       <div className='relative text-center'>
@@ -29,7 +29,7 @@ export default function UserProfile({ user }: { user: User }) {
             height={163}
           />
         ) : (
-          <DefaultUserIcon width={163} height={163} className='mx-auto' />
+          <DefaultUser width={163} height={163} className='mx-auto' />
         )}
         <p className='text-5 text-[#808080] my-1 opacity-50'>
           {`@`}

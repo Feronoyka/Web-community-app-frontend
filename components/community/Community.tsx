@@ -1,6 +1,6 @@
 'use client';
 
-import MembersIcon from '@/assets/icons/MembersIcon';
+import Members from '@/assets/icons/Members';
 import { Button } from '../UI';
 import { CommunityFromApi, User } from '@/types';
 import { useRouter } from 'next/navigation';
@@ -60,7 +60,7 @@ function Community({
                 src={avatarUrl}
                 alt=''
                 fill
-                className='absolute top-30 object-cover z-0 rounded-[5px]'
+                className='absolute top-30 object-cover z-0 rounded-[10px]'
               />
             </div>
           </div>
@@ -74,7 +74,7 @@ function Community({
           {description}
         </p>
         <div className='flex mb-4 justify-center items-center'>
-          <MembersIcon width={27} height={27} />
+          <Members width={27} height={27} />
           {membersCount > 0 ? (
             <p className='text-gray-700 ml-1'>{membersCount + 1} members</p>
           ) : (

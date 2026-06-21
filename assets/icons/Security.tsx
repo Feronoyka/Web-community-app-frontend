@@ -1,11 +1,6 @@
 import { Icon } from '@/types';
 
-const SecurityIcon = ({
-  className,
-  onClick,
-  height = 142,
-  width = 117,
-}: Icon) => {
+function Security({ className, onClick, height = 142, width = 117 }: Icon) {
   return (
     <>
       <svg
@@ -24,6 +19,6 @@ const SecurityIcon = ({
       </svg>
     </>
   );
-};
+}
 
-export default SecurityIcon;
+export default Security;

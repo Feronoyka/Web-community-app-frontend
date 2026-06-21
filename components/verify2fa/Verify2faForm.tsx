@@ -3,7 +3,7 @@
 import { useActionState, useState, useTransition } from 'react';
 import OTPInput from 'react-otp-input';
 import { verify2faAction } from '@/app/(auth)/sign-in/verify-2fa/actions';
-import { CheckBoxIcon, UnCheckBoxIcon } from '@/assets/icons/';
+import { CheckBox, UnCheckBox } from '@/assets/icons/';
 import './otp.module.css';
 import { Button } from '../UI';
 import { useResendCooldown } from '@/hooks/useResendCooldown';
@@ -81,12 +81,12 @@ function Verify2faForm() {
         </div>
         <div className='flex justify-center items-center'>
           {check === 'on' ? (
-            <CheckBoxIcon
+            <CheckBox
               className='cursor-pointer transition-all transition-discrete'
               onClick={toggleCheck}
             />
           ) : (
-            <UnCheckBoxIcon
+            <UnCheckBox
               className='cursor-pointer transition-all transition-discrete'
               onClick={toggleCheck}
             />

@@ -1,4 +1,4 @@
-import { OutlineIcon } from '@/assets/icons';
+import { ArrowLeft } from '@/assets/icons';
 import { Button, Input } from '@/components/UI';
 import { User } from '@/types';
 import Link from 'next/link';
@@ -16,7 +16,7 @@ function Account({ user }: { user: User | null }) {
       <div className='flex justify-between'>
         <h1 className='text-[32px] font-bold'>Account</h1>
         <Link href='/'>
-          <OutlineIcon />
+          <ArrowLeft />
         </Link>
       </div>
       <h2 className='text-2xl text-gray-500 opacity-70'>

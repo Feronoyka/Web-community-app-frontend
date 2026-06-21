@@ -1,6 +1,6 @@
 import { Icon } from '@/types';
 
-function MembersIcon({
+function Members({
   className,
   onClick,
   height = 32,
@@ -29,4 +29,4 @@ function MembersIcon({
   );
 }
 
-export default MembersIcon;
+export default Members;

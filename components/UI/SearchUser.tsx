@@ -1,6 +1,6 @@
 'use client';
 
-import { DefaultUserIcon } from '@/assets/icons';
+import { DefaultUser } from '@/assets/icons';
 import { useDebounce } from '@/hooks/useDebounce';
 import { fetchUsersQuery } from '@/lib/queryUsers';
 import { User } from '@/types';
@@ -45,7 +45,7 @@ function SearchUser({ name, className }: SearchType) {
         onChange={(e) => setQueryUsers(e.target.value)}
       />
 
-      {showResults.length > 0 && (
+      {showResults.length > 0 && !isLoading && (
         <ul className='absolute top-full left-80% bg-white px-3 py-4 rounded-[10px] w-[90%]'>
           {showResults.map((user) => (
             <li
@@ -63,7 +63,7 @@ function SearchUser({ name, className }: SearchType) {
                   />
                 ) : (
                   <div>
-                    <DefaultUserIcon />
+                    <DefaultUser />
                   </div>
                 )}
                 <div className='ml-2'>

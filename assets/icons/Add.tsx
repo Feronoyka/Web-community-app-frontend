@@ -1,6 +1,6 @@
 import { Icon } from '@/types';
 
-const AddIcon = ({ className, onClick, height = 48, width = 48 }: Icon) => {
+const Add = ({ className, onClick, height = 48, width = 48 }: Icon) => {
   return (
     <svg
       className={className}
@@ -20,4 +20,4 @@ const AddIcon = ({ className, onClick, height = 48, width = 48 }: Icon) => {
   );
 };
 
-export default AddIcon;
+export default Add;

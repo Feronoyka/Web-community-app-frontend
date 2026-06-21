@@ -1,6 +1,6 @@
 import { Icon } from '@/types';
 
-function AccountIcon({ className, onClick, width = 32, height = 32 }: Icon) {
+function Account({ className, onClick, width = 32, height = 32 }: Icon) {
   return (
     <>
       <svg
@@ -38,4 +38,4 @@ function AccountIcon({ className, onClick, width = 32, height = 32 }: Icon) {
   );
 }
 
-export default AccountIcon;
+export default Account;

@@ -2,7 +2,7 @@ import { useActionState, useState } from 'react';
 import Link from 'next/link';
 import { signUpAction } from '@/app/(auth)/sign-up/actions';
 import { Button, Input } from '../UI';
-import { SeeIcon, UnSeeIcon } from '@/assets/icons';
+import { Eye, EyeSlash } from '@/assets/icons';
 
 function SignUpForm() {
   const [state, action, isPending] = useActionState(signUpAction, null);
@@ -31,12 +31,12 @@ function SignUpForm() {
         <div className='relative'>
           <Input type={type} name='password' placeholder='Password' />
           {type === 'password' ? (
-            <UnSeeIcon
+            <EyeSlash
               className='absolute top-[15px] left-71 cursor-pointer'
               onClick={toggleHideAndSHow}
             />
           ) : (
-            <SeeIcon
+            <Eye
               className='absolute top-[15px] left-71 cursor-pointer'
               onClick={toggleHideAndSHow}
             />

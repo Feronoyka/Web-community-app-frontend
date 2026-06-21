@@ -1,11 +1,6 @@
 import { Icon } from '@/types';
 
-const DefaultUserIcon = ({
-  className,
-  onClick,
-  height = 50,
-  width = 50,
-}: Icon) => {
+const DefaultUser = ({ className, onClick, height = 50, width = 50 }: Icon) => {
   return (
     <svg
       className={`cursor-pointer ${className}`}
@@ -41,4 +36,4 @@ const DefaultUserIcon = ({
   );
 };
 
-export default DefaultUserIcon;
+export default DefaultUser;

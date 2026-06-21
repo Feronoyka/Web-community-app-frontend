@@ -1,11 +1,6 @@
 import { Icon } from '@/types';
 
-const UnCheckBoxIcon = ({
-  className,
-  onClick,
-  height = 20,
-  width = 20,
-}: Icon) => {
+const UnCheckBox = ({ className, onClick, height = 20, width = 20 }: Icon) => {
   return (
     <>
       <svg
@@ -29,4 +24,4 @@ const UnCheckBoxIcon = ({
   );
 };
 
-export default UnCheckBoxIcon;
+export default UnCheckBox;

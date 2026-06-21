@@ -1,4 +1,4 @@
-import { KeyIcon, OutlineIcon } from '@/assets/icons';
+import { KeyIcon, ArrowLeft } from '@/assets/icons';
 import Link from 'next/link';
 import ResetPasswordForm from './ResetPasswordForm';
 
@@ -7,7 +7,7 @@ function ResetPassword() {
     <div className='py-8 px-8'>
       <div className=''>
         <Link href='/' className='flex justify-end'>
-          <OutlineIcon />
+          <ArrowLeft />
         </Link>
         <div className='text-center mt-4'>
           <h1 className='text-4xl font-bold'>Forgot password</h1>

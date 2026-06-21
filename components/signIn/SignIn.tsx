@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import SignInForm from './SignInForm';
-import { OutlineIcon } from '@/assets/icons';
+import { ArrowLeft } from '@/assets/icons';
 
 function SignIn() {
   return (
     <div className='py-8 px-8'>
       <Link href='/' className='flex justify-end'>
-        <OutlineIcon />
+        <ArrowLeft />
       </Link>
       <div className='text-center'>
         <h1 className='text-[36px] font-bold'>Sign in</h1>

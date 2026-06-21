@@ -1,11 +1,6 @@
 import { Icon } from '@/types';
 
-const CheckBoxIcon = ({
-  className,
-  onClick,
-  height = 20,
-  width = 20,
-}: Icon) => {
+const CheckBox = ({ className, onClick, height = 20, width = 20 }: Icon) => {
   return (
     <>
       <svg
@@ -28,4 +23,4 @@ const CheckBoxIcon = ({
   );
 };
 
-export default CheckBoxIcon;
+export default CheckBox;

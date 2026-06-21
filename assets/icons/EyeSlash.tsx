@@ -1,6 +1,6 @@
 import { Icon } from '@/types';
 
-const UnSeeIcon = ({ className, onClick, height = 24, width = 24 }: Icon) => {
+const EyeSlash = ({ className, onClick, height = 24, width = 24 }: Icon) => {
   return (
     <>
       <svg
@@ -37,4 +37,4 @@ const UnSeeIcon = ({ className, onClick, height = 24, width = 24 }: Icon) => {
   );
 };
 
-export default UnSeeIcon;
+export default EyeSlash;
