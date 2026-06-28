@@ -10,6 +10,7 @@ import {
   MembersSetting,
   ArrowLeft,
   SendIcon,
+  XMark,
 } from '@/assets/icons';
 import EllipsisVertical from '@/assets/icons/EllipsisVertical';
 import { useCommunityChat } from '@/hooks/useCommunityChat';
@@ -63,6 +64,12 @@ export default function CommunityChat({
     setInput('');
   };
 
+  const handleDelete = (isOwn: boolean, messageId: string) => {
+    if (isOwn) {
+      deleteMessage(messageId);
+    }
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -104,9 +111,9 @@ export default function CommunityChat({
       >
         <div className='flex justify-between items-center mx-8'>
           <div className='flex items-center'>
-            <Link href={'/'}>
+            <button onClick={() => router.back()}>
               <ArrowLeft />
-            </Link>
+            </button>
             {community?.avatarUrl ? (
               <div className='relative w-20 h-20'>
                 <Image
@@ -198,6 +205,8 @@ export default function CommunityChat({
           <p className='text-center'>No messages yet, Say hello :3</p>
         )}
         {messages.map((message) => {
+          const isOwnMessage = message.senderId === currentUser.id;
+
           return (
             <div key={message.id} className='flex items-end mt-4'>
               {message.sender?.avatarUrl ? (
@@ -211,7 +220,7 @@ export default function CommunityChat({
               ) : (
                 <DefaultUser width={55} height={55} />
               )}
-              <div className='bg-(--golden-pollen-50) rounded-[10px] px-3 py-2 ml-3 break-all max-w-100 shadow-(--cartoon-shadow) border'>
+              <div className='bg-(--golden-pollen-50) group rounded-[10px] px-3 py-2 ml-3 break-all max-w-100 shadow-(--cartoon-shadow) border'>
                 <div className='flex items-center'>
                   <p className='text-(--steel-blue-100)'>
                     {message.sender?.username}
@@ -227,7 +236,18 @@ export default function CommunityChat({
                       minute: '2-digit',
                     })}
                   </p>
-                  {/*hover Icon to delete message */}
+                  {isOwnMessage && (
+                    <button
+                      className='hidden group-hover:flex transition-all ml-1'
+                      onClick={() => handleDelete(isOwnMessage, message.id)}
+                    >
+                      <XMark
+                        width={20}
+                        height={20}
+                        className='bg-(--golden-pollen-50)'
+                      />
+                    </button>
+                  )}
                 </div>
                 <p className='text-[#333333]'>{message.content}</p>
               </div>

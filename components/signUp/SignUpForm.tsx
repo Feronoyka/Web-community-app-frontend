@@ -57,7 +57,7 @@ function SignUpForm() {
           >
             {isPending ? <p>Signing up...</p> : <p>Sign up</p>}
           </Button>
-          <p className='mt-2 mb-4'>
+          <p className='mt-4'>
             <span>Already have an account?</span>{' '}
             <span className='text-[#0379FF]'>
               <Link href='/sign-in'>Sign in</Link>

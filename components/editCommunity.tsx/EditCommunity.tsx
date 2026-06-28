@@ -1,7 +1,7 @@
 import { ArrowLeft } from '@/assets/icons';
-import Link from 'next/link';
 import EditCommunityForm from './EditCommunityForm';
 import { CommunityFromApi } from '@/types';
+import { useRouter } from 'next/navigation';
 
 function EditCommunity({
   communityId,
@@ -10,6 +10,8 @@ function EditCommunity({
   communityId: string;
   community: CommunityFromApi;
 }) {
+  const router = useRouter();
+
   return (
     <div className='bg-white col-start-3 col-end-11 rounded-[10px] pt-9 px-9 shadow-(--cartoon-shadow) border-2'>
       <div className='flex justify-between'>
@@ -20,9 +22,9 @@ function EditCommunity({
           </h3>
         </div>
         <div>
-          <Link href='/'>
+          <button onClick={() => router.forward()}>
             <ArrowLeft />
-          </Link>
+          </button>
         </div>
       </div>
       <div>

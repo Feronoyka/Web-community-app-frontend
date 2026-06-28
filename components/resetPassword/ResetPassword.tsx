@@ -1,14 +1,16 @@
 import { KeyIcon, ArrowLeft } from '@/assets/icons';
-import Link from 'next/link';
 import ResetPasswordForm from './ResetPasswordForm';
+import { useRouter } from 'next/navigation';
 
 function ResetPassword() {
+  const router = useRouter();
+
   return (
     <div className='py-8 px-8'>
       <div className=''>
-        <Link href='/' className='flex justify-end'>
+        <button onClick={() => router.back()} className='flex justify-end'>
           <ArrowLeft />
-        </Link>
+        </button>
         <div className='text-center mt-4'>
           <h1 className='text-4xl font-bold'>Forgot password</h1>
           <div className='flex justify-center mt-4'>

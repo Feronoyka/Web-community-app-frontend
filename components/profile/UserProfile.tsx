@@ -1,12 +1,26 @@
-import Image from 'next/image';
+'use client';
+
+// import Image from 'next/image';
 import Link from 'next/link';
-import { DefaultUser, ArrowLeft } from '@/assets/icons';
+import { ArrowLeft } from '@/assets/icons';
 import { Pronouns } from '@/utils/enums';
 import { User } from '@/types';
 import { Button } from '../UI';
+import UserAvatar from '../UI/UserAvatar';
+import { useRouter } from 'next/navigation';
 
-export default function UserProfile({ user }: { user: User }) {
-  const avatarStyle = 'mx-auto rounded-[100%] border-[#D9D9D9] border';
+export default function UserProfile({
+  user,
+  currentUser,
+}: {
+  user: User;
+  currentUser?: User | null;
+}) {
+  // const avatarStyle = 'mx-auto rounded-[100%] border-[#D9D9D9] border';
+
+  const router = useRouter();
+
+  const isOwn = user.id === currentUser?.id;
 
   return (
     <div className='col-start-3 col-end-11 bg-white rounded-[10px] shadow-(--cartoon-shadow) border-2 pb-4'>
@@ -15,22 +29,12 @@ export default function UserProfile({ user }: { user: User }) {
           {user.username}
           {`'s`} Profile
         </h1>
-        <Link href='/'>
+        <button onClick={() => router.back()}>
           <ArrowLeft />
-        </Link>
+        </button>
       </div>
       <div className='relative text-center'>
-        {user.avatarUrl ? (
-          <Image
-            src={user.avatarUrl}
-            alt=''
-            className={avatarStyle}
-            width={163}
-            height={163}
-          />
-        ) : (
-          <DefaultUser width={163} height={163} className='mx-auto' />
-        )}
+        <UserAvatar avatarUrl={user.avatarUrl} className='mx-auto' />
         <p className='text-5 text-[#808080] my-1 opacity-50'>
           {`@`}
           {user.nickname} |
@@ -42,9 +46,13 @@ export default function UserProfile({ user }: { user: User }) {
         ) : (
           <p>{user.description}</p>
         )}
-        <Button buttonType='secondaryOne' className='mt-6'>
-          <Link href={`/chat/private/${user.id}`}>Chat</Link>
-        </Button>
+        {!isOwn && (
+          <Link href={`/chat/private/${user.id}`}>
+            <Button buttonType='secondaryOne' className='mt-6'>
+              Chat
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );

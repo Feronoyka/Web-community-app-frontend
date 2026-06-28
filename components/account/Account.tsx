@@ -1,12 +1,17 @@
+'use client';
+
 import { ArrowLeft } from '@/assets/icons';
 import { Button, Input } from '@/components/UI';
 import { User } from '@/types';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 function Account({ user }: { user: User | null }) {
   {
     /*form action */
   }
+
+  const router = useRouter();
 
   return (
     <form
@@ -15,9 +20,9 @@ function Account({ user }: { user: User | null }) {
     >
       <div className='flex justify-between'>
         <h1 className='text-[32px] font-bold'>Account</h1>
-        <Link href='/'>
+        <button onClick={() => router.back()}>
           <ArrowLeft />
-        </Link>
+        </button>
       </div>
       <h2 className='text-2xl text-gray-500 opacity-70'>
         Set your account preference

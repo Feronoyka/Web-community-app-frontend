@@ -10,6 +10,7 @@ import {
   Members,
   Account,
   Logout,
+  ChatsIcon,
 } from '@/assets/icons';
 import SearchUser from './UI/SearchUser';
 import Image from 'next/image';
@@ -79,6 +80,13 @@ function Navbar({ user }: { user: User | null }) {
                     >
                       <Members stroke='#000000' strokeWidth={1.5} />
                       <p className='text-[18px]'>Create community</p>
+                    </Link>
+                    <Link
+                      href={''}
+                      className={`flex flex-row items-center py-1 px-2 ${hoverList}`}
+                    >
+                      <ChatsIcon />
+                      <p className='text-[18px]'>Chats</p>
                     </Link>
                     <button
                       className={`flex flex-row items-center py-1 px-2 text-[18px] w-full cursor-pointer ${hoverList}`}

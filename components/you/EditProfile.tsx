@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import { ArrowLeft } from '@/assets/icons';
 import EditProfileForm from './EditProfileForm';
 import { User } from '@/types';
+import { useRouter } from 'next/navigation';
 
 // type User = {
 //   user: {
@@ -15,6 +15,8 @@ import { User } from '@/types';
 // };
 
 export default function EditProfile({ user }: { user: User }) {
+  const router = useRouter();
+
   return (
     <div className='bg-white col-start-3 col-end-11 rounded-[10px] shadow-(--cartoon-shadow) border-2'>
       <div className='px-9 py-9'>
@@ -25,9 +27,9 @@ export default function EditProfile({ user }: { user: User }) {
               Update your profile
             </h3>
           </div>
-          <Link href={`/you/${user.nickname}`}>
+          <button onClick={() => router.back()}>
             <ArrowLeft />
-          </Link>
+          </button>
         </div>
         <div className='px-7'>
           <EditProfileForm user={user} />

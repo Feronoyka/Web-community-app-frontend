@@ -31,7 +31,7 @@ function Community({
       return;
     }
 
-    router.push(`/community/${id}`);
+    router.push(`/chat/community/${id}`);
 
     setIsPending(true);
     try {
@@ -51,8 +51,8 @@ function Community({
   console.log('isMember:', isMember);
 
   return (
-    <div className='rounded-[10px] bg-(--golden-pollen-100) w-full h-125 shadow-(--cartoon-shadow) border-2 border-black)'>
-      <div className='flex bg-[#F8CD86] w-109.75 h-39 rounded-t-[10px] justify-center'>
+    <div className='shadow-(--cartoon-shadow) rounded-[10px] border-2'>
+      <div className='flex bg-[#F8CD86] w-full h-39 rounded-t-[10px] justify-center'>
         {avatarUrl ? (
           <div className='flex bg-[#F8CD86] w-89 h-39 rounded-t-[10px] justify-center'>
             <div className='relative w-25 h-25 mt-25'>
@@ -68,37 +68,41 @@ function Community({
           <DefaultMembers className='my-25' />
         )}
       </div>
-      <div className='my-15 text-center'>
-        <h3 className='text-2xl font-bold'>{name}</h3>
-        <p className='w-82.75 mx-auto h-30 text-gray-700 mt-3 border-box px-10 break-normal'>
-          {description}
-        </p>
-        <div className='flex mb-4 justify-center items-center'>
-          <Members width={27} height={27} />
-          {membersCount > 0 ? (
-            <p className='text-gray-700 ml-1'>{membersCount + 1} members</p>
-          ) : (
-            <p className='text-gray-700 ml-1'>1 member</p>
-          )}
+      <div className='rounded-b-[10px] bg-(--golden-pollen-100) w-full h-90'>
+        <div className='pb-7 pt-15 text-center'>
+          <h3 className='text-2xl font-bold'>{name}</h3>
+          <p className='w-82.75 mx-auto mt-3 text-gray-700 border-box break-normal'>
+            {description}
+          </p>
+          <div className='flex justify-center items-center mt-3'>
+            <Members width={27} height={27} />
+            {membersCount > 0 ? (
+              <p className='text-gray-700 ml-1'>{membersCount + 1} members</p>
+            ) : (
+              <p className='text-gray-700 ml-1'>1 member</p>
+            )}
+          </div>
+          <div className='mt-30'>
+            {isOwner || isMember ? (
+              <Button
+                className='text-xl hover:shadow-(--cartoon-shadow-50)'
+                buttonType='secondaryOne'
+                onClick={handleChat}
+              >
+                Chat
+              </Button>
+            ) : (
+              <Button
+                className='text-xl hover:shadow-(--cartoon-shadow-50)'
+                buttonType='secondaryOne'
+                onClick={handleFollow}
+                disabled={isPending}
+              >
+                {isPending ? 'Joining..' : 'Join'}
+              </Button>
+            )}
+          </div>
         </div>
-        {isOwner || isMember ? (
-          <Button
-            className='px-8 py-1 text-xl hover:shadow-(--cartoon-shadow-50)'
-            buttonType='secondaryOne'
-            onClick={handleChat}
-          >
-            Chat
-          </Button>
-        ) : (
-          <Button
-            className='px-8 py-1 text-xl hover:shadow-(--cartoon-shadow-50)'
-            buttonType='secondaryOne'
-            onClick={handleFollow}
-            disabled={isPending}
-          >
-            {isPending ? 'Joining' : 'Join'}
-          </Button>
-        )}
       </div>
     </div>
   );

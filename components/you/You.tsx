@@ -46,9 +46,11 @@ export default async function You({ user }: { user: User }) {
         ) : (
           <p>{user.description}</p>
         )}
-        <Button buttonType='secondaryTwo' className='mt-8 w-20'>
-          <Link href={`/you/edit/${user.nickname}`}>Edit</Link>
-        </Button>
+        <Link href={`/you/edit/${user.nickname}`}>
+          <Button buttonType='secondaryTwo' className='mt-8 w-20'>
+            Edit
+          </Button>
+        </Link>
       </div>
     </div>
   );
