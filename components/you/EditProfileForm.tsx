@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { updateUserProfileAction } from '@/app/you/edit/[nickname]/action';
 import { PRONOUNS_OPTIONS, Pronouns } from '@/utils/enums';
-import { DefaultUser } from '@/assets/icons';
+import { DefaultUserIcon } from '@/assets/icons';
 import { Button, Input, TextArea } from '../UI';
 import { User } from '@/types';
 import Camera from '@/assets/icons/Camera';
@@ -93,7 +93,7 @@ function EditProfileForm({ user }: { user: User }) {
                     className='rounded-full object-cover z-0 border-[#D9D9D9] border'
                   />
                 ) : (
-                  <DefaultUser
+                  <DefaultUserIcon
                     width={163}
                     height={163}
                     className='group relative'

@@ -47,7 +47,7 @@ export default function UserProfile({
           <p>{user.description}</p>
         )}
         {!isOwn && (
-          <Link href={`/chat/private/${user.id}`}>
+          <Link href={`/chats/conversations/${user.id}`}>
             <Button buttonType='secondaryOne' className='mt-6'>
               Chat
             </Button>

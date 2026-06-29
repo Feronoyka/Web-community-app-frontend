@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { DefaultUser } from '@/assets/icons';
+import { DefaultUserIcon } from '@/assets/icons';
 
 function UserAvatar({
   avatarUrl,
@@ -32,7 +32,7 @@ function UserAvatar({
             className={`rounded-full object-cover z-0 border-[#D9D9D9] border ${className}`}
           />
         ) : (
-          <DefaultUser
+          <DefaultUserIcon
             width={width}
             height={height}
             className={`group relative ${className}`}

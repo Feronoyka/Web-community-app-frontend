@@ -1,4 +1,5 @@
 import { Community } from './community';
+import { Conversation } from './conversation';
 
 export type User = {
   id?: string;
@@ -10,4 +11,5 @@ export type User = {
   email?: string;
   joinedCommunities?: Community[];
   ownedCommunities?: Community[];
+  conversations?: Conversation[];
 };

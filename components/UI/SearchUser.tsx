@@ -1,6 +1,6 @@
 'use client';
 
-import { DefaultUser } from '@/assets/icons';
+import { DefaultUserIcon } from '@/assets/icons';
 import { useDebounce } from '@/hooks/useDebounce';
 import { fetchUsersQuery } from '@/lib/queryUsers';
 import { User } from '@/types';
@@ -63,7 +63,7 @@ function SearchUser({ name, className }: SearchType) {
                   />
                 ) : (
                   <div>
-                    <DefaultUser />
+                    <DefaultUserIcon />
                   </div>
                 )}
                 <div className='ml-2'>

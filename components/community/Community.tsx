@@ -31,7 +31,7 @@ function Community({
       return;
     }
 
-    router.push(`/chat/community/${id}`);
+    router.push(`/chats/communities/${id}`);
 
     setIsPending(true);
     try {
@@ -44,7 +44,7 @@ function Community({
   };
 
   const handleChat = () => {
-    router.push(`/chat/community/${id}`);
+    router.push(`/chats/communities/${id}`);
   };
 
   console.log('isOwner:', isOwner);

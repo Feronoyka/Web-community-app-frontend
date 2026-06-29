@@ -8,5 +8,5 @@ export default async function Main() {
   const communities = await getCommunities();
   const user: User | null = await getMe();
 
-  return <Communities user={user} communities={communities} />;
+  return <Communities user={user} communities={communities} />; // community/communities
 }

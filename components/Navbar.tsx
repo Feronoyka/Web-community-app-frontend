@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {
   SignUp,
   UserIcon,
-  DefaultUser,
+  DefaultUserIcon,
   Logo,
   Members,
   Account,
@@ -42,12 +42,12 @@ function Navbar({ user }: { user: User | null }) {
                   onClick={() => setIsOpen(!isOpen)}
                 />
               ) : (
-                <DefaultUser onClick={() => setIsOpen(!isOpen)} />
+                <DefaultUserIcon onClick={() => setIsOpen(!isOpen)} />
               )}
             </li>
           ) : (
             <li className='inline-block text-xl'>
-              <DefaultUser onClick={() => setIsOpen(!isOpen)} />
+              <DefaultUserIcon onClick={() => setIsOpen(!isOpen)} />
             </li>
           )}
           <li className='group'>
@@ -82,7 +82,7 @@ function Navbar({ user }: { user: User | null }) {
                       <p className='text-[18px]'>Create community</p>
                     </Link>
                     <Link
-                      href={''}
+                      href='/chats/conversations'
                       className={`flex flex-row items-center py-1 px-2 ${hoverList}`}
                     >
                       <ChatsIcon />

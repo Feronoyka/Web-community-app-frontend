@@ -3,7 +3,7 @@ export { default as UserIcon } from './UserIcon';
 export { default as SignUp } from './SignUpIcon';
 export { default as ArrowLeft } from './ArrowLeft';
 export { default as Add } from './Add';
-export { default as DefaultUser } from './DefaultUser';
+export { default as DefaultUserIcon } from './DefaultUserIcon';
 export { default as Security } from './Security';
 export { default as CheckBox } from './CheckBoxIcon';
 export { default as UnCheckBox } from './UnCheckBox';

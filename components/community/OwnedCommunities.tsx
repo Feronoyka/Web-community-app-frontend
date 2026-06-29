@@ -21,12 +21,13 @@ function OwnedCommunities({ user }: { user: User | null }) {
               <div key={community.id} className='grid col-span-4'>
                 <Community
                   id={community.id}
-                  key={community.id}
                   ownerId={community.ownerId}
+                  avatarUrl={community.avatarUrl}
                   name={community.name}
                   membersCount={community.membersCount}
-                  backgroundUrl={community.backgroundUrl}
+                  members={community.members}
                   description={community.description}
+                  isMember={community.isMember}
                   user={user}
                 />
               </div>
