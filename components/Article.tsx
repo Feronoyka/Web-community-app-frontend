@@ -5,9 +5,14 @@ function Article() {
   return (
     <>
       <div className={article}>
-        <h1 className='text-white font-bold text-[48px] mt-20.25 ml-13'>
-          Welcome to lovely community
-        </h1>
+        <div className='mx-13 mt-15 max-[1024px]:mx-7'>
+          <h1 className='text-white font-bold text-5xl max-[1024px]:text-[40px]'>
+            Welcome to Ventus forum
+          </h1>
+          <p className='text-white opacity-85 mt-4'>
+            Where you can create own forum and discuss any specific stuff
+          </p>
+        </div>
       </div>
     </>
   );

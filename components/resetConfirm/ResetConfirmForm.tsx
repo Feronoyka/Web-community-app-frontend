@@ -20,7 +20,7 @@ function ResetConfirmForm() {
     <>
       <form action={action}>
         <p className='font-bold mt-4'>Password</p>
-        <div className='relative'>
+        <div className='relative px-'>
           <Input type={type} name='password' placeholder='Password' />
           {type === 'password' ? (
             <EyeSlash
@@ -40,7 +40,7 @@ function ResetConfirmForm() {
         <p className='font-bold mt-2'>Confirm</p>
         <div className='relative'>
           <Input
-            type='password'
+            type={type}
             name='confirmPassword'
             placeholder='Confirm password'
           />

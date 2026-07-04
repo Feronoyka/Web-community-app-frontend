@@ -75,5 +75,5 @@ export const editCommunityAction = async (
     return { errors: { server: 'something went wrong' } };
   }
 
-  redirect(`/chats/communities/${id}`);
+  redirect(`/chat/community/${id}`);
 };

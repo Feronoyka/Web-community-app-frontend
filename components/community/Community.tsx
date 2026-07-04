@@ -31,7 +31,7 @@ function Community({
       return;
     }
 
-    router.push(`/chats/communities/${id}`);
+    router.push(`/chat/community/${id}`);
 
     setIsPending(true);
     try {
@@ -44,7 +44,7 @@ function Community({
   };
 
   const handleChat = () => {
-    router.push(`/chats/communities/${id}`);
+    router.push(`/chat/community/${id}`);
   };
 
   console.log('isOwner:', isOwner);
@@ -71,7 +71,7 @@ function Community({
       <div className='rounded-b-[10px] bg-(--golden-pollen-100) w-full h-90'>
         <div className='pb-7 pt-15 text-center'>
           <h3 className='text-2xl font-bold'>{name}</h3>
-          <p className='w-82.75 mx-auto mt-3 text-gray-700 border-box break-normal'>
+          <p className='mx-7 mt-3 mb-auto text-gray-700 border-box break-normal'>
             {description}
           </p>
           <div className='flex justify-center items-center mt-3'>
@@ -98,7 +98,7 @@ function Community({
                 onClick={handleFollow}
                 disabled={isPending}
               >
-                {isPending ? 'Joining..' : 'Join'}
+                {isPending ? 'Joining...' : 'Join'}
               </Button>
             )}
           </div>

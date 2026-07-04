@@ -22,7 +22,10 @@ export default function Communities({ communities, user }: CommunitiesProps) {
       {list.length !== 0 ? (
         <div className='grid grid-cols-12 gap-8 mx-16 mt-8'>
           {list.map((community) => (
-            <div key={community.id} className='col-span-4 mb-10'>
+            <div
+              key={community.id}
+              className='col-span-4 mb-10 max-[738px]:col-span-13 max-[1024px]:col-span-6'
+            >
               <Community
                 id={community.id}
                 ownerId={community.ownerId}

@@ -34,9 +34,7 @@ function Communities({
               </div>
             </div>
             <Button buttonType='secondaryOne'>
-              <Link href={`/chats/communities/${joinedCommunity.id}`}>
-                Chat
-              </Link>
+              <Link href={`/chat/community/${joinedCommunity.id}`}>Chat</Link>
             </Button>
           </div>
         ))

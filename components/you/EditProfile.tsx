@@ -1,3 +1,5 @@
+'use client';
+
 import { ArrowLeft } from '@/assets/icons';
 import EditProfileForm from './EditProfileForm';
 import { User } from '@/types';

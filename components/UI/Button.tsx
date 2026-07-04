@@ -4,7 +4,12 @@ type Button = {
   className?: string;
   children: React.ReactNode;
   disabled?: boolean;
-  buttonType: 'primary' | 'secondaryOne' | 'secondaryTwo' | 'tertiary';
+  buttonType:
+    | 'primary'
+    | 'secondaryOne'
+    | 'secondaryTwo'
+    | 'specialSecondary'
+    | 'tertiary';
 };
 
 function Button({
@@ -47,6 +52,18 @@ function Button({
             type={type}
             onClick={onClick}
             className={`text-white w-20 font-bold bg-(--dusty-grape-50) rounded-[15px] border-black border py-0.5 cursor-pointer shadow-(--cartoon-shadow) ${className} hover:shadow-(--cartoon-shadow-50)`}
+            disabled={disabled}
+          >
+            {children}
+          </button>
+        );
+
+      case 'specialSecondary':
+        return (
+          <button
+            type={type}
+            onClick={onClick}
+            className={`text-white w-20 font-bold bg-linear-to-r from-30% from-(--vibrant-coral-100) to-(--steel-blue-100) rounded-[15px] border-black border py-0.5 cursor-pointer shadow-(--cartoon-shadow) ${className} hover:shadow-(--cartoon-shadow-50)`}
             disabled={disabled}
           >
             {children}

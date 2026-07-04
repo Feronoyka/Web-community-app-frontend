@@ -14,7 +14,7 @@ export const editUserProfileSchema = z.object({
 
   description: z
     .string()
-    .max(650, 'Description should not be exceed 650 characters')
+    .max(620, 'Description should not be exceed 620 characters')
     .optional(),
 
   avatarUrl: z

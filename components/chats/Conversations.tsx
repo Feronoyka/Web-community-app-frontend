@@ -30,13 +30,15 @@ function Conversations({ chattedUsers }: { chattedUsers: User[] }) {
                 <p className='text-gray-500'>@{chattedUser.nickname}</p>
               </div>
             </div>
-            <Button buttonType='secondaryOne'>
-              <Link href={`/chats/conversations/${chattedUser.id}`}>Chat</Link>
-            </Button>
+            <Link href={`/chat/private/${chattedUser.id}`}>
+              <Button buttonType='secondaryOne'>Chat</Button>
+            </Link>
           </div>
         ))
       ) : (
-        <p>There is no conversation</p>
+        <p className='text-center mt-8 text-2xl font-semibold text-gray-400'>
+          There is no conversation
+        </p>
       )}
     </>
   );

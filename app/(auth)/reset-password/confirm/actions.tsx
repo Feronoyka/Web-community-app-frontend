@@ -33,6 +33,7 @@ export const resetConfirmAction = async (
     const resetToken = cookieStore.get('resetToken')?.value;
 
     if (!resetToken) redirect('/reset-password');
+    console.log('reset token:', resetToken);
 
     const response = await axios.post(
       `${API}/auth/reset-confirm`,
@@ -49,6 +50,16 @@ export const resetConfirmAction = async (
 
     cookieStore.delete('resetToken');
   } catch (error) {
+    if (
+      typeof error === 'object' &&
+      error !== null &&
+      'digest' in error &&
+      typeof (error as { digest?: unknown }).digest === 'string' &&
+      (error as { digest: string }).digest.startsWith('NEXT_REDIRECT')
+    ) {
+      throw error;
+    }
+
     if (axios.isAxiosError(error)) {
       return {
         errors: { server: error.response?.data.message ?? error.message },

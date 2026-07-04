@@ -8,7 +8,7 @@ function VerifyResetOtp() {
         <div>
           <h3 className='text-4xl font-bold mb-4'>Verify email</h3>
           <KeyIcon className='mx-auto mt-8' />
-          <p className='font-semibold text-[#808080] mt-4'>
+          <p className='font-semibold text-[#808080] mx-auto mt-4'>
             Verify email address
           </p>
         </div>

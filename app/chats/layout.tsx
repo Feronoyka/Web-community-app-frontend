@@ -28,7 +28,7 @@ export default function Layout({
               <div className='mr-40 text-2xl font-bold hover:bg-yellow-500 px-2 py-1 rounded-[10px]'>
                 <NavLink href={'/chats/conversations'}>Conversations</NavLink>
               </div>
-              <div className='ml-40 text-2xl font-bold hover:bg-yellow-500 px-2 py-1'>
+              <div className='ml-40 text-2xl font-bold hover:bg-yellow-500 px-2 py-1 rounded-[10px]'>
                 <NavLink href={'/chats/communities'}>
                   Joined communities
                 </NavLink>

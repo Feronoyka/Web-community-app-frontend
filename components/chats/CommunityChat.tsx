@@ -175,7 +175,7 @@ export default function CommunityChat({
               >
                 <ul>
                   {isOwner && (
-                    <Link href={`/chats/communities/${community?.id}/edit`}>
+                    <Link href={`/chat/community/${community?.id}/edit`}>
                       <li className='cursor-pointer flex items-center hover:bg-gray-200 px-2 py-1 rounded-[10px]'>
                         <p className='mr-2 w-30'>Edit community</p>
                         <MembersSetting />

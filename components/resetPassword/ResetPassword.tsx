@@ -1,3 +1,5 @@
+'use client';
+
 import { KeyIcon, ArrowLeft } from '@/assets/icons';
 import ResetPasswordForm from './ResetPasswordForm';
 import { useRouter } from 'next/navigation';
@@ -16,7 +18,7 @@ function ResetPassword() {
           <div className='flex justify-center mt-4'>
             <KeyIcon />
           </div>
-          <p className='font-semibold mt-4 text-[#808080]'>
+          <p className='font-semibold mt-4 text-[#808080] mx-auto w-70'>
             Please write your email address to receive confirmation code
           </p>
         </div>

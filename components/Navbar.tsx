@@ -30,7 +30,7 @@ function Navbar({ user }: { user: User | null }) {
           <li className='flex flex-row items-center'>
             <SearchUser
               name='Search people'
-              className='pr-32 mr-8 text-xl py-2.75 pl-4 bg-(--golden-pollen-100) outline-none rounded-[10px]'
+              className='px-20 mr-8 text-xl py-2 pl-4 bg-(--golden-pollen-100) outline-none rounded-[10px] max-[767px]:mr-5'
             />
           </li>
           {user ? (
@@ -53,7 +53,7 @@ function Navbar({ user }: { user: User | null }) {
           <li className='group'>
             {isOpen &&
               (user !== null ? (
-                <ul className='items-center absolute bg-white py-2 px-4 top-21 left-[82%] rounded-[10px] border-2 shadow-(--cartoon-shadow)'>
+                <ul className='items-center absolute bg-white py-2 px-4 top-21 right-8 rounded-[10px] border-2 shadow-(--cartoon-shadow)'>
                   <li className='my-3 items-center justify-center'>
                     <div>
                       <p className='font-semibold'>{user.nickname}</p>
@@ -98,13 +98,13 @@ function Navbar({ user }: { user: User | null }) {
                   </li>
                 </ul>
               ) : (
-                <ul className='items-center absolute bg-white py-2 px-4 top-21 left-[89%] rounded-[10px] border-2 shadow-(--cartoon-shadow)'>
+                <ul className='items-center absolute bg-white py-2 px-4 top-21 right-8 rounded-[10px] border-2 shadow-(--cartoon-shadow)'>
                   <li className='cursor-pointer'>
                     <Link
                       href='/sign-up'
                       className={`flex flex-row items-center py-1 px-2 ${hoverList}`}
                     >
-                      <SignUp /> <p>Sign up</p>
+                      <SignUp /> <p className='whitespace-nowrap'>Sign up</p>
                     </Link>
                   </li>
                 </ul>

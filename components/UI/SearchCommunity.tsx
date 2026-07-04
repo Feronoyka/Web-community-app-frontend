@@ -33,15 +33,17 @@ function SearchCommunity({ name, className }: SearchType) {
   }, [debounceQuery, setCommunities, setIsLoading]);
 
   return (
-    <>
+    <div
+      className={`border-2 py-4 pl-6 shadow-(--cartoon-shadow) rounded-[10px] ${className}`}
+    >
       <input
-        className={`border-2 shadow-(--cartoon-shadow) ${className}`}
+        className='outline-none'
         type='text'
         placeholder={name}
         value={searchCommunity}
         onChange={(e) => setSearchCommunity(e.target.value)}
       />
-    </>
+    </div>
   );
 }
 

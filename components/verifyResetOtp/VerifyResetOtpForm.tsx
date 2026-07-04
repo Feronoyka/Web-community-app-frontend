@@ -60,7 +60,7 @@ function VerifyResetOtpForm() {
         <input type='hidden' name='otp' value={otp} />
         <div className='mt-4 mb-4'>
           <Button
-            className='px-19 text-[18px]'
+            className='w-70 text-[18px]'
             buttonType='primary'
             type='submit'
             disabled={isPending}

@@ -10,7 +10,7 @@ export default async function You({ user }: { user: User }) {
   // const avatarStyle = 'mx-auto rounded-[100%] border-[#D9D9D9] border';
 
   return (
-    <div className='col-start-3 col-end-11 bg-white rounded-[10px] shadow-(--cartoon-shadow) border-2 pb-4'>
+    <div className='col-start-3 col-end-11 bg-white rounded-[10px] shadow-(--cartoon-shadow) border-2 pb-4 max-[1024px]:col-span-12'>
       <div className='flex justify-between mx-8 my-8'>
         <h1 className='font-bold text-4xl'>
           {user.username}
@@ -20,7 +20,7 @@ export default async function You({ user }: { user: User }) {
           <ArrowLeft />
         </Link>
       </div>
-      <div className='relative text-center'>
+      <div className='relative text-center mx-16'>
         {/* <label>
           {user.avatarUrl ? (
             <Image
@@ -44,10 +44,10 @@ export default async function You({ user }: { user: User }) {
         {!user.description ? (
           <p className='text-[#808080]'>No description</p>
         ) : (
-          <p>{user.description}</p>
+          <p className='text-left'>{user.description}</p>
         )}
         <Link href={`/you/edit/${user.nickname}`}>
-          <Button buttonType='secondaryTwo' className='mt-8 w-20'>
+          <Button buttonType='specialSecondary' className='mt-8 w-20'>
             Edit
           </Button>
         </Link>

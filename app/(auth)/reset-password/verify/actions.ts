@@ -36,6 +36,8 @@ export const verifyResetOtpAction = async (
       otp: result.data.otp,
     });
 
+    console.log('Verify-reset-otp response:', response.data);
+
     cookieStore.set('resetToken', response.data.resetToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -54,5 +56,5 @@ export const verifyResetOtpAction = async (
     return { errors: { server: 'Something went wrong' } };
   }
 
-  redirect('/reset-password/reset');
+  redirect('/reset-password/confirm');
 };

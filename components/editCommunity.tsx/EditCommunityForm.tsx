@@ -5,7 +5,7 @@ import { Button, Input, TextArea } from '../UI';
 import Image from 'next/image';
 import Link from 'next/link';
 import { DefaultMembers } from '@/assets/icons';
-import { editCommunityAction } from '@/app/chats/communities/[id]/edit/actions';
+import { editCommunityAction } from '@/app/chat/community/[id]/edit/actions';
 import { CommunityFromApi } from '@/types';
 
 function EditCommunityForm({
