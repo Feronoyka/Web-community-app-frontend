@@ -2,7 +2,7 @@
 
 import { useActionState, useState, ChangeEvent } from 'react';
 import Image from 'next/image';
-import { updateUserProfileAction } from '@/app/you/edit/[nickname]/action';
+import { updateUserProfileAction } from '@/app/profile/[id]/edit/action';
 import { PRONOUNS_OPTIONS, Pronouns } from '@/utils/enums';
 import { DefaultUserIcon } from '@/assets/icons';
 import { Button, Input, TextArea } from '../UI';
