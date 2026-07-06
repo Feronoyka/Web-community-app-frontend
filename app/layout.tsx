@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${albertSans.variable} antialiased bg-[#F7EDE2] overflow-x-hidden`}
+        className={`${albertSans.variable} antialiased bg-[#F7EDE2] max-[767px]:bg-white overflow-x-hidden`}
       >
         <CommunityProvider>{children}</CommunityProvider>
       </body>

@@ -9,7 +9,7 @@ function Article() {
           <h1 className='text-white font-bold text-5xl max-[1024px]:text-[40px]'>
             Welcome to Ventus forum
           </h1>
-          <p className='text-white opacity-85 mt-4'>
+          <p className='text-gray-300 mt-4'>
             Where you can create own forum and discuss any specific stuff
           </p>
         </div>

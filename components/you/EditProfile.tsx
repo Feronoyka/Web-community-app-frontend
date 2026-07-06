@@ -3,7 +3,7 @@
 import { ArrowLeft } from '@/assets/icons';
 import EditProfileForm from './EditProfileForm';
 import { User } from '@/types';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 
 // type User = {
 //   user: {
@@ -16,11 +16,23 @@ import { useRouter } from 'next/navigation';
 //   };
 // };
 
-export default function EditProfile({ user }: { user: User }) {
+export default function EditProfile({
+  currentUser,
+  user,
+}: {
+  currentUser: User;
+  user?: User | null;
+}) {
   const router = useRouter();
 
+  const isOwn = user?.id === currentUser?.id;
+
+  if (!isOwn) {
+    redirect('/sign-in');
+  }
+
   return (
-    <div className='bg-white col-start-3 col-end-11 rounded-[10px] shadow-(--cartoon-shadow) border-2'>
+    <div className=''>
       <div className='px-9 py-9'>
         <div className='flex justify-between mb-10'>
           <div>
@@ -34,7 +46,7 @@ export default function EditProfile({ user }: { user: User }) {
           </button>
         </div>
         <div className='px-7'>
-          <EditProfileForm user={user} />
+          <EditProfileForm user={currentUser} />
         </div>
       </div>
     </div>

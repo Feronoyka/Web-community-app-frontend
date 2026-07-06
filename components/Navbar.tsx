@@ -61,7 +61,7 @@ function Navbar({ user }: { user: User | null }) {
                     </div>
                     <hr className='text-gray-300 my-4' />
                     <Link
-                      href={`/you/${user?.id}`}
+                      href={`/profile/${user?.id}`}
                       className={`flex flex-row items-center py-1 px-2 ${hoverList}`}
                     >
                       <UserIcon />

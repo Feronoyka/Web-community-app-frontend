@@ -16,7 +16,7 @@ function Account({ user }: { user: User | null }) {
   return (
     <form
       action={''}
-      className='bg-white col-start-3 col-end-11 px-9 py-9 rounded-[10px] shadow-(--cartoon-shadow) border-2'
+      className='bg-white col-start-3 col-end-11 px-9 py-9 rounded-[10px] shadow-(--cartoon-shadow) border-2 max-[1024px]:col-span-12'
     >
       <div className='flex justify-between'>
         <h1 className='text-[32px] font-bold'>Account</h1>
