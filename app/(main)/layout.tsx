@@ -11,7 +11,7 @@ export default function RootLayout({
   return (
     <CommunityProvider>
       <Header />
-      <div className='grid grid-cols-12 gap-8 mx-16'>
+      <div className='grid grid-cols-12 gap-8 mx-16 max-[767px]:flex max-[767px]:flex-col max-[767px]:mx-4'>
         <Article />
         <Navigation />
       </div>

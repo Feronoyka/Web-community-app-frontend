@@ -7,7 +7,7 @@ import { PRONOUNS_OPTIONS, Pronouns } from '@/utils/enums';
 import { DefaultUserIcon } from '@/assets/icons';
 import { Button, Input, TextArea } from '../UI';
 import { User } from '@/types';
-import Camera from '@/assets/icons/Camera';
+import { CameraIcon } from '@/assets/icons';
 import { useRouter } from 'next/navigation';
 
 function EditUserProfileForm({ currentUser }: { currentUser: User }) {
@@ -24,16 +24,52 @@ function EditUserProfileForm({ currentUser }: { currentUser: User }) {
     if (file) setPreviewUrl(URL.createObjectURL(file));
   };
 
-  const inputStyle =
-    'w-81 py-2 outline-1 outline-[#808080] rounded-[10px] pl-2 mt-1 text-[18px]';
   const h3 = 'font-bold text-xl';
   const errorStyle = 'text-red-500 text-sm';
 
   return (
     <>
       <form action={action}>
-        <div className='flex justify-between'>
-          <div>
+        <div className='flex justify-between max-[767px]:flex-col'>
+          {/*Left side */}
+          <div className='flex flex-col justify-between text-center items-center'>
+            <div className=''>
+              <label className='relative group rounded-full block cursor-pointer w-35 h-35 overflow-hidden'>
+                <input
+                  type='file'
+                  accept='image/*'
+                  className='hidden'
+                  name='avatarUrl'
+                  onChange={handleFileChange}
+                />
+                {previewUrl ? (
+                  <Image
+                    src={previewUrl}
+                    alt=''
+                    fill
+                    className='rounded-full object-cover z-0 border-[#D9D9D9] border'
+                  />
+                ) : (
+                  <DefaultUserIcon
+                    width={140}
+                    height={140}
+                    className='group relative'
+                  />
+                )}
+                <div className='absolute text-white inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity'>
+                  <CameraIcon />
+                  <p className='center font-bold text-xl'>Upload</p>
+                </div>
+              </label>
+              <p className='text-[#808080] mt-2 opacity-50'>
+                {'@'}
+                {currentUser.nickname}
+              </p>
+            </div>
+          </div>
+
+          {/*right side */}
+          <div className='flex flex-col justify-center'>
             <div>
               <h3 className={h3}>Name</h3>
               <Input
@@ -41,7 +77,7 @@ function EditUserProfileForm({ currentUser }: { currentUser: User }) {
                 name='username'
                 defaultValue={currentUser.username}
                 placeholder={currentUser.username}
-                className='w-90'
+                className='w-80'
               />
               {state?.errors.username && (
                 <p className={errorStyle}>{state.errors.username}</p>
@@ -50,7 +86,7 @@ function EditUserProfileForm({ currentUser }: { currentUser: User }) {
             <div className='my-2'>
               <h3 className={h3}>Pronouns</h3>
               <select
-                className={inputStyle}
+                className='w-80 py-2 outline-1 outline-[#808080] rounded-[10px] pl-2 mt-1 text-[18px] max-[767px]:w-full'
                 name='pronouns'
                 defaultValue={currentUser.pronouns ?? Pronouns.NONE}
               >
@@ -69,7 +105,7 @@ function EditUserProfileForm({ currentUser }: { currentUser: User }) {
               <TextArea
                 name='description'
                 placeholder='I love cute stuff'
-                className='max-w-90'
+                className='h-100 w-80'
                 defaultValue={currentUser.description}
               ></TextArea>
               {state?.errors.description && (
@@ -77,58 +113,21 @@ function EditUserProfileForm({ currentUser }: { currentUser: User }) {
               )}
             </div>
           </div>
-          <div className='flex flex-col justify-between text-center items-center'>
-            <div className='mb'>
-              <label className='relative group rounded-full block cursor-pointer w-40.75 h-40.75 overflow-hidden'>
-                <input
-                  type='file'
-                  accept='image/*'
-                  className='hidden'
-                  name='avatarUrl'
-                  onChange={handleFileChange}
-                />
-                {previewUrl ? (
-                  <Image
-                    src={previewUrl}
-                    alt=''
-                    fill
-                    className='rounded-full object-cover z-0 border-[#D9D9D9] border'
-                  />
-                ) : (
-                  <DefaultUserIcon
-                    width={163}
-                    height={163}
-                    className='group relative'
-                  />
-                )}
-                <div className='absolute text-white inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity'>
-                  <Camera />
-                  <p className='center font-bold text-xl'>Upload</p>
-                </div>
-              </label>
-              <p className='text-[#808080] mt-2 opacity-50'>
-                {'@'}
-                {currentUser.nickname}
-              </p>
-            </div>
-            <div>
-              <Button
-                buttonType='tertiary'
-                className='mr-2'
-                onClick={() => router.back()}
-              >
-                Discard
-              </Button>
-              <Button
-                className='ml-2 cursor-pointer w-20 hover:shadow-(--cartoon-shadow-50)'
-                type='submit'
-                buttonType='secondaryTwo'
-                disabled={isPending}
-              >
-                {isPending ? <p>Saving...</p> : <p>Save</p>}
-              </Button>
-            </div>
-          </div>
+        </div>
+
+        {/*button */}
+        <div className='flex justify-between mt-4'>
+          <Button buttonType='tertiary' onClick={() => router.back()}>
+            Discard
+          </Button>
+          <Button
+            className='ml-2 cursor-pointer w-20 hover:shadow-(--cartoon-shadow-50)'
+            type='submit'
+            buttonType='secondaryTwo'
+            disabled={isPending}
+          >
+            {isPending ? <p>Saving...</p> : <p>Save</p>}
+          </Button>
         </div>
       </form>
     </>

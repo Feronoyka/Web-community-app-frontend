@@ -12,11 +12,7 @@ async function page() {
 
   const chattedUsers = await getChattedUsers(user);
 
-  return (
-    <div className='grid grid-cols-12 gap-5 mx-16'>
-      <Conversations chattedUsers={chattedUsers} />
-    </div>
-  );
+  return <Conversations chattedUsers={chattedUsers} />;
 }
 
 export default page;

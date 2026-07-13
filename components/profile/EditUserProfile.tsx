@@ -31,7 +31,7 @@ export default function EditUserProfile({
           <ArrowLeft />
         </button>
       </div>
-      <div className='px-7'>
+      <div className='px-5'>
         <EditUserProfileForm currentUser={currentUser} />
       </div>
     </div>

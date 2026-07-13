@@ -7,7 +7,7 @@ async function page() {
   if (!user) redirect('/sign-in');
 
   return (
-    <div className='grid grid-cols-12 gap-8 mx-16 my-20'>
+    <div className='grid grid-cols-12 gap-8 mx-16 my-20 max-[830px]:mx-10'>
       <CreateCommunity />
     </div>
   );

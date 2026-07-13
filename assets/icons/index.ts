@@ -17,6 +17,6 @@ export { default as MembersFilled } from './MembersFilled';
 export { default as SendIcon } from './SendIcon';
 export { default as DefaultMembers } from './DefaultMembers';
 export { default as MembersSetting } from './MembersSetting';
-export { default as Camera } from './Camera';
+export { default as CameraIcon } from './CameraIcon';
 export { default as XMark } from './XMark';
 export { default as ChatsIcon } from './ChatsIcon';

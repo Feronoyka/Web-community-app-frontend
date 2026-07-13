@@ -32,7 +32,7 @@ export default function UserProfile({
           <ArrowLeft />
         </button>
       </div>
-      <div className='relative text-center'>
+      <div className='relative text-center px-10'>
         <UserAvatar avatarUrl={user?.avatarUrl} className='mx-auto' />
         <p className='text-5 text-[#808080] my-1 opacity-50'>
           {`@`}
@@ -43,7 +43,7 @@ export default function UserProfile({
         {!user?.description ? (
           <p className='text-[#808080]'>No description</p>
         ) : (
-          <p>{user.description}</p>
+          <p className='text-left'>{user.description}</p>
         )}
         {!isOwn ? (
           <Link href={`/chat/private/${user?.id}`}>

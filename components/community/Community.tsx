@@ -71,7 +71,7 @@ function Community({
       <div className='rounded-b-[10px] bg-(--golden-pollen-100) w-full h-90'>
         <div className='pb-7 pt-15 text-center'>
           <h3 className='text-2xl font-bold'>{name}</h3>
-          <p className='mx-7 mt-3 mb-auto text-gray-700 border-box break-normal'>
+          <p className='mx-7 mt-3 truncate mb-auto text-gray-700 border-box break-normal'>
             {description}
           </p>
           <div className='flex justify-center items-center mt-3'>

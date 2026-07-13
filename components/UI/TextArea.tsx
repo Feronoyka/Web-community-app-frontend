@@ -22,7 +22,7 @@ function TextArea({
       <textarea
         name={name}
         placeholder={placeholder}
-        className={`${className} mt-1 border border-[#808080] focus:outline-none rounded-[10px] resize-none overflow-y-hidden border-box w-full max-w-[325px] pt-3 px-3 pb-[290px] text-[18px]`}
+        className={`${className} mt-1 border border-[#808080] focus:outline-none rounded-[10px] resize-none overflow-y-hidden border-box w-full pt-3 px-3 text-[18px]`}
         onChange={onChange}
         maxLength={maxLenght}
         minLength={minLength}

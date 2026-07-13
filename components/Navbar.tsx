@@ -30,7 +30,7 @@ function Navbar({ user }: { user: User | null }) {
           <li className='flex flex-row items-center'>
             <SearchUser
               name='Search people'
-              className='px-20 mr-8 text-xl py-2 pl-4 bg-(--golden-pollen-100) outline-none rounded-[10px] max-[767px]:mr-5'
+              className='px-10 mr-8 text-xl py-2 pl-4 bg-(--golden-pollen-100) outline-none rounded-[10px] max-[767px]:mr-5'
             />
           </li>
           {user ? (

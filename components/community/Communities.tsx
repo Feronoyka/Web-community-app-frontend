@@ -20,11 +20,11 @@ export default function Communities({ communities, user }: CommunitiesProps) {
   return (
     <>
       {list.length !== 0 ? (
-        <div className='grid grid-cols-12 gap-8 mx-16 mt-8'>
+        <div className='grid grid-cols-12 gap-8 mx-16 mt-8 max-[767px]:mx-4'>
           {list.map((community) => (
             <div
               key={community.id}
-              className='col-span-4 mb-10 max-[738px]:col-span-13 max-[1024px]:col-span-6'
+              className='col-span-4 mb-10 max-[738px]:col-span-12 max-[1024px]:col-span-6'
             >
               <Community
                 id={community.id}
@@ -41,8 +41,8 @@ export default function Communities({ communities, user }: CommunitiesProps) {
           ))}
         </div>
       ) : (
-        <div className='flex justify-center'>
-          <p>There is no communities yet</p>
+        <div className='flex justify-center mt-8'>
+          <p className='text-gray-400'>There is no communities yet</p>
         </div>
       )}
     </>

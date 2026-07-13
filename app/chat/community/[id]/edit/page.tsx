@@ -21,7 +21,7 @@ export default async function page({
   }
 
   return (
-    <div className='grid grid-cols-12 gap-8 mx-16'>
+    <div className='my-20 max-[830px]:mx-10'>
       <EditCommunity communityId={id} community={community} />
     </div>
   );

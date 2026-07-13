@@ -37,13 +37,13 @@ function OwnedCommunities({ user }: { user: User | null }) {
             ))}
           </div>
         ) : (
-          <div className='flex justify-center'>
-            <p>You do not have any communities</p>
+          <div className='flex justify-center mt-8'>
+            <p className='text-gray-400'>You do not have any communities</p>
           </div>
         )
       ) : (
-        <div className='flex justify-center'>
-          <p>Sign up to create community</p>
+        <div className='flex justify-center mt-8'>
+          <p className='text-gray-400'>Sign up to create community</p>
         </div>
       )}
     </>

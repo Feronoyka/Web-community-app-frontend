@@ -33,29 +33,9 @@ function EditCommunityForm({
   return (
     <>
       <form action={action}>
-        <div className='flex justify-between mt-10'>
-          <div>
-            <p className='text-[20px] font-bold'>Name</p>
-            <Input
-              name='communityName'
-              placeholder={community.name}
-              defaultValue={community.name}
-              onChange={(event) => setName(event.target?.value)}
-              minLength={3}
-              maxLength={30}
-            />
-            {state?.errors.name && <p>{state.errors.name}</p>}
-            <p className='text-[20px] font-bold mt-4'>Description</p>
-            <TextArea
-              name='communityDescription'
-              placeholder='Community description'
-              defaultValue={community.description}
-              onChange={(event) => setDescription(event.target.value)}
-              maxLenght={650}
-            ></TextArea>
-            {state?.errors.description && <p>{state.errors.description}</p>}
-          </div>
-          <div className='bg-(--golden-pollen-100) w-89.75 h-120.75 rounded-[10px] shadow-(--cartoon-shadow) border-2'>
+        <div className='flex justify-between mt-10 px-10 max-[830px]:flex-col max-[830px]:items-center'>
+          {/*left side */}
+          <div className='bg-(--golden-pollen-100) w-89.75 h-120.75 rounded-[10px] shadow-(--cartoon-shadow) border-2 '>
             <div className='flex bg-(--golden-pollen-50) w-89 h-39 rounded-t-[10px] justify-center'>
               <label className='relative my-25 block cursor-pointer group w-25 h-25 border border-gray-600 rounded-[10px] overflow-hidden'>
                 <input type='hidden' name='communityId' value={id} />
@@ -98,8 +78,36 @@ function EditCommunityForm({
               )}
             </div>
           </div>
+
+          {/* right side*/}
+          <div className='ml-10 w-80'>
+            <div className='w-full'>
+              <p className='text-[20px] font-bold'>Name</p>
+              <Input
+                name='communityName'
+                placeholder={community.name}
+                defaultValue={community.name}
+                onChange={(event) => setName(event.target?.value)}
+                minLength={3}
+                maxLength={30}
+              />
+              {state?.errors.name && <p>{state.errors.name}</p>}
+            </div>
+            <div>
+              <p className='text-[20px] font-bold mt-4'>Description</p>
+              <TextArea
+                name='communityDescription'
+                placeholder='Community description'
+                defaultValue={community.description}
+                onChange={(event) => setDescription(event.target.value)}
+                maxLenght={620}
+                className='h-89'
+              ></TextArea>
+              {state?.errors.description && <p>{state.errors.description}</p>}
+            </div>
+          </div>
         </div>
-        <div className='flex justify-between my-8'>
+        <div className='flex justify-between my-8 px-10'>
           <Link href={`/community/${id}`}>
             <Button buttonType='tertiary'>Discard</Button>
           </Link>

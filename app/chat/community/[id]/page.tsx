@@ -16,13 +16,15 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
   const accessToken = cookieStore.get('accessToken')?.value ?? '';
 
   return (
-    <CommunityChat
-      currentUser={user}
-      community={community}
-      communityId={id}
-      owner={community?.owner}
-      accessToken={accessToken}
-    />
+    <div className='bg-white'>
+      <CommunityChat
+        currentUser={user}
+        community={community}
+        communityId={id}
+        owner={community?.owner}
+        accessToken={accessToken}
+      />
+    </div>
   );
 }
 

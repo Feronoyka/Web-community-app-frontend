@@ -11,11 +11,7 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
 
   const user = await getUser(id);
 
-  return (
-    <>
-      <EditUserProfile currentUser={currentUser} user={user} />
-    </>
-  );
+  return <EditUserProfile currentUser={currentUser} user={user} />;
 }
 
 export default page;

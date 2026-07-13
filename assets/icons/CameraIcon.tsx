@@ -1,6 +1,6 @@
 import { Icon } from '@/types';
 
-function Camera({ className, onClick, width = 32, height = 32 }: Icon) {
+function CameraIcon({ className, onClick, width = 32, height = 32 }: Icon) {
   return (
     <>
       <svg
@@ -38,4 +38,4 @@ function Camera({ className, onClick, width = 32, height = 32 }: Icon) {
   );
 }
 
-export default Camera;
+export default CameraIcon;

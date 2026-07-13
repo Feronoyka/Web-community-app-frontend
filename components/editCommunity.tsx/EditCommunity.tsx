@@ -1,3 +1,5 @@
+'use client';
+
 import { ArrowLeft } from '@/assets/icons';
 import EditCommunityForm from './EditCommunityForm';
 import { CommunityFromApi } from '@/types';
@@ -13,7 +15,7 @@ function EditCommunity({
   const router = useRouter();
 
   return (
-    <div className='bg-white col-start-3 col-end-11 rounded-[10px] pt-9 px-9 shadow-(--cartoon-shadow) border-2'>
+    <div className='bg-white col-start-2 col-end-12 rounded-[10px] pt-9 px-9 shadow-(--cartoon-shadow) border-2 max-[767px]:px-0 max-[767px]:border-none max-[767px]:shadow-none'>
       <div className='flex justify-between'>
         <div>
           <h1 className='text-4xl font-bold'>Set community</h1>

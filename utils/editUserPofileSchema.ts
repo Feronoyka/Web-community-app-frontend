@@ -2,6 +2,14 @@ import z from 'zod';
 import { Pronouns } from './enums';
 
 export const editUserProfileSchema = z.object({
+  nickname: z
+    .string()
+    .trim()
+    .min(3, 'nickname should be at least 3 characters')
+    .max(30, 'nickname should not be exceed 30 characters')
+    .optional()
+    .transform((value) => value?.trim()),
+
   username: z
     .string()
     .trim()

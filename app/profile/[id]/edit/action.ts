@@ -60,5 +60,5 @@ export const updateUserProfileAction = async (
     return { errors: { server: 'Something went wrong' } };
   }
 
-  redirect(`/you/${user.nickname}`);
+  redirect(`/profile/${user.id}`);
 };
