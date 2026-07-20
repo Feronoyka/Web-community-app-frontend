@@ -2,9 +2,15 @@
 
 This community made with Nextjs, Reactjs, Zod, Zustand, Axios, Socket.io
 
+## Figma design
+
+[Figma design of Ventus forum](https://www.figma.com/design/w44lceCNMrJ1p4hSb5YcJp/Web-community-app?node-id=0-1&p=f)
+
+[Main component of design](https://www.figma.com/design/w44lceCNMrJ1p4hSb5YcJp/Web-community-app?node-id=7-8&t=XFUZREJJcCfeKty3-1)
+
 ## Install depencies
 
-```
+```bash
 npm install
 ```
 
@@ -34,7 +40,7 @@ Delete `.next` folder and then run `npm run dev`
 
 ## Run Docker
 
-```
+```bash
 docker compose up
 ```
 
