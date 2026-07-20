@@ -1,8 +1,11 @@
-const SignUpIcon = ({ className }: { className?: string }) => (
+import { Icon } from '@/types';
+
+const SignUp = ({ className, onClick, height = 32, width = 32 }: Icon) => (
   <svg
+    onClick={onClick}
     className={className}
-    width='32'
-    height='32'
+    width={width}
+    height={height}
     viewBox='0 0 32 32'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'
@@ -16,4 +19,4 @@ const SignUpIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export default SignUpIcon;
+export default SignUp;

@@ -1,6 +1,7 @@
+import { CommunityProvider } from '@/provider/community-provider';
 import Header from '@/components/Header';
 import Article from '@/components/Article';
-import Main from '@/components/Main';
+import Navigation from '@/components/Navigation';
 
 export default function RootLayout({
   children,
@@ -8,13 +9,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <CommunityProvider>
       <Header />
-      <div className='grid grid-cols-12 gap-8 mx-[64px]'>
+      <div className='grid grid-cols-12 gap-8 mx-16 max-[767px]:flex max-[767px]:flex-col max-[767px]:mx-4'>
         <Article />
-        <Main />
+        <Navigation />
       </div>
-      <div className='grid grid-cols-12 gap-8 mx-[64px] mt-9'>{children}</div>
-    </>
+      <div>{children}</div>
+    </CommunityProvider>
   );
 }

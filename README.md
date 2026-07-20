@@ -1,8 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Description
+
+This community made with Nextjs, Reactjs, Zod, Zustand, Axios, Socket.io
+
+## Figma design
+
+[Figma design of Ventus forum](https://www.figma.com/design/w44lceCNMrJ1p4hSb5YcJp/Web-community-app?node-id=0-1&p=f)
+
+[Main component of design](https://www.figma.com/design/w44lceCNMrJ1p4hSb5YcJp/Web-community-app?node-id=7-8&t=XFUZREJJcCfeKty3-1)
+
+## Install depencies
+
+```bash
+npm install
+```
 
 ## Getting Started
 
-First, run the development server:
+First, run the web-community-app-server in dev, uou can see in README of web-community-app-server and by default nestjs uses port 3000
+
+Second, after running the server run the nestjs in development mode:
+
+NextJs auto run on available port to 3001 as port 3000 already taken
 
 ```bash
 npm run dev
@@ -14,23 +32,20 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Possible problem
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+if you got a error with turbopack like `FATAL: An unexpected Turbopack error occurred.`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Delete `.next` folder and then run `npm run dev`
 
-## Learn More
+## Run Docker
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+docker compose up
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## **Deploy on Vercel**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The easiest way to deploy your Next.js app is to use the ++[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)++ from the creators of Next.js.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out our ++[Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying)++ for more details.

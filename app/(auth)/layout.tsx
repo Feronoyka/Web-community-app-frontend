@@ -1,7 +1,7 @@
 function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className='grid grid-cols-12 gap-8 mx-[64px]'>
-      <div className='bg-white col-start-5 col-end-9 rounded-[10px] my-40'>
+    <div className='grid grid-cols-12 gap-8 mx-16'>
+      <div className='col-start-5 col-end-9 mx-auto bg-white rounded-[10px] shadow-(--cartoon-shadow) border-2 my-20 max-[767px]:col-span-12 max-[767px]:shadow-none max-[767px]:border-none max-[1024px]:col-start-4'>
         {children}
       </div>
     </div>

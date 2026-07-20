@@ -1,9 +1,10 @@
 import { Albert_Sans } from 'next/font/google';
 import type { Metadata } from 'next';
 import './globals.css';
+import { CommunityProvider } from '@/provider/community-provider';
 
 const albertSans = Albert_Sans({
-  variable: '--font-albert',
+  variable: '--font-albert-sans',
   subsets: ['latin'],
 });
 
@@ -19,8 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${albertSans.variable} antialiased bg-[#F7EDE2]`}>
-        {children}
+      <body
+        className={`${albertSans.variable} antialiased bg-[#F7EDE2] max-[767px]:bg-white overflow-x-hidden`}
+      >
+        <CommunityProvider>{children}</CommunityProvider>
       </body>
     </html>
   );

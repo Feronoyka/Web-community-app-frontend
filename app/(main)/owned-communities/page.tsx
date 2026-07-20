@@ -1,5 +1,11 @@
-function page() {
-  return <div>Owned communities</div>;
+import { getMe } from '@/lib/auth';
+import OwnedCommunities from '@/components/community/OwnedCommunities';
+import { User } from '@/types';
+
+async function page() {
+  const user: User | null = await getMe();
+
+  return <OwnedCommunities user={user} />;
 }
 
 export default page;
