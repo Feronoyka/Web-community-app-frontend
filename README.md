@@ -2,10 +2,6 @@
 
 This community made with Nextjs, Reactjs, TailwindCSS, Zod, Zustand, Axios, Socket.io
 
-## Lighthouse result
-
-<img width="1918" height="698" alt="Screenshot 2026-07-28 234212" src="https://github.com/user-attachments/assets/ec182305-e240-459f-a427-152b282cb39c" />
-
 ## Figma design
 
 [Figma design of Ventus forum](https://www.figma.com/design/w44lceCNMrJ1p4hSb5YcJp/Web-community-app?node-id=0-1&p=f)
